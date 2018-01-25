@@ -7,6 +7,7 @@ import Controlador.Proyecto;
 import Controlador.generarXlsx;
 import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
+import Vistas.DetallesAreaInfo;
 import Vistas.Producciones;
 import Vistas.Inicio;
 import Vistas.Procesos;
@@ -35,6 +36,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     int cont = 0;
     static int soloUnaVez = 0;
     ConexionPS CPS = null;
+    DetallesAreaInfo informacion = null;
 
     public Menu(int cargo) {
         initComponents();
@@ -1405,6 +1407,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         jLabel3.setForeground(Color.BLACK);
+        informacion = new DetallesAreaInfo(this, true);
+        informacion.setLocationRelativeTo(null);
+        informacion.setVisible(true);
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jLabel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseReleased
@@ -1421,6 +1426,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         jLabel4.setForeground(Color.BLACK);
+        informacion = new DetallesAreaInfo(this, true);
+        informacion.setLocationRelativeTo(null);
+        informacion.setVisible(true);
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void jLabel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseReleased
@@ -1441,6 +1449,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
         jLabel7.setForeground(Color.BLACK);
+        informacion = new DetallesAreaInfo(this, true);
+        informacion.setLocationRelativeTo(null);
+        informacion.setVisible(true);
     }//GEN-LAST:event_jLabel7MousePressed
 
     private void jLabel18MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseEntered
@@ -1457,6 +1468,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
     private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MousePressed
         jLabel18.setForeground(Color.BLACK);
+        informacion = new DetallesAreaInfo(this, true);
+        informacion.setLocationRelativeTo(null);
+        informacion.setVisible(true);
     }//GEN-LAST:event_jLabel18MousePressed
 //Metodos de la clase menu----------------------------------------------------->
 
