@@ -40,7 +40,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         jTFechaIngreso2.setEditable(false);
         jTFechaIngreso3.setEditable(false);
         jTFechaIngreso4.setEditable(false);
-
+        TDetalleProduccion.getTableHeader().setReorderingAllowed(false);
         //jTTimepoTotalUnidad
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
     }

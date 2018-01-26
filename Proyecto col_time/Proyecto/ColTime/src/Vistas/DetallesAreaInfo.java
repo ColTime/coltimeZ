@@ -30,7 +30,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTPTerminado = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -46,8 +46,8 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTPTerminado.setAutoCreateRowSorter(true);
+        jTPTerminado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -66,12 +66,12 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        jTable1.setRowHeight(17);
-        jTable1.setSelectionBackground(new java.awt.Color(63, 179, 255));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        jTPTerminado.setGridColor(new java.awt.Color(255, 255, 255));
+        jTPTerminado.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTPTerminado.setRowHeight(17);
+        jTPTerminado.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTPTerminado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTPTerminado);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(128, 128, 131));
@@ -235,7 +235,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTPTerminado;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;

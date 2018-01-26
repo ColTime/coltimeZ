@@ -15,12 +15,32 @@ public class Procesos extends javax.swing.JPanel {
         tamañoColumnas(jTFE);
         tamañoColumnas(jTTE);
         tamañoColumnas(jTEN);
+        jTFE.getTableHeader().setReorderingAllowed(false);
+        jTTE.getTableHeader().setReorderingAllowed(false);
+        jTEN.getTableHeader().setReorderingAllowed(false);
+        estadoCampos(false);
+        botonesinicio();
     }
     private CachedRowSet crs = null;
     String v[] = new String[3];
     DefaultTableModel FE = null;
     DefaultTableModel TE = null;
     DefaultTableModel EN = null;
+
+    private void estadoCampos(boolean estado) {
+        jTNombreProceso.setEnabled(estado);
+        cbArea.setEnabled(estado);
+    }
+
+    private void botonesinicio() {
+        btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnDelete.setVisible(true);
+        btnDelete.setEnabled(false);
+        btnActivar.setEnabled(false);
+        btnActivar.setVisible(false);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -428,34 +448,86 @@ public class Procesos extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guarModificarProcesos(1);//Guardar
+        jTNombreProceso.setText("");
+        cbArea.setSelectedIndex(0);
+        estadoCampos(false);
+        botonesinicio();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         guarModificarProcesos(2);//Modificarf
+        jTNombreProceso.setText("");
+        cbArea.setSelectedIndex(0);
+        estadoCampos(false);
+        botonesinicio();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         activarODesactivar(0);//Desactivar
+        consultarProcesos();
+        estadoCampos(false);
+        botonesinicio();
+        tamañoColumnas(jTFE);
+        tamañoColumnas(jTTE);
+        tamañoColumnas(jTEN);
+        jTNombreProceso.setText("");
+        cbArea.setSelectedIndex(0);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
         activarODesactivar(1);//Activar
+        consultarProcesos();
+        estadoCampos(false);
+        botonesinicio();
+        tamañoColumnas(jTFE);
+        tamañoColumnas(jTTE);
+        tamañoColumnas(jTEN);
+        jTNombreProceso.setText("");
+        cbArea.setSelectedIndex(0);
     }//GEN-LAST:event_btnActivarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-//Código...
+        estadoCampos(true);
+        botonesinicio();
+        jTNombreProceso.setText("");
+        cbArea.setSelectedIndex(0);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    private void activarBotonesEliminacion(int op) {
+        if (op == 1) {
+            btnDelete.setEnabled(true);
+            btnDelete.setVisible(true);
+            btnActivar.setEnabled(false);
+            btnActivar.setVisible(false);
+        } else {
+            btnDelete.setEnabled(false);
+            btnDelete.setVisible(false);
+            btnActivar.setEnabled(true);
+            btnActivar.setVisible(true);
+        }
+    }
     private void jTFEMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEMousePressed
         seleccionarProceso(jTFE);
+        btnUpdate.setEnabled(true);
+        activarBotonesEliminacion(jTFE.getValueAt(jTFE.getSelectedRow(), 2).toString().equals("Activo") ? 1 : 0);
+        estadoCampos(true);
+        btnGuardar.setEnabled(false);
     }//GEN-LAST:event_jTFEMousePressed
 
     private void jTTEMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTEMousePressed
         seleccionarProceso(jTTE);
+        btnUpdate.setEnabled(true);
+        activarBotonesEliminacion(jTTE.getValueAt(jTTE.getSelectedRow(), 2).toString().equals("Activo") ? 1 : 0);
+        estadoCampos(true);
+        btnGuardar.setEnabled(false);
     }//GEN-LAST:event_jTTEMousePressed
 
     private void jTENMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTENMousePressed
         seleccionarProceso(jTEN);
+        btnUpdate.setEnabled(true);
+        activarBotonesEliminacion(jTEN.getValueAt(jTEN.getSelectedRow(), 2).toString().equals("Activo") ? 1 : 0);
+        estadoCampos(true);
+        btnGuardar.setEnabled(false);
     }//GEN-LAST:event_jTENMousePressed
 
     private void seleccionarProceso(JTable tabla) {
@@ -498,14 +570,14 @@ public class Procesos extends javax.swing.JPanel {
         tabla.getColumnModel().getColumn(0).setMaxWidth(20);
         tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
         tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
-        tabla.getColumnModel().getColumn(1).setMinWidth(210);
-        tabla.getColumnModel().getColumn(1).setMaxWidth(210);
-        tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(210);
-        tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(210);
-        tabla.getColumnModel().getColumn(2).setMinWidth(50);
-        tabla.getColumnModel().getColumn(2).setMaxWidth(50);
-        tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(50);
-        tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(50);
+        tabla.getColumnModel().getColumn(1).setMinWidth(200);
+        tabla.getColumnModel().getColumn(1).setMaxWidth(200);
+        tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(200);
+        tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(200);
+        tabla.getColumnModel().getColumn(2).setMinWidth(60);
+        tabla.getColumnModel().getColumn(2).setMaxWidth(60);
+        tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(60);
+        tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(60);
     }
 
     private void consultarProcesos() {
@@ -544,7 +616,7 @@ public class Procesos extends javax.swing.JPanel {
     private void guarModificarProcesos(int op) {
         if (!jTNombreProceso.getText().equals("") && cbArea.getSelectedIndex() != 0) {
             Controlador.Procesos obj = new Controlador.Procesos();
-            if (obj.guardarModificarProcesos(op, jTNombreProceso.getText(), cbArea.getSelectedIndex())) {//"1" es para guardar la infomación,Nombre del proceso y area del proceso.
+            if (obj.guardarModificarProcesos(op, jTNombreProceso.getText(), cbArea.getSelectedIndex(), Integer.parseInt(jLID.getText()))) {//"1" es para guardar la infomación,Nombre del proceso y area del proceso.
                 //Mensaje de exito!!
                 if (op == 1) {//Registrar
                     new rojerusan.RSNotifyAnimated("Listo!", "El Proceso fue registrado exitosamente.", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
@@ -561,6 +633,7 @@ public class Procesos extends javax.swing.JPanel {
             }
         } else {
             //Mensaje
+            new rojerusan.RSNotifyAnimated("Alerta!!", "Falta algun campo por diligenciar.", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
     }
 

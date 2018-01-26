@@ -18,9 +18,9 @@ public class Procesos {
 
     }
 
-    public boolean guardarModificarProcesos(int op, String nombre, int area) {
+    public boolean guardarModificarProcesos(int op, String nombre, int area,int id) {
         ProcesosM obj = new ProcesosM();
-        return obj.guardarModificarProcesosM(op,nombre,area);
+        return obj.guardarModificarProcesosM(op,nombre,area,id);
     }
 
     public CachedRowSet consultarProcesos() {

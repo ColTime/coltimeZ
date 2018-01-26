@@ -70,7 +70,7 @@ public class DetalleProyectoM {
             //Query------------------------------------------------------------>
             String Qry = "";
             if (op == 1) {
-                //Se valida si el proyecto ya tenia antecedentes registrados en esa misma ubicacion
+                //Se valida si el proyecto ya tenia antecedentes registrados en esa misma ubicacion----
                 Qry = "CALL PA_ValidarUbicacionPNC(?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, Integer.parseInt(numerOrden));

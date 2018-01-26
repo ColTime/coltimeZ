@@ -28,7 +28,7 @@ import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
 public class Menu extends javax.swing.JFrame implements Runnable {
-
+    
     public Color cor = new Color(189, 189, 189);
     public Color corF = new Color(219, 219, 219);
     public static Producciones bp = null;
@@ -37,7 +37,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     static int soloUnaVez = 0;
     ConexionPS CPS = null;
     DetallesAreaInfo informacion = null;
-
+    
     public Menu(int cargo) {
         initComponents();
         this.cargo = cargo;
@@ -62,9 +62,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         }
         //Fin de toma de tiempos automatica
     }
-
+    
     public Menu() {
-
+        
     }
     //Variables en uso de la clase
     private int posX = 0;
@@ -79,7 +79,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     CachedRowSet crs = null;
     CambiarContraseña obj = null;
     public static PrintStream myPS;
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,7 +94,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jButton2 = new javax.swing.JButton();
         jDocumento = new javax.swing.JLabel();
         jDocumento1 = new javax.swing.JLabel();
-        jDocumento2 = new javax.swing.JLabel();
         jPMenu = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         rSUsuario = new rojerusan.RSFotoCircle();
@@ -262,10 +261,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
         jDocumento.setText("jLabel1");
 
+        jDocumento1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jDocumento1.setForeground(new java.awt.Color(51, 255, 51));
         jDocumento1.setText("Linea");
-
-        jDocumento2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jDocumento2.setText(".");
 
         javax.swing.GroupLayout jPSuperiorLayout = new javax.swing.GroupLayout(jPSuperior);
         jPSuperior.setLayout(jPSuperiorLayout);
@@ -284,8 +282,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPSuperiorLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDocumento2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDocumento1)))
                 .addGap(209, 209, 209))
         );
@@ -302,9 +298,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jDocumento)
                                 .addComponent(jButton2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jDocumento1)
-                            .addComponent(jDocumento2)))))
+                        .addComponent(jDocumento1))))
         );
 
         jPMenu.setBackground(new java.awt.Color(219, 219, 219));
@@ -1033,7 +1027,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             }
         }
     }
-
+    
     private void funcionalidades(int cargo) {
         switch (cargo) {
             case 1:
@@ -1063,19 +1057,19 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             btn1.setColorHover(cor);
             btn1.setColorNormal(corF);
             btn1.setColorPressed(cor);
-
+            
             btn2.setColorHover(cor);
             btn2.setColorNormal(cor);
             btn2.setColorPressed(cor);
-
+            
             btn3.setColorHover(cor);
             btn3.setColorNormal(corF);
             btn3.setColorPressed(cor);
-
+            
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
-
+            
             btn6.setColorHover(cor);
             btn6.setColorNormal(corF);
             btn6.setColorPressed(cor);
@@ -1106,23 +1100,23 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             btn1.setColorHover(cor);
             btn1.setColorNormal(corF);
             btn1.setColorPressed(cor);
-
+            
             btn2.setColorHover(cor);
             btn2.setColorNormal(corF);
             btn2.setColorPressed(cor);
-
+            
             btn3.setColorHover(cor);
             btn3.setColorNormal(corF);
             btn3.setColorPressed(cor);
-
+            
             btn4.setColorHover(cor);
             btn4.setColorNormal(cor);
             btn4.setColorPressed(cor);
-
+            
             btn6.setColorHover(cor);
             btn6.setColorNormal(corF);
             btn6.setColorPressed(cor);
-
+            
         } else {
             btn3.setColorHover(cor);
             btn3.setColorNormal(cor);
@@ -1156,23 +1150,23 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             btn1.setColorHover(cor);
             btn1.setColorNormal(cor);
             btn1.setColorPressed(cor);
-
+            
             btn2.setColorHover(cor);
             btn2.setColorNormal(corF);
             btn2.setColorPressed(cor);
-
+            
             btn3.setColorHover(cor);
             btn3.setColorNormal(corF);
             btn3.setColorPressed(cor);
-
+            
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
-
+            
             btn6.setColorHover(cor);
             btn6.setColorNormal(corF);
             btn6.setColorPressed(cor);
-
+            
         } else {
             btn1.setColorHover(cor);
             btn1.setColorNormal(cor);
@@ -1189,19 +1183,19 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             btn1.setColorHover(cor);
             btn1.setColorNormal(corF);
             btn1.setColorPressed(cor);
-
+            
             btn2.setColorHover(cor);
             btn2.setColorNormal(corF);
             btn2.setColorPressed(cor);
-
+            
             btn3.setColorHover(cor);
             btn3.setColorNormal(cor);
             btn3.setColorPressed(cor);
-
+            
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
-
+            
             btn6.setColorHover(cor);
             btn6.setColorNormal(corF);
             btn6.setColorPressed(cor);
@@ -1220,14 +1214,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_formWindowDeactivated
 
     private void jPSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMousePressed
-
+        
         posX = evt.getX();
         posY = evt.getY();
 
     }//GEN-LAST:event_jPSuperiorMousePressed
 
     private void jPSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMouseDragged
-
+        
         this.setLocation((evt.getXOnScreen() - posX), (evt.getYOnScreen() - posY - 25));
 
     }//GEN-LAST:event_jPSuperiorMouseDragged
@@ -1370,19 +1364,19 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             btn1.setColorHover(cor);
             btn1.setColorNormal(corF);
             btn1.setColorPressed(cor);
-
+            
             btn2.setColorHover(cor);
             btn2.setColorNormal(corF);
             btn2.setColorPressed(cor);
-
+            
             btn3.setColorHover(cor);
             btn3.setColorNormal(corF);
             btn3.setColorPressed(cor);
-
+            
             btn4.setColorHover(cor);
             btn4.setColorNormal(corF);
             btn4.setColorPressed(cor);
-
+            
             btn6.setColorHover(cor);
             btn6.setColorNormal(cor);
             btn6.setColorPressed(cor);
@@ -1408,6 +1402,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         jLabel3.setForeground(Color.BLACK);
         informacion = new DetallesAreaInfo(this, true);
+        informacion.setTitle("Formato estandar");
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel3MousePressed
@@ -1427,6 +1422,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         jLabel4.setForeground(Color.BLACK);
         informacion = new DetallesAreaInfo(this, true);
+        informacion.setTitle("Teclados");
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel4MousePressed
@@ -1450,6 +1446,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
         jLabel7.setForeground(Color.BLACK);
         informacion = new DetallesAreaInfo(this, true);
+        informacion.setTitle("Ensamble");
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel7MousePressed
@@ -1469,6 +1466,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MousePressed
         jLabel18.setForeground(Color.BLACK);
         informacion = new DetallesAreaInfo(this, true);
+        informacion.setTitle("Almacen");
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel18MousePressed
@@ -1523,7 +1521,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden no existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
     }
-
+    
     public void limpiarInformacionAreas() {
         FIngresadosHoy.setText("0");
         FEjecucion.setText("0");
@@ -1632,7 +1630,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Controlador.Usuario obj = new Controlador.Usuario();
         obj.sesion(sec, doc);
     }
-
+    
     public void cambiarpanelProyecto(String name) {
         if (!jPContenido.getComponent(0).getName().equals(name)) {
             switch (cargo) {
@@ -1654,7 +1652,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public void CapturaImagen() {
         File obj = new File(rSUsuario.image.toString());
     }
-
+    
     public void traerimagen() {//Esta parte del proyecto esta en espera
         ImageIcon obj = new ImageIcon(rSUsuario.image);
         try {
@@ -1663,7 +1661,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         } catch (Exception e) {
         }
     }
-
+    
     public void prueba() {
         JFileChooser se = new JFileChooser();
         se.setFileSelectionMode((int) se.getSelectedFile().length());
@@ -1684,7 +1682,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
  /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
 //                try {
 //                    UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
@@ -1723,7 +1721,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public javax.swing.JButton jButton2;
     public static javax.swing.JLabel jDocumento;
     public static javax.swing.JLabel jDocumento1;
-    public static javax.swing.JLabel jDocumento2;
     public javax.swing.JInternalFrame jInternalFrame1;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel10;

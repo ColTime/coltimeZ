@@ -20,6 +20,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         btnDelete.setEnabled(false);
         consultarUsuarios("", "", 0);
         btnActivar.setVisible(false);
+        jTUsuario.getTableHeader().setReorderingAllowed(false);
         limites();
     }
 
@@ -613,7 +614,7 @@ public class Usuarios1 extends javax.swing.JPanel {
     }//GEN-LAST:event_cBCargoBItemStateChanged
 
     private void jTUsuarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuarioMouseReleased
-    if (!evt.isPopupTrigger()) {
+        if (!evt.isPopupTrigger()) {
             int users = jTUsuario.getRowCount();
             if (users > 0) {
                 int fila = jTUsuario.getSelectedRow();
@@ -644,7 +645,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 jTdocumento.setEnabled(false);
                 btnNuevo.setEnabled(true);
             }
-        }       
+        }
     }//GEN-LAST:event_jTUsuarioMouseReleased
 
     public void estadoComponentes(boolean estado, Color es) {

@@ -27,15 +27,16 @@ public class ProcesosM {
     ResultSet rs = null;
     boolean res = false;
 
-    public boolean guardarModificarProcesosM(int op, String nombre, int area) {
+    public boolean guardarModificarProcesosM(int op, String nombre, int area, int id) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
-            pps = con.prepareStatement("SELECT FU_RegistrarModificarProcesos(?,?,?)");//op,nombre del proceso y area a la que aplica.
+            pps = con.prepareStatement("SELECT FU_RegistrarModificarProcesos(?,?,?,?)");//op,nombre del proceso y area a la que aplica.
             pps.setInt(1, op);
             pps.setString(2, nombre);
             pps.setInt(3, area);
+            pps.setInt(4, id);
             rs = pps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
@@ -75,6 +76,7 @@ public class ProcesosM {
             pps.setInt(1, id);
             pps.setInt(2, estado);
             rs = pps.executeQuery();
+            rs.next();
             res = rs.getBoolean(1);
             rs.close();
             pps.close();
