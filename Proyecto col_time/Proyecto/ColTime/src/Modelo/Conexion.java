@@ -28,7 +28,7 @@ public class Conexion {
 //                JOptionPane.showMessageDialog(null, "Conexion exitosa");
 //            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Imposible realizar conexion con la BD" + e);
+//            JOptionPane.showMessageDialog(null, "Imposible realizar conexion con la BD" + e);
             e.printStackTrace();
         }
     }

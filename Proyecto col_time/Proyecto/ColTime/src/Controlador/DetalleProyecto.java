@@ -81,6 +81,11 @@ public class DetalleProyecto {
         return obj.ValidarCnatidadPNCM(numerOrden, detalle, op, tipo, negocio);
     }
 
+    public CachedRowSet consultarDetalles(int area) {
+        DetalleProyectoM obj = new DetalleProyectoM();
+        return obj.consultarDetallesM(area);
+    }
+
     //Reporte general
     public CachedRowSet generar_Reportes() {
         DetalleProyectoM obj = new DetalleProyectoM();

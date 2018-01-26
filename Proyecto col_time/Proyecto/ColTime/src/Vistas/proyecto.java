@@ -1161,7 +1161,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         } else {
             validarRegistro(1);
         }
-        puerto.close();
+//        puerto.close();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jTNombreClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreClienteKeyTyped

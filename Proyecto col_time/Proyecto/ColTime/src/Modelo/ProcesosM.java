@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +46,7 @@ public class ProcesosM {
             con.close();
             conexion.destruir();
         } catch (Exception e) {//Errores
+            JOptionPane.showMessageDialog(null, e);
         }
         return res;
     }

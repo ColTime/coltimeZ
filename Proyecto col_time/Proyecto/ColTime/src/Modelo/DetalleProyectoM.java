@@ -22,6 +22,29 @@ public class DetalleProyectoM {
     boolean res = false;
 
     //Metodos----------------------------------------------------->
+    public CachedRowSet consultarDetallesM(int area) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query------------------------------------------------------------>
+            String Qry = "CALL PA_ConsultarDetallesProyectosProduccion(?)";
+            ps = con.prepareStatement(Qry);
+            ps.setInt(1, area);
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
+            crs.populate(rs);
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return crs;
+    }
+
     public int ValidarCnatidadPNCM(String numerOrden, int detalle, int op, String tipo, String negocio) {
         int cantidad = 0;
         try {
@@ -121,7 +144,24 @@ public class DetalleProyectoM {
 
                     if (negocio.equals("IN")) {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                         //Se registran los procesos de IN para este subproyecto.
-                        Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?)";
+                        Qry = "CALL PA_ConsultarIDProcesosTEYEN(?)";//Se van a consultar lo procesos de IN.
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, 3);//Área Ensamble
+                        rs = ps.executeQuery();
+                        while (rs.next()) {//Se registran todos los procesos
+                            Qry = "CALL PA_RegistrarDetalleEnsamble(?,?,?,?)";
+                            ps = con.prepareStatement(Qry);
+                            ps.setInt(1, Integer.parseInt(numerOrden));
+                            ps.setInt(2, tipo);
+                            if (ubicacion == null) {
+                                ps.setString(3, "");
+                            } else {
+                                ps.setString(3, ubicacion);
+                            }
+                            ps.setInt(4, rs.getInt(1));
+                            ps.execute();
+                        }
+                        Qry = "CALL PA_DetalleDeLosProcesosDeEnsamble(?,?,?)";//Me cuenta los procesos del producto y me actualiza el estado del proyecto.
                         ps = con.prepareStatement(Qry);
                         ps.setInt(1, Integer.parseInt(numerOrden));
                         ps.setInt(2, tipo);
@@ -133,7 +173,24 @@ public class DetalleProyectoM {
                         ps.execute();
                     } else if (negocio.equals("TE")) {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                         //Se registran los procesos de TE para este subproyecto. 
-                        Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?)";
+                        Qry = "CALL PA_ConsultarIDProcesosTEYEN(?)";//Se van a consultar lo procesos de EN.
+                        ps = con.prepareStatement(Qry);
+                        ps.setInt(1, 2);//Área Teclados
+                        rs = ps.executeQuery();
+                        while (rs.next()) {
+                            Qry = "CALL PA_RegistrarDetalleTeclados(?,?,?,?)";
+                            ps = con.prepareStatement(Qry);
+                            ps.setInt(1, Integer.parseInt(numerOrden));
+                            ps.setInt(2, tipo);
+                            if (ubicacion == null) {
+                                ps.setString(3, "");
+                            } else {
+                                ps.setString(3, ubicacion);
+                            }
+                            ps.setInt(4, rs.getInt(1));
+                            ps.execute();
+                        }
+                        Qry = "CALL PA_DetalleDeLosProcesosDeTeclados(?,?,?)";
                         ps = con.prepareStatement(Qry);
                         ps.setInt(1, Integer.parseInt(numerOrden));
                         ps.setInt(2, tipo);
@@ -160,7 +217,7 @@ public class DetalleProyectoM {
                             ps.execute();
                         } else {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                             //Si es TH o FV
-                            Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?,?)";
+                            Qry = "CALL PA_RegistrarDetalleFormatoEstandar(?,?,?)";//Registrar los procesos queda pendiente para desarrollar.....................................................................................
                             ps = con.prepareStatement(Qry);
                             ps.setInt(1, Integer.parseInt(numerOrden));
                             ps.setInt(2, tipo);

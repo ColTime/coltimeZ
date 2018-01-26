@@ -11,7 +11,7 @@ public class Procesos extends javax.swing.JPanel {
     public Procesos() {
         initComponents();
         consultarProcesos();
-        jLID.setVisible(false);
+//        jLID.setVisible(false);
         tamañoColumnas(jTFE);
         tamañoColumnas(jTTE);
         tamañoColumnas(jTEN);
@@ -40,6 +40,7 @@ public class Procesos extends javax.swing.JPanel {
         btnDelete.setEnabled(false);
         btnActivar.setEnabled(false);
         btnActivar.setVisible(false);
+        jLID.setText("ID");
     }
 
     @SuppressWarnings("unchecked")
@@ -432,7 +433,11 @@ public class Procesos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTNombreProcesoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreProcesoKeyReleased
-
+        if (!jTNombreProceso.getText().equals("") && cbArea.getSelectedIndex() != 0) {
+            btnGuardar.setEnabled(true);
+        } else {
+            btnGuardar.setEnabled(false);
+        }
     }//GEN-LAST:event_jTNombreProcesoKeyReleased
 
     private void jTNombreProcesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreProcesoKeyTyped
@@ -443,23 +448,38 @@ public class Procesos extends javax.swing.JPanel {
     }//GEN-LAST:event_jTNombreProcesoKeyTyped
 
     private void cbAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAreaItemStateChanged
-
+        if (!jTNombreProceso.getText().equals("") && cbArea.getSelectedIndex() != 0) {
+            btnGuardar.setEnabled(true);
+        } else {
+            btnGuardar.setEnabled(false);
+        }
     }//GEN-LAST:event_cbAreaItemStateChanged
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        guarModificarProcesos(1);//Guardar
-        jTNombreProceso.setText("");
-        cbArea.setSelectedIndex(0);
-        estadoCampos(false);
-        botonesinicio();
+        //Guardar
+        if (guarModificarProcesos(1)) {
+            jTNombreProceso.setText("");
+            cbArea.setSelectedIndex(0);
+            estadoCampos(false);
+            botonesinicio();
+            consultarProcesos();
+            tamañoColumnas(jTFE);
+            tamañoColumnas(jTTE);
+            tamañoColumnas(jTEN);
+        }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        guarModificarProcesos(2);//Modificarf
-        jTNombreProceso.setText("");
-        cbArea.setSelectedIndex(0);
-        estadoCampos(false);
-        botonesinicio();
+        //Modificarf
+        if (guarModificarProcesos(2)) {
+            jTNombreProceso.setText("");
+            cbArea.setSelectedIndex(0);
+            estadoCampos(false);
+            botonesinicio();
+            consultarProcesos();
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -613,11 +633,17 @@ public class Procesos extends javax.swing.JPanel {
         }
     }
 
-    private void guarModificarProcesos(int op) {
+    private boolean guarModificarProcesos(int op) {
+        int id = 0;
+        if (!jLID.getText().equals("ID")) {
+            id = Integer.parseInt(jLID.getText());
+        }
+        boolean res = false;
         if (!jTNombreProceso.getText().equals("") && cbArea.getSelectedIndex() != 0) {
             Controlador.Procesos obj = new Controlador.Procesos();
-            if (obj.guardarModificarProcesos(op, jTNombreProceso.getText(), cbArea.getSelectedIndex(), Integer.parseInt(jLID.getText()))) {//"1" es para guardar la infomación,Nombre del proceso y area del proceso.
+            if (obj.guardarModificarProcesos(op, jTNombreProceso.getText(), cbArea.getSelectedIndex(), id)) {//"1" es para guardar la infomación,Nombre del proceso y area del proceso.
                 //Mensaje de exito!!
+                res = true;
                 if (op == 1) {//Registrar
                     new rojerusan.RSNotifyAnimated("Listo!", "El Proceso fue registrado exitosamente.", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                 } else {//Modificar
@@ -635,6 +661,7 @@ public class Procesos extends javax.swing.JPanel {
             //Mensaje
             new rojerusan.RSNotifyAnimated("Alerta!!", "Falta algun campo por diligenciar.", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
+        return res;
     }
 
 
