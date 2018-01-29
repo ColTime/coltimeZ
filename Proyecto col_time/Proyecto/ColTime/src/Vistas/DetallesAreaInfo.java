@@ -96,6 +96,11 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTPTerminado = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jTPTerminado.setAutoCreateRowSorter(true);
         jTPTerminado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTPTerminado.setForeground(new java.awt.Color(128, 128, 131));
@@ -130,6 +135,11 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(128, 128, 131));
         jLabel4.setText("Proyecto terminados hoy:");
 
+        jTPPausado = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jTPPausado.setAutoCreateRowSorter(true);
         jTPPausado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTPPausado.setForeground(new java.awt.Color(128, 128, 131));
@@ -149,7 +159,9 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jTPPausado.setGridColor(new java.awt.Color(255, 255, 255));
         jTPPausado.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTPPausado.setRowHeight(17);
+        jTPPausado.setRowSorter(null);
         jTPPausado.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTPPausado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jTPPausado);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -164,6 +176,11 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setText("Proyecto ejecución hoy:");
 
+        jTPIniciar = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jTPIniciar.setAutoCreateRowSorter(true);
         jTPIniciar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTPIniciar.setForeground(new java.awt.Color(128, 128, 131));
@@ -184,8 +201,14 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jTPIniciar.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTPIniciar.setRowHeight(17);
         jTPIniciar.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTPIniciar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jTPIniciar);
 
+        jTPEjecucion = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jTPEjecucion.setAutoCreateRowSorter(true);
         jTPEjecucion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTPEjecucion.setForeground(new java.awt.Color(128, 128, 131));
@@ -206,6 +229,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jTPEjecucion.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTPEjecucion.setRowHeight(17);
         jTPEjecucion.setSelectionBackground(new java.awt.Color(63, 179, 255));
+        jTPEjecucion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(jTPEjecucion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

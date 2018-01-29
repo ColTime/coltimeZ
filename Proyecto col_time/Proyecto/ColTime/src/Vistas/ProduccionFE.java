@@ -30,6 +30,7 @@ public class ProduccionFE extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         contenidoFE = new javax.swing.JPanel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         setName("FE"); // NOI18N
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -47,7 +48,7 @@ public class ProduccionFE extends javax.swing.JPanel {
         );
         contenidoFELayout.setVerticalGroup(
             contenidoFELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGap(0, 529, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(contenidoFE);
@@ -59,14 +60,14 @@ public class ProduccionFE extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

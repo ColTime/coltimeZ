@@ -452,6 +452,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.setRowHeight(17);
         jTUsuario.setSelectionBackground(new java.awt.Color(63, 179, 255));
         jTUsuario.setSelectionForeground(new java.awt.Color(244, 244, 244));
+        jTUsuario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTUsuario.setShowHorizontalLines(false);
         jTUsuario.setShowVerticalLines(false);
         jTUsuario.addMouseListener(new java.awt.event.MouseAdapter() {

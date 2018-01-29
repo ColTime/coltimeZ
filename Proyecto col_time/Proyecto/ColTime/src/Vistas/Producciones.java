@@ -19,20 +19,26 @@ import paneles.CambiaPanel;
 
 public class Producciones extends javax.swing.JFrame implements ActionListener {
 
-    public Producciones() {
+    public Producciones(int cargo) {
         initComponents();
         this.setLocationRelativeTo(null);
         EstadoDelMenu(false);
+        this.cargo=cargo;
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
 //        new CambiaPanel(Contenido, new ProduccionFE());
 //        generarLabel("28400");
     }
+
+    public Producciones() {
+
+    }
+
     int posX = 0;
     int posY = 0;
     int panel = 0;
     CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
-    static int negocio = 0;
+    static int negocio = 0, cargo = 0;
     public Color cor = new Color(17, 161, 255);
     public Color corF = new Color(63, 179, 255);
 
@@ -806,7 +812,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {//Estas lines me van a mostrar todos los detalles del proyecto sin importar se estan en ejecucion o no "1"
         int orden = Integer.parseInt(e.getActionCommand());
-        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio, 1);
+        detalleProduccion obj = new detalleProduccion(this, true, orden, negocio, 1,cargo);
         if (negocio == 4) {
             obj.btnPNC.setVisible(false);
         }
@@ -846,7 +852,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Producciones().setVisible(true);
+                new Producciones(0).setVisible(true);
             }
         });
     }

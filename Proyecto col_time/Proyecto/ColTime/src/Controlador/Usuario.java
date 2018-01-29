@@ -112,6 +112,11 @@ public class Usuario {
         obj.sesion(sec, doc);
     }
 
+    public String nombreUsuario(String doc) {
+        Modelo.UsuarioM obj = new UsuarioM();
+        return obj.nombreUsuarioM(doc);
+    }
+
     //Metodo de liberacion de memoria------------------------------------------>
     @Override
     protected void finalize() throws Throwable {

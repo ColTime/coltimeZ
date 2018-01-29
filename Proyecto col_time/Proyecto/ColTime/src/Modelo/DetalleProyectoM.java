@@ -213,7 +213,7 @@ public class DetalleProyectoM {
                             } else if (negocio.equals("FE") && tipoNegocio.equals("Circuito")) {
                                 ps.setInt(2, 8);
                             }
-                            ps.setInt(3, 22);//Proceso de GF
+                            ps.setInt(3, 20);//Proceso de GF "20"
                             ps.execute();
                         } else {//tener en cuenta que los procesos se ban a traer de la tabla procesos dependiendo del tipo de negocio!!
                             //Si es TH o FV
@@ -238,7 +238,7 @@ public class DetalleProyectoM {
                         } else if (tipoNegocio.equals("PCB COM")) {//Componentes de PCB.
                             ps.setInt(2, 11);
                         }
-                        ps.setInt(3, 23);//Proceso de componentes.
+                        ps.setInt(3, 19);//Proceso de componentes "19".
                         ps.execute();
                     }
                 }

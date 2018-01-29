@@ -240,7 +240,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
                 n = 3;
                 break;
         }
-        detalleProduccion obj = new detalleProduccion(this, true, orden, n, 3);
+        detalleProduccion obj = new detalleProduccion(this, true, orden, n, 3,Menu.cargo);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();

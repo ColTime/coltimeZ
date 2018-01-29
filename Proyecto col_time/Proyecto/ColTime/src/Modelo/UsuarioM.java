@@ -227,6 +227,30 @@ public class UsuarioM {
         return res;
     }
 
+    public String nombreUsuarioM(String doc) {
+        String nombre="";
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_NombreUsuario(?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, doc);
+            rs = ps.executeQuery();
+            rs.next();
+            nombre=rs.getString(1);
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            conexion.cerrar(rs);
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return nombre;
+    }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.

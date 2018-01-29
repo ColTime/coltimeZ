@@ -16,9 +16,7 @@ import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.PrintStream;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
@@ -39,7 +37,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     ConexionPS CPS = null;
     DetallesAreaInfo informacion = null;
 
-    public Menu(int cargo) {
+    public Menu(int cargo, String nombre) {
         initComponents();
         this.cargo = cargo;
         Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
@@ -52,7 +50,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         funcionalidades(cargo);
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
-        new rojerusan.RSNotifyAnimated("Bienvenido", "Nombre del empleado", 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+        new rojerusan.RSNotifyAnimated("Bienvenido", nombre, 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         soloUnaVez++;
         DisponibilidadConexion dispo = new DisponibilidadConexion();
         Thread conec = new Thread(dispo);
@@ -73,7 +71,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     //Variables en uso de la clase
     private int posX = 0;
     private int posY = 0;
-    private FileInputStream strem;//Sirve para convertir la images a bit's
     public static int cargo = 0;
     public static ControlDelTiempo producF = null;
     public static ControlDelTiempo producT = null;
@@ -313,11 +310,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
         rSUsuario.setColorBordePopu(new java.awt.Color(204, 204, 204));
         rSUsuario.setColorButtonOptions(new java.awt.Color(128, 128, 131));
-        rSUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rSUsuarioMouseClicked(evt);
-            }
-        });
         jPanel4.add(rSUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 110, 100));
 
         jPMenu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 110));
@@ -424,7 +416,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jPMenu.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 42));
 
         btn6.setForeground(new java.awt.Color(128, 128, 131));
-        btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes.png"))); // NOI18N
+        btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/procesos.png"))); // NOI18N
         btn6.setText("PROCESOS");
         btn6.setBorderPainted(false);
         btn6.setColorHover(new java.awt.Color(189, 189, 189));
@@ -931,7 +923,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jPContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -1038,19 +1030,28 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                 //Gestor comercial
                 this.setTitle("Gestor Comercial");
                 btn3.setEnabled(false);
+                btn6.setEnabled(false);
                 break;
             case 2:
                 //Encargado FE y TE
                 this.setTitle("Encargado FE y TE");
                 btn3.setEnabled(false);
+                btn6.setEnabled(false);
                 break;
             case 3:
                 //Encargado de EN
                 this.setTitle("Encargado EN");
                 btn3.setEnabled(false);
+                btn6.setEnabled(false);
                 break;
-            default:
+            case 4:
                 this.setTitle("Administrador");
+                break;
+            case 5:
+                this.setTitle("Almacen");
+                btn3.setEnabled(false);
+                btn2.setEnabled(false);
+                btn6.setEnabled(false);
                 break;
         }
     }
@@ -1127,7 +1128,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             btn3.setColorPressed(cor);
         }
         if (bp == null) {
-            bp = new Producciones();
+            bp = new Producciones(cargo);
             bp.setVisible(true);
         } else {
             bp.isFocusableWindow();
@@ -1246,10 +1247,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void rSUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSUsuarioMouseClicked
-
-    }//GEN-LAST:event_rSUsuarioMouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if (obj == null) {
@@ -1657,29 +1654,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }
 
     //La parte de capturar y gusrdadr la imagen de perfil no se a realizado.
-    public void CapturaImagen() {
+    public void rutaImagen() {
         File obj = new File(rSUsuario.image.toString());
-    }
-
-    public void traerimagen() {//Esta parte del proyecto esta en espera
-        ImageIcon obj = new ImageIcon(rSUsuario.image);
-        try {
-            strem = new FileInputStream(rSUsuario.getName());
-//            longitudByte=rSUsuario.;
-        } catch (Exception e) {
-        }
-    }
-
-    public void prueba() {
-        JFileChooser se = new JFileChooser();
-        se.setFileSelectionMode((int) se.getSelectedFile().length());
-        int estado = se.showOpenDialog(null);
-        if (estado == JFileChooser.APPROVE_OPTION) {
-            try {
-                strem = new FileInputStream(se.getSelectedFile());
-            } catch (Exception e) {
-            }
-        }
     }
 
     /**
@@ -1697,7 +1673,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 //                } catch (Exception e) {
 //                    JOptionPane.showMessageDialog(null, e);
 //                }
-                new Menu(0).setVisible(true);
+                new Menu(0, "").setVisible(true);
             }
         });
     }

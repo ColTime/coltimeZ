@@ -88,7 +88,7 @@ public class Procesos extends javax.swing.JPanel {
         setBackground(new java.awt.Color(219, 219, 219));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         setToolTipText("usuarios");
-        setName("procesos"); // NOI18N
+        setName("Procesos"); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));

@@ -11,7 +11,7 @@ import rojerusan.RSNotifyAnimated;
 
 public class detalleProyecto extends javax.swing.JDialog {
 
-    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
+    public detalleProyecto(java.awt.Frame parent, boolean modal, int detalle, int negocio, String orden, int permiso, int cargo) {//Falta organizar la variable "tipo" para que traiga el valor correspondiente
         super(parent, modal);
         initComponents();
         if (negocio == 1) {
@@ -28,6 +28,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         this.negocio = negocio;
         this.setLocationRelativeTo(null);
         this.permiso = permiso;
+        this.cargo = cargo;
         cargarTabla();
         jTNombreCliente.setEditable(false);
         jTNombreProyecto.setEditable(false);
@@ -46,7 +47,7 @@ public class detalleProyecto extends javax.swing.JDialog {
     }
     //variables
     private CachedRowSet crs = null;
-    private static int detalle = 0;
+    private static int detalle = 0, cargo = 0;
     private static int negocio = 0, permiso = 0;
     int rows = -1;
 
@@ -420,7 +421,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                                     idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));//Identificador
                                     int proceso = 0;
                                     if (TDetalleProduccion.getValueAt(row, 0).toString().equals("GF")) {
-                                        proceso = 22;
+                                        proceso = 20;//Proceso de gran formato.
                                     }
                                     String orden[] = this.getTitle().split("-");                                                  //Cantidad//   
                                     if (almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), Integer.parseInt(cantidad), detalle, proceso)) {
@@ -438,8 +439,8 @@ public class detalleProyecto extends javax.swing.JDialog {
                             //Registro te tiempo de componentes
                             if (JOptionPane.showOptionDialog(null, "¿Seguro desea terminar la toma de tiempos de los componentes.", "Seguridad", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
                                 idDetalle = String.valueOf(TDetalleProduccion.getValueAt(row, 13));//Identificador
-                                String orden[] = this.getTitle().split("-");                                         //Cantidad//   
-                                almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 23);//
+                                String orden[] = this.getTitle().split("-");                                         //Cantidad//      Proceso  
+                                almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 19);//
                                 //Mensaje de confirmación de la terminación de la toma de tiempo
                                 new rojerusan.RSNotifyAnimated("¡Listo!", "Mensaje___.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                                 cargarTabla();
@@ -506,13 +507,9 @@ public class detalleProyecto extends javax.swing.JDialog {
                 TDetalleProduccion.getColumnModel().getColumn(6).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
-//                TDetalleProduccion.getColumnModel().getColumn(8).setMinWidth(0);
-//                TDetalleProduccion.getColumnModel().getColumn(8).setMaxWidth(0);
-//                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-//                TDetalleProduccion.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
             }
         }
-        if (negocio != 4) {
+        if (negocio != 4 || cargo == 4) {
             TDetalleProduccion.getColumnModel().getColumn(14).setMinWidth(0);
             TDetalleProduccion.getColumnModel().getColumn(14).setMaxWidth(0);
             TDetalleProduccion.getTableHeader().getColumnModel().getColumn(14).setMaxWidth(0);
@@ -561,7 +558,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", 0);
+                detalleProyecto dialog = new detalleProyecto(new javax.swing.JFrame(), true, 0, 0, "", 0, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

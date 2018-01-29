@@ -23,13 +23,14 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     /**
      * Creates new form detalleProduccion
      */
-    public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio, int vistaC) {
+    public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio, int vistaC, int cargo) {
         super(parent, modal);
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         this.orden = orden;
         this.negocio = negocio;
         this.vistaC = vistaC;
+        this.cargo=cargo;
         if (vistaC == 1) {
             //Detalles del proyecto
             this.setTitle(String.valueOf(orden));
@@ -43,7 +44,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         consultarDetalleProyectoProduccion(vistaC);
     }
     //Variables
-    static int orden = 0, negocio = 0;
+    static int orden = 0, negocio = 0, cargo = 0;
     static CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 1;
     static boolean res = false;
@@ -112,7 +113,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
     private void btnPNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPNCActionPerformed
         Producciones obj1 = new Producciones();
         res = false;
-        detalleProduccion obj = new detalleProduccion(obj1, true, orden, negocio, 2);
+        detalleProduccion obj = new detalleProduccion(obj1, true, orden, negocio, 2, cargo);
         if (res) {
             obj.btnPNC.setVisible(false);
             obj.setLocationRelativeTo(null);
@@ -208,7 +209,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 permiso = 1;
             }
         }
-        detalleProyecto obj = new detalleProyecto(obj1, true, id, negocio, String.valueOf(orden), permiso);
+        detalleProyecto obj = new detalleProyecto(obj1, true, id, negocio, String.valueOf(orden), permiso,cargo);
         obj.setVisible(true);
         obj.setLocationRelativeTo(this);
     }
@@ -243,7 +244,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                detalleProduccion dialog = new detalleProduccion(new javax.swing.JFrame(), true, 0, 0, 0);
+                detalleProduccion dialog = new detalleProduccion(new javax.swing.JFrame(), true, 0, 0, 0, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

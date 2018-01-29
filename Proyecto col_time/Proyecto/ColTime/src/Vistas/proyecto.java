@@ -14,6 +14,7 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.toedter.calendar.JTextFieldDateEditor;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -45,10 +46,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
             jREjecucion.setEnabled(false);
             jRParada.setEnabled(false);
             ocultarFechas();
-            jTNovedades.setVisible(false);
-            jLNovedades.setVisible(false);
-            jScrollPane1.setVisible(false);
-            jTNovedades.setLineWrap(true);
+            fechasEditables();//Se encarga de no permitir que se edite la fecha manualmente.
         }
         op = p;
         limpiarCampos();
@@ -66,6 +64,20 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
     int puertoProyecto = 0;
     DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     private CommPort puerto = null;
+    Thread QRProyecto = new Thread(this);
+
+    private void fechasEditables() {
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) jDentrega.getDateEditor();
+        editor.setEditable(false);
+        JTextFieldDateEditor editor1 = (JTextFieldDateEditor) jDFechaEntregaFE.getDateEditor();
+        editor1.setEditable(false);
+        JTextFieldDateEditor editor2 = (JTextFieldDateEditor) jDFechaEntregaFECOM.getDateEditor();
+        editor2.setEditable(false);
+        JTextFieldDateEditor editor3 = (JTextFieldDateEditor) jDFechaEntregaPCBGF.getDateEditor();
+        editor3.setEditable(false);
+        JTextFieldDateEditor editor4 = (JTextFieldDateEditor) jDFechaEntregaPCBCOMGF.getDateEditor();
+        editor4.setEditable(false);
+    }
 
     private void visibilidadID() {
         jLIDConversor.setVisible(false);
@@ -207,6 +219,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTNovedades = new javax.swing.JTextArea();
         jLNovedades = new javax.swing.JLabel();
+        jLNCaracteres = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(219, 219, 219));
@@ -605,10 +618,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, -1));
@@ -617,10 +630,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaFECOM.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFECOM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFECOM.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECOMCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFECOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 130, 20));
@@ -629,10 +642,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaPCBGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBGFCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 130, -1));
@@ -664,10 +677,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaPCBCOMGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBCOMGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBCOMGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBCOMGFCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBCOMGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 130, -1));
@@ -715,10 +728,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -1011,6 +1024,14 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jTNovedades.setColumns(20);
         jTNovedades.setRows(5);
         jTNovedades.setWrapStyleWord(true);
+        jTNovedades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTNovedadesKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNovedadesKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTNovedades);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 290, 150));
@@ -1019,6 +1040,11 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jLNovedades.setForeground(new java.awt.Color(128, 128, 131));
         jLNovedades.setText("Novedades:");
         jPanel2.add(jLNovedades, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 460, -1, -1));
+
+        jLNCaracteres.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLNCaracteres.setForeground(new java.awt.Color(128, 128, 131));
+        jLNCaracteres.setText("250");
+        jPanel2.add(jLNCaracteres, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 600, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(189, 189, 189));
@@ -1041,7 +1067,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, Short.MAX_VALUE)
                 .addGap(2, 2, 2)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1074,18 +1100,28 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         fecha();
         limpiarID();
         ocultarFechas();
-        Thread QRProyecto = new Thread(this);
         QRProyecto.start();
     }//GEN-LAST:event_btnNuevoActionPerformed
     @Override
     public void run() {
-        String valor = proyectoQR();
-        if (puertoProyecto == 1) {
-            puertoProyecto = 0;
-            llenarCamporProyecto(valor);
-        } else {
-            //No se pudo establecer la conexión con el puerto COM, desea cambiarlo o volver a intentar? 
-            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexión con el puerto COM");
+        int abierto = 1;
+        while (abierto == 1) {
+            String valor = proyectoQR();
+            if (puertoProyecto == 1) {
+                puertoProyecto = 0;
+                llenarCamporProyecto(valor);
+                abierto = 0;
+            } else {
+                //No se pudo establecer la conexión con el puerto COM, desea cambiarlo o volver a intentar? 
+                if (JOptionPane.showOptionDialog(null, "No se pudo establecer la conexión con el puerto COM, ¿dese volver a intentarlo?",
+                        "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                        new Object[]{"SI", "NO"}, "SI") == 0) {
+                    abierto = 1;
+                } else {
+                    abierto = 0;
+                }
+            }
         }
     }
 
@@ -1288,7 +1324,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
 
     private void btnTomaTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomaTiemposActionPerformed
         Menu principal = new Menu();
-        detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 4, 4);
+        detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 4, 4,Menu.cargo);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
@@ -1634,7 +1670,21 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
     private void jTNombreClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreClienteKeyReleased
         validarCampos();
     }//GEN-LAST:event_jTNombreClienteKeyReleased
+
+    private void jTNovedadesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNovedadesKeyReleased
+    }//GEN-LAST:event_jTNovedadesKeyReleased
+
+    private void jTNovedadesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNovedadesKeyTyped
+        if (jTNovedades.getText().length() >= 250) {
+            evt.consume();
+        }
+        caracteresRestantes(jTNovedades.getText().length());
+    }//GEN-LAST:event_jTNovedadesKeyTyped
 //Metodos-------------------------------------------------------------------->
+
+    private void caracteresRestantes(int cant) {
+        jLNCaracteres.setText(String.valueOf(250 - cant));
+    }
 
     private void ejecucionOParada(int op) {
         int seleccion = JOptionPane.showOptionDialog(null, (op == 1) ? "¿Seguro desea poner en ejecucion este numero de orden?" : "¿Seguro desea parar este numero de orden?",
@@ -2286,6 +2336,15 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jTNovedades.setVisible(false);
         jScrollPane1.setVisible(false);
         jTNovedades.setText("");
+        jTNovedades.setVisible(false);
+        jLNovedades.setVisible(false);
+        jLNCaracteres.setVisible(false);
+        jScrollPane1.setVisible(false);
+        jTNovedades.setLineWrap(true);
+        jDFechaEntregaPCBGF.setVisible(false);
+        jLCircuitoGF.setVisible(false);
+        jLpcbGF.setVisible(false);
+        jDFechaEntregaPCBCOMGF.setVisible(false);
     }
 
     private void VerificarQueSeElimina(DetalleProyecto obj) {//Falata la eliminacion Cuando se presenta una integración
@@ -2840,6 +2899,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
     public static javax.swing.JLabel jLIngreso;
     public static javax.swing.JLabel jLMaterialCircuito;
     public static javax.swing.JLabel jLMaterialPCB;
+    public static javax.swing.JLabel jLNCaracteres;
     public static javax.swing.JLabel jLNovedades;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
