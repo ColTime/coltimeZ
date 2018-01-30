@@ -418,7 +418,7 @@ public class proyecto1 extends javax.swing.JPanel {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         jPInformacion.setBackground(new Color(255, 255, 255));
         btnConsultarDetalle.setEnabled(true);
-        btnNuevo.setEnabled(false);
+//        btnNuevo.setEnabled(false);
         btnModificarPNC.setEnabled(false);
         btnGenerarQR.setEnabled(false);
         btnDelete.setEnabled(false);

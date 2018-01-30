@@ -136,7 +136,7 @@ public class FE_TE_INM {
             con = conexion.getConexion();
             //Falta calcular el estado
             String Qry = "";
-            if (proceso == 22) {
+            if (proceso == 20) {//El proceso de gran formato es el "20"
                 Qry = "CALL PA_ValidarCantidadDetalleProyecto(?,?,?,?)";
                 ps = con.prepareStatement(Qry);
                 ps.setInt(1, orden);

@@ -22,15 +22,16 @@ public class DetalleProyectoM {
     boolean res = false;
 
     //Metodos----------------------------------------------------->
-    public CachedRowSet consultarDetallesM(int area) {
+    public CachedRowSet consultarDetallesM(int area,int op) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = "CALL PA_ConsultarDetallesProyectosProduccion(?)";
+            String Qry = "CALL PA_ConsultarDetallesProyectosProduccion(?,?)";
             ps = con.prepareStatement(Qry);
             ps.setInt(1, area);
+            ps.setInt(2, op);
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
             crs.populate(rs);

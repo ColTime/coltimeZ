@@ -468,7 +468,7 @@ public class ProyectoM {
             conexion.establecerConexion();
             con = conexion.getConexion();
             //Query------------------------------------------------------------>
-            String Qry = Qry = "CALL PA_ConsultarProyectosEliminados()";
+            String Qry = "CALL PA_ConsultarProyectosEliminados()";
             ps = con.prepareStatement(Qry);
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();

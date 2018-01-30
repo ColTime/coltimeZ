@@ -33,32 +33,33 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
     public void consultarDetallesDeProyectos(int area) {
         Controlador.DetalleProyecto obj = new DetalleProyecto();
         try {
+            for (int i = 1; i <= 4; i++) {
+                CachedRowSet crs = obj.consultarDetalles(area,i);
+                while (crs.next()) {
+                    v[0] = crs.getString(1);
+                    v[1] = crs.getString(2);
 
-            CachedRowSet crs = obj.consultarDetalles(area);
-            while (crs.next()) {
-                v[0] = crs.getString(1);
-                v[1] = crs.getString(2);
-
-                switch (crs.getInt(3)) {//Estado
-                    case 1://Por iniciar
-                        iniciar.addRow(v);
-                        break;
-                    case 2://Pausado
-                        pausar.addRow(v);
-                        break;
-                    case 3://terminado
-                        terminar.addRow(v);
-                        break;
-                    case 4://Ejecucion
-                        ejecucion.addRow(v);
-                        break;
+                    switch (crs.getInt(3)) {//Estado
+                        case 1://Por iniciar
+                            iniciar.addRow(v);
+                            break;
+                        case 2://Pausado
+                            pausar.addRow(v);
+                            break;
+                        case 3://terminado
+                            terminar.addRow(v);
+                            break;
+                        case 4://Ejecucion
+                            ejecucion.addRow(v);
+                            break;
+                    }
                 }
-            }
-            jTPTerminado.setModel(terminar);
-            jTPIniciar.setModel(iniciar);
-            jTPPausado.setModel(pausar);
-            jTPEjecucion.setModel(ejecucion);
+                jTPTerminado.setModel(terminar);
+                jTPIniciar.setModel(iniciar);
+                jTPPausado.setModel(pausar);
+                jTPEjecucion.setModel(ejecucion);
 
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -95,6 +96,11 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         jTPTerminado = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -170,7 +176,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel6.setText("Proyecto por iniciar hoy:");
+        jLabel6.setText("Proyecto por iniciar:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
@@ -247,15 +253,12 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -289,6 +292,10 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+            
+    }//GEN-LAST:event_jPanel1KeyPressed
 
     /**
      * @param args the command line arguments
