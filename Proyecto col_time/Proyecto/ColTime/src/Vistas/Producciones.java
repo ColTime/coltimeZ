@@ -682,24 +682,24 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                                     break;
                             }
                             break;
-                        case 3:
-                            //Terminado
-                            //Eliminar----------------------------------------------------------------------------
-                            switch (crs.getString(3)) {
-                                case "Normal":
-                                    //Proyecto normal
-                                    icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
-                                    break;
-                                case "Quick":
-                                    //Proyecto Quick
-                                    icon = new ImageIcon("src\\produccion\\ProyectCheckQuick.png");
-                                    break;
-                                case "RQT":
-                                    //Proyecto RQT
-                                    icon = new ImageIcon("src\\produccion\\ProyectCheckRQT.png");
-                                    break;
-                            }
-                            break;
+//                        case 3:
+//                            //Terminado
+//                            //Eliminar----------------------------------------------------------------------------
+//                            switch (crs.getString(3)) {
+//                                case "Normal":
+//                                    //Proyecto normal
+//                                    icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
+//                                    break;
+//                                case "Quick":
+//                                    //Proyecto Quick
+//                                    icon = new ImageIcon("src\\produccion\\ProyectCheckQuick.png");
+//                                    break;
+//                                case "RQT":
+//                                    //Proyecto RQT
+//                                    icon = new ImageIcon("src\\produccion\\ProyectCheckRQT.png");
+//                                    break;
+//                            }
+//                            break;
                         //Eliminar------------------------------------------------------------------------------
                         case 4:
                             //Ejecucion

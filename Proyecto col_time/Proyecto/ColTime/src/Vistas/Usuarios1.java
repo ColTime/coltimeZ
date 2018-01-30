@@ -583,11 +583,17 @@ public class Usuarios1 extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActivarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        registrarMdificarUsuario(2, 1);
-        jTdocumento.setEnabled(true);
-        btnUpdate.setEnabled(false);
-        btnDelete.setEnabled(false);
-        estadoComponentes(false, new Color(244, 244, 244));
+        int seleccion = JOptionPane.showOptionDialog(null, "¿Seguro desea guardar estos cambios?",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI");
+        if (seleccion == 0) {
+            registrarMdificarUsuario(2, 1);
+            jTdocumento.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            estadoComponentes(false, new Color(244, 244, 244)); 
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void jTdocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyTyped
@@ -799,18 +805,18 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.getColumnModel().getColumn(3).setMaxWidth(206);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(206);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(206);
-        jTUsuario.getColumnModel().getColumn(4).setMinWidth(156);
-        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(156);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(156);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(156);
+        jTUsuario.getColumnModel().getColumn(4).setMinWidth(153);
+        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(153);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(153);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(153);
         jTUsuario.getColumnModel().getColumn(5).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        jTUsuario.getColumnModel().getColumn(6).setMinWidth(53);
-        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(53);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(53);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(53);
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(50);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(50);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(50);
         jTUsuario.getColumnModel().getColumn(7).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);

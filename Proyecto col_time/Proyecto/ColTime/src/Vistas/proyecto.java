@@ -1191,11 +1191,17 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Proyecto obj = new Proyecto();
-        if (obj.validarNumerOrden(Integer.parseInt(jTNorden.getText()))) {//Se valida que la orden no exista
-            new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden ya existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
-        } else {
-            validarRegistro(1);
+        int seleccion = JOptionPane.showOptionDialog(null, "¿Seguro desea registrar este proyecto?",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI");
+        if (seleccion == 0) {
+            Proyecto obj = new Proyecto();
+            if (obj.validarNumerOrden(Integer.parseInt(jTNorden.getText()))) {//Se valida que la orden no exista
+                new rojerusan.RSNotifyAnimated("¡Alerta!", "Este numero de orden ya existe.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
+            } else {
+                validarRegistro(1);
+            }
         }
 //        puerto.close();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -1603,8 +1609,6 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         }
 
         fechaEntregaFEoGF();
-
-
     }//GEN-LAST:event_cbMaterialCircuitoItemStateChanged
 
     private void cbMaterialPCBTEItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialPCBTEItemStateChanged
@@ -2414,6 +2418,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 subEliminardetalle(obj, Integer.parseInt(jLIDPCBCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB COM");
             }
         }
+        if (jRPIntegracion.isSelected() == false && !jLIDPCBEN.getText().equals("")) {
+            subEliminardetalle(obj, Integer.parseInt(jLIDPCBEN.getText()), Integer.parseInt(jTNorden.getText()), "IN", "Circuito-TE");
+        }
+
     }
 
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
