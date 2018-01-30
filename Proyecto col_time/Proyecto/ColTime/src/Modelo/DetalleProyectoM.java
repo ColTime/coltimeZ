@@ -22,7 +22,7 @@ public class DetalleProyectoM {
     boolean res = false;
 
     //Metodos----------------------------------------------------->
-    public CachedRowSet consultarDetallesM(int area,int op) {
+    public CachedRowSet consultarDetallesM(int area, int op) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -292,6 +292,9 @@ public class DetalleProyectoM {
                 break;
             case "PCB COM":
                 tipo = 11;
+                break;
+            case "Circuito-TE":
+                tipo = 12;
                 break;
         }
         return tipo;

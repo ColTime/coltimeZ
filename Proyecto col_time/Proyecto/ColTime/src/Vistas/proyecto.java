@@ -618,10 +618,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, -1));
@@ -630,10 +630,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaFECOM.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFECOM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaFECOM.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaFECOMCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaFECOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 130, 20));
@@ -642,10 +642,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaPCBGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBGFCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 130, -1));
@@ -677,10 +677,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDFechaEntregaPCBCOMGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBCOMGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDFechaEntregaPCBCOMGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDFechaEntregaPCBCOMGFCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPDetalles1.add(jDFechaEntregaPCBCOMGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 130, -1));
@@ -728,10 +728,10 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jDentregaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -1324,7 +1324,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
 
     private void btnTomaTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomaTiemposActionPerformed
         Menu principal = new Menu();
-        detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 4, 4,Menu.cargo);
+        detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 4, 4, Menu.cargo);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
@@ -1928,22 +1928,24 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         boolean respues = true;
         if (jCPCBTE.isSelected()) {
             if (jRPIntegracion.isSelected() && jCPCBTE.isSelected()) {
-                if (jDFechaEntregaPCBCOMGF.getDate() != null && jDFechaEntregaPCBGF.getDate() != null) {
-                    respues = true;
-                } else {
-                    respues = false;
-                }
-            } else if (jRPIntegracion.isSelected()) {
-                if (jDFechaEntregaPCBGF.getDate() != null) {
-                    respues = true;
-                } else {
-                    respues = false;
-                }
-            } else if (jRPCBCOM.isSelected()) {
-                if (jDFechaEntregaPCBCOMGF.getDate() != null) {
-                    respues = true;
-                } else {
-                    respues = false;
+                if (jRPIntegracion.isSelected() && jRPCBCOM.isSelected()) {//Integración y Componentes
+                    if (jDFechaEntregaPCBCOMGF.getDate() != null && jDFechaEntregaPCBGF.getDate() != null) {
+                        respues = true;
+                    } else {
+                        respues = false;
+                    }
+                } else if (jRPIntegracion.isSelected()) {//Solo integración
+                    if (jDFechaEntregaPCBGF.getDate() != null) {// Pre condición:jDFechaEntregaPCBCOMGF.getDate() != null &&
+                        respues = true;
+                    } else {
+                        respues = false;
+                    }
+                } else if (jRPCBCOM.isSelected()) {//Solo Componentes
+                    if (jDFechaEntregaPCBCOMGF.getDate() != null) {
+                        respues = true;
+                    } else {
+                        respues = false;
+                    }
                 }
             }
         }
@@ -2485,13 +2487,6 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         } else if (cbNegocio.getSelectedItem().equals("FE/TE")) {//////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE"
-            //Registro de componentes de la PCB del teclado.
-            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
-                op1 = op;
-                op = 1;
-                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-                op = op1;
-            }
 
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
@@ -2586,6 +2581,21 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                         op = op1;
                     }
                 }
+                //Registro de componentes de la PCB del teclado.
+                if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                    res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDPCBCOM.getText()));
+                    op = op1;
+                }
+                //------------------------------------------------------------------------------------------------------------------------
+                if (jCPCBTE.isSelected() && jRPIntegracion.isSelected() && jLIDPCBEN.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                    res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "IN", "Circuito-TE", numeroOrden, "", op, Integer.parseInt(jLIDPCBCOM.getText()));
+                    op = op1;
+                }
+                //------------------------------------------------------------------------------------------------------------------------
                 //Fin del registro del PCB TE
             }
             if (jCTeclado.isSelected()) {
@@ -2610,13 +2620,6 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 op1 = op;
                 op = 1;
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-                op = op1;
-            }
-            //Registro de componentes PCB COM
-            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
-                op1 = op;
-                op = 1;
-                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
                 op = op1;
             }
             //Registro de componentes
@@ -2685,13 +2688,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "Circuito COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
                 op = op1;
             }
-            //Registro de componentes PCB COM
-            if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
-                op1 = op;
-                op = 1;
-                res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDCircuitoCOM.getText()));
-                op = op1;
-            }
+
             if (jCConversor.isSelected()) {
                 //Registrar Conversor------------------------------------------>
                 if (jLIDConversor.getText().equals("0")) {
@@ -2785,6 +2782,21 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                         op = op1;
                     }
                 }
+                //Registro de componentes PCB COM
+                if (jCPCBTE.isSelected() && jRPCBCOM.isSelected() && jLIDPCBCOM.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                    res = subRegistrarModificarProyecto(obj, "", "ALMACEN", "PCB COM", numeroOrden, "", op, Integer.parseInt(jLIDPCBCOM.getText()));
+                    op = op1;
+                }
+                //------------------------------------------------------------------------------------------------------------------------
+                if (jCPCBTE.isSelected() && jRPIntegracion.isSelected() && jLIDPCBEN.getText().equals("0")) {
+                    op1 = op;
+                    op = 1;
+                    res = subRegistrarModificarProyecto(obj, jTPCBTE.getText(), "IN", "Circuito-TE", numeroOrden, "", op, Integer.parseInt(jLIDPCBCOM.getText()));
+                    op = op1;
+                }
+                //------------------------------------------------------------------------------------------------------------------------
                 //Fin del registro del PCB TE
             }
             if (jCTeclado.isSelected()) {
