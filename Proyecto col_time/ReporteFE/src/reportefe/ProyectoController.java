@@ -22,7 +22,7 @@ public class ProyectoController {
             Conexion conexion = new Conexion();
             conexion.establecerConexion();
             con = conexion.getConexion();
-            ps = con.prepareStatement("CALL PA_ReporteDeFE()");
+            ps = con.prepareStatement("CALL PA_InformeNFE");
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
             crs.populate(rs);

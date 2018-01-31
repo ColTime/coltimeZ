@@ -723,15 +723,15 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                     switch (crs.getString(3)) {
                         case "Normal":
                             //Proyecto normal
-                            icon = new ImageIcon("src\\produccion\\proyectStop.png");
+                            icon = new ImageIcon(getClass().getResource("src\\produccion\\proyectStop.png"));
                             break;
                         case "Quick":
                             //Proyecto Quick
-                            icon = new ImageIcon("src\\produccion\\proyectStopQuick.png");
+                            icon = new ImageIcon(getClass().getResource("src\\produccion\\proyectStopQuick.png"));
                             break;
                         case "RQT":
                             //Proyecto RQT
-                            icon = new ImageIcon("src\\produccion\\proyectStopRQT.png");
+                            icon = new ImageIcon(getClass().getResource("src\\produccion\\proyectStopRQT.png"));
                             break;
                     }
                 }

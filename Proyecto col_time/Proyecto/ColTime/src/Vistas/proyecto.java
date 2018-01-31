@@ -1134,7 +1134,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
             Scanner mySC;
             while (commports.hasMoreElements()) {
                 myCPI = (CommPortIdentifier) commports.nextElement();
-                if (myCPI.getName().equals("COM4")) {//Localización del puerto 
+                if (myCPI.getName().equals("COM3")) {//Localización del puerto 
                     puertoProyecto = 1;
                     puerto = myCPI.open("Puerto serial Proyecto", 100);//Apertura y nombre del puerto
                     SerialPort mySP = (SerialPort) puerto;
