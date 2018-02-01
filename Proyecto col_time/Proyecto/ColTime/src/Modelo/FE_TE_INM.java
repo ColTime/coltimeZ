@@ -70,8 +70,13 @@ public class FE_TE_INM {
                     cantidadAntigua = rs.getInt(2);
                     estado = 0;
                 }
-                int restante = rs.getInt(1) - (cantidadTerminada + cantidadAntigua);
-                operarios = rs.getInt(3);
+                //---------
+                int restante = rs.getInt(1) - (cantidadTerminada + cantidadAntigua);//Esta es la cantidad restante del proceso.
+                //---------
+                operarios = rs.getInt(3);//El numero de operarios que va a trabajar en el proceso.
+                //---------
+//                int pasadas=rs.getInt(1)-restante;//El numero de las cantidades disponibles para que el otro proyecto las pueda trabajar.
+                //---------
                 // si el estado es dos o tres (2 o 3) procedera a realizar la actualización.
                 if (estado != 0) {
                     Qry = "CALL PA_CalcularTiempoMinutos(?,?,?,?)";
@@ -104,8 +109,8 @@ public class FE_TE_INM {
                 } else {
                     res = false;
                     //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada(Al celular)...................................
-//                    enviarMensajeCelular("Mensaje", cps);//Mensaje para el celular
-
+//                 enviarMensajeCelular("Mensaje", cps);//Mensaje para el celular
+                   //Esta por definir por que medio se enviara el mensaje al celular.
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
