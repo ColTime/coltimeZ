@@ -26,7 +26,6 @@ public class ProyectoController {
             rs = ps.executeQuery();
             crs = new CachedRowSetImpl();
             crs.populate(rs);
-
             rs.close();
             ps.close();
             con.close();

@@ -612,7 +612,10 @@ public class DetalleProyectoM {
             rs1 = ps.executeQuery();
             rs1.next();
             res = rs1.getBoolean(1);
-
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }

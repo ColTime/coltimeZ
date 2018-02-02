@@ -89,6 +89,9 @@ public class ConsultarPNC extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTNordenKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNordenKeyTyped(evt);
+            }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -286,6 +289,13 @@ public class ConsultarPNC extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TDetalleMousePressed
+
+    private void jTNordenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNordenKeyTyped
+        char v = evt.getKeyChar();
+        if (v == ' ' || v == '.' || v == '/' || v == '_' || v == '?' || v == '-') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTNordenKeyTyped
     //Metodos de consultarPNC--------------------------------------------------->
 
     private void exportarInformacion(int pos) {

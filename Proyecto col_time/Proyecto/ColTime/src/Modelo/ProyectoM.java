@@ -52,6 +52,7 @@ public class ProyectoM {
             ps.setInt(1, orden);
             ps.setInt(2, op);
             res = !ps.execute();
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -109,6 +110,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -132,6 +134,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -167,6 +170,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -221,6 +225,7 @@ public class ProyectoM {
             } else {
                 res = false;
             }
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -283,6 +288,7 @@ public class ProyectoM {
                     }
                 }
             }
+            //Cierre de conexiones
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -326,6 +332,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -349,6 +356,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -373,6 +381,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -452,6 +461,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -473,6 +483,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             conexion.cerrar(rs);
             ps.close();
             con.close();
@@ -483,7 +494,8 @@ public class ProyectoM {
         return crsP;
     }
 
-    //!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //Solo se elimina cierta información, mucho cuidado al ejecutarlo por cualquier razon.
     public boolean EliminarProyecto(int orden) {
         try {
             conexion = new Conexion();
@@ -506,6 +518,7 @@ public class ProyectoM {
         }
         return res;
     }
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public boolean ReacttivarProyecto(int orden) {//Se cambiara el estado del proyecto
         try {
@@ -530,7 +543,6 @@ public class ProyectoM {
         return res;
     }
 
-    //!!!!!!!!!!!!!!
     public CachedRowSet Consultar_informacion_para_el_QR(int orden) {
         try {
             conexion = new Conexion();
@@ -543,6 +555,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -567,6 +580,7 @@ public class ProyectoM {
             } else {
                 orden = "N#Error";
             }
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -589,6 +603,7 @@ public class ProyectoM {
             if (rs.next()) {
                 fecha = String.valueOf(rs.getString(1));
             }
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -610,7 +625,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
-
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -645,6 +660,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -667,6 +683,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -689,6 +706,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -711,6 +729,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             crsP = new CachedRowSetImpl();
             crsP.populate(rs);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -733,6 +752,7 @@ public class ProyectoM {
             rs = ps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);

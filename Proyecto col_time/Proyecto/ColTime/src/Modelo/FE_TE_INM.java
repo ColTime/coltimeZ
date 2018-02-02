@@ -110,7 +110,7 @@ public class FE_TE_INM {
                     res = false;
                     //Se enviara desde acá el mensaje al lector diciendo que la cantidad para el proyecto no es la adecuada(Al celular)...................................
 //                 enviarMensajeCelular("Mensaje", cps);//Mensaje para el celular
-                   //Esta por definir por que medio se enviara el mensaje al celular.
+                    //Esta por definir por que medio se enviara el mensaje al celular.
                 }
             } else {
                 //Si no existe se ejecutara el procedimiento para iniciar o renaudar el tiempo
@@ -184,10 +184,14 @@ public class FE_TE_INM {
             }
             //Pendiente.........................................................
             //Cerrar conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
-        return res;//Falta asignarle este tru a una variable
+        return res;//Falta asignarle este true a una variable
     }
 
     public void totalTiempoPorUnidad(int detalle, int negocio) {
@@ -207,6 +211,11 @@ public class FE_TE_INM {
             } else {
                 //Actualizar el tiempo total por unidad a null
             }
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
@@ -256,7 +265,11 @@ public class FE_TE_INM {
             ps.setString(2, cadena);
             ps.execute();
             //...
-
+            //Cierre de conexiones
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
@@ -287,7 +300,6 @@ public class FE_TE_INM {
                 ps.execute();
                 //...
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }

@@ -1330,7 +1330,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
 
     private void btnTomaTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomaTiemposActionPerformed
         Menu principal = new Menu();
-        detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 4, 4, Menu.cargo);
+        detalleProduccion obj = new detalleProduccion(principal, true, Integer.parseInt(jTNorden.getText()), 5, 4, Menu.cargo);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
     }//GEN-LAST:event_btnTomaTiemposActionPerformed
@@ -2418,10 +2418,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 subEliminardetalle(obj, Integer.parseInt(jLIDPCBCOM.getText()), Integer.parseInt(jTNorden.getText()), "ALMACEN", "PCB COM");
             }
         }
-        if (jRPIntegracion.isSelected() == false && !jLIDPCBEN.getText().equals("")) {
+        if (jRPIntegracion.isSelected() == false && !jLIDPCBEN.getText().equals("0")) {
             subEliminardetalle(obj, Integer.parseInt(jLIDPCBEN.getText()), Integer.parseInt(jTNorden.getText()), "IN", "Circuito-TE");
         }
-
     }
 
     private boolean RegistrarModificarDetalle(String numeroOrden, int op) {
@@ -2457,7 +2456,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 //Fin del registro del Circuito FE
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-            VerificarQueSeElimina(obj);
+            if (op != 1) {//No es necesario cuando se registra un proyecto
+                VerificarQueSeElimina(obj);
+            }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         } else if (cbNegocio.getSelectedItem().equals("TE")) {////////////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto con negocio "TE"
@@ -2474,7 +2475,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 //Fin del registro del PCB TE
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-            VerificarQueSeElimina(obj);
+            if (op != 1) {//No es necesario cuando se registra un proyecto
+                VerificarQueSeElimina(obj);
+            }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         } else if (cbNegocio.getSelectedItem().equals("EN")) {///////////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "IN"
@@ -2491,7 +2494,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 //Fin del registro del circuito IN
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-            VerificarQueSeElimina(obj);
+            if (op != 1) {//No es necesario cuando se registra un proyecto
+                VerificarQueSeElimina(obj);
+            }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         } else if (cbNegocio.getSelectedItem().equals("FE/TE")) {//////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE"
@@ -2619,7 +2624,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 //Fin del registro del Teclado
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-            VerificarQueSeElimina(obj);
+            if (op != 1) {//No es necesario cuando se registra un proyecto
+                VerificarQueSeElimina(obj);
+            }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         } else if (cbNegocio.getSelectedItem().equals("FE/EN")) {//////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/IN"
@@ -2685,7 +2692,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 //Fin del registro del Stencil
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-            VerificarQueSeElimina(obj);
+            if (op != 1) {//No es necesario cuando se registra un proyecto
+                VerificarQueSeElimina(obj);
+            }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         } else if (cbNegocio.getSelectedItem().equals("FE/TE/EN")) {//////////////////////////////////////////////////////////////////////////////////////////////
             //Se registra el detalle del proyecto cuando el negocio es "FE/TE/IN"
@@ -2832,7 +2841,9 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
                 //Fin del registro de Integracion
             }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-            VerificarQueSeElimina(obj);
+            if (op != 1) {//No es necesario cuando se registra un proyecto
+                VerificarQueSeElimina(obj);
+            }
             //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         }
         return res;

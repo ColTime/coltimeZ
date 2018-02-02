@@ -41,6 +41,7 @@ public class ProcesosM {
             rs = pps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             rs.close();
             pps.close();
             con.close();
@@ -60,6 +61,7 @@ public class ProcesosM {
             crs = new CachedRowSetImpl();
             rs = pps.executeQuery();
             crs.populate(rs);
+            //Cierre de conexiones
             rs.close();
             pps.close();
             con.close();
@@ -80,6 +82,7 @@ public class ProcesosM {
             rs = pps.executeQuery();
             rs.next();
             res = rs.getBoolean(1);
+            //Cierre de conexiones
             rs.close();
             pps.close();
             con.close();

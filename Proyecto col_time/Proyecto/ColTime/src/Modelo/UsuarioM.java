@@ -32,6 +32,7 @@ public class UsuarioM {
             crs.populate(rs);
             //Destrucción de conexiones
             con.close();
+            conexion.cerrar(rs);
             conexion.destruir();
             ps.close();
         } catch (Exception e) {
@@ -53,6 +54,7 @@ public class UsuarioM {
             ps.execute();
             //Destrucción de conexiones
             con.close();
+            conexion.cerrar(rs);
             conexion.destruir();
             ps.close();
         } catch (Exception e) {
@@ -82,6 +84,7 @@ public class UsuarioM {
             } else {
                 res = false;
             }
+            //Cierre de conexiones
             con.close();
             conexion.destruir();
             conexion.cerrar(rs);
@@ -115,7 +118,7 @@ public class UsuarioM {
             con.close();
             obj.destruir();
         } catch (Exception e) {
-            System.out.print("Erro" + e);
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         return crs;
     }
@@ -228,7 +231,7 @@ public class UsuarioM {
     }
 
     public String nombreUsuarioM(String doc) {
-        String nombre="";
+        String nombre = "";
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -239,7 +242,7 @@ public class UsuarioM {
             ps.setString(1, doc);
             rs = ps.executeQuery();
             rs.next();
-            nombre=rs.getString(1);
+            nombre = rs.getString(1);
             //Destrucción de conexiones
             con.close();
             conexion.destruir();
