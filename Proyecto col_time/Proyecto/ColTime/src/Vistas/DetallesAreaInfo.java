@@ -30,7 +30,8 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
     String v[] = new String[2];
     String name[] = {"N°Orden", "Producto"};
     private static int area = 0;
-
+    
+//Arreglar la forma de traer la informacion a la vista.-------------------------
     public void consultarDetallesDeProyectos(int area) {
         DefaultTableModel iniciar = new DefaultTableModel(null, name);
         DefaultTableModel pausar = new DefaultTableModel(null, name);
@@ -69,7 +70,8 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
+//------------------------------------------------------------------------------
+    
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
