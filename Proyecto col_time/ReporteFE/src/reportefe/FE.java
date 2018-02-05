@@ -23,7 +23,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     public FE() {
         initComponents();
         this.setExtendedState(FE.MAXIMIZED_BOTH);
-        //Hilo
+        //Hilo de ejecución
         informe.start();
 //        cargarTablaInformeFE();
         //...
@@ -31,7 +31,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     }
     //Variables
     CachedRowSet crs = null;
-    int rep = 0;
+    int rep = 0, cantFinal = 0;
     int cantidadRestante = 0, cantidadPasada = 0;
     String tipo_negocio = "", producto1 = "", Orden1 = "";
     Object v[] = new Object[26];
@@ -107,7 +107,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
                     reinicializarVector(crs);//Se vuleve a poner el vector en estado base
                     rep = 1;
                 } else {
-                    if (v[4].toString().equals(crs.getString(4)) && v[0].toString().equals(crs.getString(1))) {
+                    if (v[4].toString().equals(crs.getString(4)) && v[0].toString().equals(crs.getString(1)) && v[25].toString().equals(crs.getString(9) == null ? "-" : crs.getString(9))) {//Tipo de producto && Numero de orden && Producto no conforme
                         rep = 1;
                     } else {
                         organizarVector();
@@ -116,7 +116,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
                         reinicializarVector(crs);//Se vuleve a poner el vector en estado base
                     }
                 }
-                if (v[4].toString().equals(crs.getString(4)) && v[0].toString().equals(crs.getString(1))) {//Numero de orden
+                if (v[4].toString().equals(crs.getString(4)) && v[0].toString().equals(crs.getString(1)) && v[25].toString().equals(crs.getString(9) == null ? "-" : crs.getString(9))) {//Numero de orden
                     //Se valida que el nuevo numero de la orden se agrege solo una sola vez al vector
                     cantidadRestante = 0;
                     cantidadPasada = 0;
@@ -171,6 +171,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
                         case 10://Maquinas
                             v[23] = crs.getInt(8);//Estado de maquinas
                             //...
+                            cantFinal = crs.getInt(6);
                             break;
                     }
                 }
@@ -255,6 +256,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
         jTReporte.getTableHeader().getColumnModel().getColumn(25).setMaxWidth(60);
         jTReporte.getTableHeader().getColumnModel().getColumn(25).setMinWidth(60);
         //Fin de sub procesos---------------------------------------------------
+        //Modifica el tamaño de las columnas de la tabla
 //        //Numero de orden
 //        jTReporte.getColumnModel().getColumn(0).setMinWidth(90);
 //        jTReporte.getColumnModel().getColumn(0).setMaxWidth(90);
@@ -330,6 +332,9 @@ public class FE extends javax.swing.JFrame implements Runnable {
     private void organizarVector() {
         int cantidadPasada = 0, prceso = 8, subProceso = 7;
         //Dependiendo del proceso se organizan las cantidades
+        if (v[0].toString().equals("29439")) {
+            rep = rep;
+        }
         if (v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado")) {//Se pasan la cantidad de productos de perforado a quemado
             v[12] = v[8];
             v[8] = 0;
@@ -351,11 +356,15 @@ public class FE extends javax.swing.JFrame implements Runnable {
             //------------------------------------------------------------------
         }
         //----------------------------------------------------------------------
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             //...
-            if (!v[subProceso].toString().equals("-1") && !v[subProceso].toString().equals("1")) {//Todos los sub
-                cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 2].toString());//Cantidad que tiene Quimicos
-                v[prceso] = cantidadPasada;//Se asigna la cantidad a Quimicos
+            if (prceso == 24) {
+                v[prceso] = Integer.parseInt(v[prceso].toString()) - cantFinal;
+            } else {
+                if (!v[subProceso].toString().equals("-1") && !v[subProceso].toString().equals("1")) {//Todos los sub
+                    cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 2].toString());//Cantidad que tiene Quimicos
+                    v[prceso] = cantidadPasada;//Se asigna la cantidad a Quimicos
+                }
             }
             //...
             prceso += 2;
@@ -420,7 +429,8 @@ public class FE extends javax.swing.JFrame implements Runnable {
             v[2] = crs.getString(3);//Tipo(Normal,Quick,RQT)
             v[3] = crs.getString(5);//Cantidad total del proyecto
             v[4] = crs.getString(4);//Tipo de negocio
-            //Procesos
+            v[25] = crs.getString(9) == null ? "-" : crs.getString(9);//Producto no conforme
+            //Procesoscrs.getString(9).
             v[6] = 0;
             v[8] = 0;
             v[10] = 0;
@@ -494,22 +504,24 @@ public class FE extends javax.swing.JFrame implements Runnable {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1232, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1262, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

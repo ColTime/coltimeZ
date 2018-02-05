@@ -212,10 +212,11 @@ public class FE_TE_INM {
                 //Actualizar el tiempo total por unidad a null
             }
             //Cierre de conexiones
-            conexion.cerrar(rs);
-            conexion.destruir();
-            ps.close();
-            con.close();
+            //No se puede cerra la conexion desde acá
+//            conexion.cerrar(rs);
+//            conexion.destruir();
+//            ps.close();
+//            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }
@@ -265,11 +266,12 @@ public class FE_TE_INM {
             ps.setString(2, cadena);
             ps.execute();
             //...
+            //No se puede ejecutar el cierre de conexiones
             //Cierre de conexiones
-            conexion.cerrar(rs);
-            conexion.destruir();
-            ps.close();
-            con.close();
+//            conexion.cerrar(rs);
+//            conexion.destruir();
+//            ps.close();
+//            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! " + e);
         }

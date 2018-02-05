@@ -78,7 +78,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));//Verde
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));//Naranjado
                             break;
                     }
                     //------------------------------------------------------
@@ -98,7 +98,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -118,7 +118,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -138,7 +138,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -158,7 +158,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -178,7 +178,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -198,7 +198,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -218,7 +218,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -238,7 +238,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
@@ -258,7 +258,7 @@ public class MyRender extends JTable {
                             cell.setBackground(new Color(116, 251, 83));
                             break;
                         case "4":
-                            cell.setBackground(Color.ORANGE);
+                            cell.setBackground(new Color(255, 168, 27));
                             break;
                     }
                     //------------------------------------------------------
