@@ -1,6 +1,5 @@
 package Modelo;
 
-import Controlador.ConexionPS;
 import com.sun.rowset.CachedRowSetImpl;
 import java.io.PrintStream;
 import java.sql.Connection;

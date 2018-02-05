@@ -204,7 +204,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         obj.addActionListener(this);
         obj.setHorizontalTextPosition(JButton.CENTER);
         //Icono del boton
-        ImageIcon icono = new ImageIcon("src\\img\\detalle.png");
+        ImageIcon icono = new ImageIcon(getClass().getResource("/produccion/DetalleTime.png"));
         Icon imagen = new ImageIcon(icono.getImage().getScaledInstance(obj.getWidth() - 6, obj.getHeight() - 6, Image.SCALE_DEFAULT));
         obj.setIcon(imagen);
         px += 101;
@@ -240,7 +240,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
                 n = 3;
                 break;
         }
-        detalleProduccion obj = new detalleProduccion(this, true, orden, n, 3,Menu.cargo);
+        detalleProduccion obj = new detalleProduccion(this, true, orden, n, 3, Menu.cargo);
         obj.setLocationRelativeTo(null);
         obj.setVisible(true);
         obj.dispose();

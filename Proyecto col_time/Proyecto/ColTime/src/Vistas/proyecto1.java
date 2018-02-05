@@ -1,7 +1,6 @@
 package Vistas;
 
 import Controlador.DetalleProyecto;
-import Controlador.Proyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
 import java.io.File;
@@ -536,7 +535,6 @@ public class proyecto1 extends javax.swing.JPanel {
             //Mensaje de no se puede eliminar el PNC
             new rojerusan.RSNotifyAnimated("Advertencia", "El PNC no puede ser eliminado.", 6, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
-
         //Esta pendiente organizar esta parte del codigo----------------------------------------------------------------->
     }//GEN-LAST:event_btnDeleteActionPerformed
 //Metodos-------------------------------------------------------------------->

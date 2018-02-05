@@ -1831,7 +1831,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
             //Tabla y encabezado
             PdfPTable tabla = new PdfPTable(3);
             PdfPCell header = new PdfPCell(new Paragraph("Orden numero: " + jTNorden.getText() + "\n"));
-            Image logo = Image.getInstance("src\\imagenesEmpresa\\logo.png");
+            Image logo = Image.getInstance(getClass().getResource("/imagenesEmpresa/logo.png"));
             logo.scaleAbsolute(300, 125);
             logo.setAlignment(Image.ALIGN_CENTER);
 

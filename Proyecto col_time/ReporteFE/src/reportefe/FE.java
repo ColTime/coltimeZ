@@ -22,6 +22,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
      */
     public FE() {
         initComponents();
+
         this.setExtendedState(FE.MAXIMIZED_BOTH);
         //Hilo de ejecución
         informe.start();
@@ -73,8 +74,8 @@ public class FE extends javax.swing.JFrame implements Runnable {
                     -P=6;
                     -C=8;
                     -Q=10;
-                    -CTH=12;
-                    -QUE=14;
+                    -Que=12;
+                    -CTH=14;
                     -S=16;
                     -E=18;
                     -C2=20;
@@ -187,6 +188,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
             jTReporte.setDefaultRenderer(Object.class, new Tabla());
             columnasOcultas();
             rep = 0;
+            cantFinal=0;
             crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
@@ -332,7 +334,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     private void organizarVector() {
         int cantidadPasada = 0, prceso = 8, subProceso = 7;
         //Dependiendo del proceso se organizan las cantidades
-        if (v[0].toString().equals("29439")) {
+        if (v[0].toString().equals("29436")) {
             rep = rep;
         }
         if (v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado")) {//Se pasan la cantidad de productos de perforado a quemado
@@ -360,10 +362,16 @@ public class FE extends javax.swing.JFrame implements Runnable {
             //...
             if (prceso == 24) {
                 v[prceso] = Integer.parseInt(v[prceso].toString()) - cantFinal;
+                cantFinal=0;
             } else {
                 if (!v[subProceso].toString().equals("-1") && !v[subProceso].toString().equals("1")) {//Todos los sub
-                    cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 2].toString());//Cantidad que tiene Quimicos
-                    v[prceso] = cantidadPasada;//Se asigna la cantidad a Quimicos
+                    if (prceso == 14) {//Control calidad TH
+                        cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 4].toString());//Se restan las cantidades
+                        v[prceso] = cantidadPasada;
+                    } else {
+                        cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 2].toString());//Se restan las cantidades
+                        v[prceso] = cantidadPasada;
+                    }
                 }
             }
             //...
@@ -371,12 +379,12 @@ public class FE extends javax.swing.JFrame implements Runnable {
             subProceso += 2;
         }
         if ((v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado") || v[4].toString().equals("Stencil"))) {//Se valida que el troquel y el repujado no pasen más cantidades.
-            v[14] = 0;
+            v[14] = 0;//CTH
         }
         //Esto hace parte de los saltos de procesos. "Parte numero 2"
         //----------------------------------------------------------------------
         if (v[15].toString().equals("-1")) {//Cuendo no lleva Screen.
-            v[14] = 0;
+            v[16] = 0;
         }
         if (v[21].toString().equals("-1")) {//Cuando no lleva ruteo
             v[20] = 0;
@@ -384,7 +392,31 @@ public class FE extends javax.swing.JFrame implements Runnable {
         //----------------------------------------------------------------------
         prceso = 8;
         subProceso = 7;
-
+        /* Indices del vector
+                    subs_POS
+                    -subP=5;
+                    -subC=7;
+                    -subQ=9;
+                    -subQue=11;
+                    -subCTH=13;
+                    -subS=15;
+                    -subE=17;
+                    -subC2=19;
+                    -subR=21;
+                    -subM=23;
+                    
+                    Procesos_POS
+                    -P=6;
+                    -C=8;
+                    -Q=10;
+                    -Que=12;
+                    -CTH=14;
+                    -S=16;
+                    -E=18;
+                    -C2=20;
+                    -R=22;
+                    -M=24;
+         */
 //        if ((v[4].toString().equals("PCB") || v[4].toString().equals("Circuito")) && v[1].toString().equals("TH")) {//Circuito o PCB TH
 //            //------------------------------------------------------------------------
 //            for (int i = 0; i < 8; i++) {

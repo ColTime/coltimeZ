@@ -22,19 +22,25 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
     public DetallesAreaInfo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jTPTerminado.getTableHeader().setReorderingAllowed(false);
+        jTPPausado.getTableHeader().setReorderingAllowed(false);
+        jTPEjecucion.getTableHeader().setReorderingAllowed(false);
+        jTPIniciar.getTableHeader().setReorderingAllowed(false);
     }
     String v[] = new String[2];
     String name[] = {"N°Orden", "Producto"};
-    DefaultTableModel iniciar = new DefaultTableModel(null, name);
-    DefaultTableModel pausar = new DefaultTableModel(null, name);
-    DefaultTableModel terminar = new DefaultTableModel(null, name);
-    DefaultTableModel ejecucion = new DefaultTableModel(null, name);
+    private static int area = 0;
 
     public void consultarDetallesDeProyectos(int area) {
+        DefaultTableModel iniciar = new DefaultTableModel(null, name);
+        DefaultTableModel pausar = new DefaultTableModel(null, name);
+        DefaultTableModel terminar = new DefaultTableModel(null, name);
+        DefaultTableModel ejecucion = new DefaultTableModel(null, name);
+        this.area = area;
         Controlador.DetalleProyecto obj = new DetalleProyecto();
         try {
             for (int i = 1; i <= 4; i++) {
-                CachedRowSet crs = obj.consultarDetalles(area,i);
+                CachedRowSet crs = obj.consultarDetalles(area, i);
                 while (crs.next()) {
                     v[0] = crs.getString(1);
                     v[1] = crs.getString(2);
@@ -58,7 +64,6 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
                 jTPIniciar.setModel(iniciar);
                 jTPPausado.setModel(pausar);
                 jTPEjecucion.setModel(ejecucion);
-
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -92,6 +97,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jTPIniciar = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTPEjecucion = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -238,6 +244,16 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jTPEjecucion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(jTPEjecucion);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
+        jButton1.setToolTipText("");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -256,21 +272,30 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -294,8 +319,12 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
-            
+
     }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        consultarDetallesDeProyectos(area);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +369,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
