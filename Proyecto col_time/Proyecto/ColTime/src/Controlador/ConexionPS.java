@@ -40,7 +40,7 @@ public class ConexionPS {
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible
                 existePuerto = 1;
                 myCPI = (CommPortIdentifier) commports.nextElement();
-                if (myCPI.getName().equals("COM3")) {
+                if (myCPI.getName().equals("COM6")) {
                     puerto = myCPI.open("Puerto Serial Operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
                     //
@@ -57,12 +57,15 @@ public class ConexionPS {
                             mySC = new Scanner(mySP.getInputStream());
                         }
                         valorBeta = mySC.next();//Valor de entrada
-                        if (valorBeta.charAt(0) == '+') {//Valida que el valor de entrada sea el correcto
+                        
+//                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
+
+                        if (valorBeta.charAt(0) == '/') {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
                             //...
                             obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
                             //--------------------------------------------------
-                            obj.myPS.print(mensaje);//Valor de dalida
-                            mensaje = null;
+//                            obj.myPS.print(mensaje);//Valor de dalida
+//                            mensaje = null;
                             System.gc();//Garbage collector.
                         }
                     }

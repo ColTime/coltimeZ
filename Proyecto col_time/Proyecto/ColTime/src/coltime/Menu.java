@@ -16,7 +16,6 @@ import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
 import java.awt.Color;
-import java.awt.Image;
 import java.io.File;
 import java.io.PrintStream;
 import javax.sql.rowset.CachedRowSet;
@@ -58,12 +57,12 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         Thread conec = new Thread(dispo);
         conec.start();
 //        Toma de tiempos automatica
-//        if (cargo == 2 || cargo == 3) {
-//            if (soloUnaVez == 1) {
-//                Thread tomaTiempo = new Thread(this);
-//                tomaTiempo.start();
-//            }
-//        }
+        if (cargo == 2 || cargo == 3) {
+            if (soloUnaVez == 1) {
+                Thread tomaTiempo = new Thread(this);
+                tomaTiempo.start();
+            }
+        }
         //Fin de toma de tiempos automatica
     }
 
@@ -106,7 +105,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         btn3 = new rsbuttom.RSButtonMetro();
         btn5 = new rsbuttom.RSButtonMetro();
         btn6 = new rsbuttom.RSButtonMetro();
-        jButton3 = new javax.swing.JButton();
         jPContenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -427,14 +425,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             }
         });
         jPMenu.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 190, 42));
-
-        jButton3.setText("imagen");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPMenu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -1458,15 +1448,12 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel18MousePressed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }//GEN-LAST:event_jButton3ActionPerformed
 //Metodos de la clase menu----------------------------------------------------->
 
     public void LecturaCodigoQR(String codigo) {
         String beta[] = codigo.split("/");
         String infoP[] = beta[1].split(";");
+//        String infoP[] = codigo.split(";");
         Proyecto validar = new Proyecto();
         if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
             if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
@@ -1670,7 +1657,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             if (ruta.exists()) {
                 try {
                     //Aun no esta completo
-                    ImageIcon icon=new ImageIcon(rutaImagen);
+                    ImageIcon icon = new ImageIcon(rutaImagen);
                     rSUsuario.setImagenDefault(icon);
 //                    UrSUsuario.set
 //                    rSUsuario.imagenIcon.setImage(icon.getImage());
@@ -1726,7 +1713,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
     public static javax.swing.JLabel jDocumento;
     public javax.swing.JInternalFrame jInternalFrame1;
     public static javax.swing.JLabel jLConexion;

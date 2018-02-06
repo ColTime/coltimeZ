@@ -50,7 +50,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
         while (true) {
             cargarTablaInformeFE();
             try {
-                Thread.sleep(8000);//Se actualiza cada 8 segundos
+                Thread.sleep(5000);//Se actualiza cada 5 segundos
             } catch (InterruptedException ex) {
                 Logger.getLogger(FE.class.getName()).log(Level.SEVERE, null, ex);
             }
