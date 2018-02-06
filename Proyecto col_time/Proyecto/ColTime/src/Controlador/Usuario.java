@@ -116,6 +116,15 @@ public class Usuario {
         Modelo.UsuarioM obj = new UsuarioM();
         return obj.nombreUsuarioM(doc);
     }
+    
+    public void imagenUsuario(String ruta,String doc) {
+        Modelo.UsuarioM obj = new UsuarioM();
+        obj.imagenUsuariM(ruta,doc);
+    }
+     public String consultarImagenUsuario(String doc) {
+        Modelo.UsuarioM obj = new UsuarioM();
+        return obj.consultarImagenUsuariM(doc);
+    }
 
     //Metodo de liberacion de memoria------------------------------------------>
     @Override

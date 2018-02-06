@@ -95,6 +95,7 @@ public class proyecto extends javax.swing.JPanel implements Runnable {
         jLIDPCBCOM.setVisible(false);//ID de los componentes del circuito
         jLMaterialPCB.setVisible(false);
         jLMaterialCircuito.setVisible(false);
+        jLIDPCBEN.setVisible(false);//ID de integracion de la PCB
     }
 
     private void limites() {

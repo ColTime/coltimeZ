@@ -185,7 +185,7 @@ public class screen extends javax.swing.JFrame implements Runnable {
                 Thread.sleep(100);//5000
                 this.dispose();
                 Thread.sleep(100);//500
-                Menu men = new Menu(Integer.parseInt(jLCargo.getText()),jLNombreUsuario.getText());
+                Menu men = new Menu(Integer.parseInt(jLCargo.getText()),jLNombreUsuario.getText(),this.jDocumento.getText());
                 men.setVisible(true);
                 
                 men.setLocationRelativeTo(null);

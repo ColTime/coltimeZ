@@ -32,7 +32,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     }
     //Variables
     CachedRowSet crs = null;
-    int rep = 0, cantFinal = 0;
+    int rep = 0, cantFinal = 0, cantidadProyecto = 0;
     int cantidadRestante = 0, cantidadPasada = 0;
     String tipo_negocio = "", producto1 = "", Orden1 = "";
     Object v[] = new Object[26];
@@ -112,6 +112,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
                         rep = 1;
                     } else {
                         organizarVector();
+                        cantidadProyecto++;
                         df.addRow(v);//Información del proyecto
                         //Estado inicial del proyecto
                         reinicializarVector(crs);//Se vuleve a poner el vector en estado base
@@ -178,7 +179,9 @@ public class FE extends javax.swing.JFrame implements Runnable {
                 }
             }
             organizarVector();
+            cantidadProyecto++;
             df.addRow(v);//Información del proyecto
+            cantidadProceso[25] = cantidadProyecto;
             df.addRow(cantidadProceso);
             for (int i = 0; i < 10; i++) {
                 cantidadProceso[6 + (i + i)] = 0;
@@ -188,7 +191,8 @@ public class FE extends javax.swing.JFrame implements Runnable {
             jTReporte.setDefaultRenderer(Object.class, new Tabla());
             columnasOcultas();
             rep = 0;
-            cantFinal=0;
+            cantFinal = 0;
+            cantidadProyecto=0;
             crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
@@ -362,7 +366,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
             //...
             if (prceso == 24) {
                 v[prceso] = Integer.parseInt(v[prceso].toString()) - cantFinal;
-                cantFinal=0;
+                cantFinal = 0;
             } else {
                 if (!v[subProceso].toString().equals("-1") && !v[subProceso].toString().equals("1")) {//Todos los sub
                     if (prceso == 14) {//Control calidad TH

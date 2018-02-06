@@ -254,6 +254,48 @@ public class UsuarioM {
         return nombre;
     }
 
+    public void imagenUsuariM(String ruta,String doc) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_ImagenUsuario(?,?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, ruta);
+            ps.setString(2, doc);
+            ps.execute();
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+    }
+    public String consultarImagenUsuariM(String doc) {
+        String ruta="";
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_ConsultarImagenUsuario(?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, doc);
+            rs= ps.executeQuery();
+            rs.next();
+            ruta=rs.getString(1);
+            //Destrucción de conexiones
+            con.close();
+            conexion.destruir();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return ruta;
+    }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.

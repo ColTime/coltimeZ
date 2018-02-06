@@ -3,7 +3,7 @@ package reportefe;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-public class Conexion {
+public class Conexion{
 
     private Connection conexion;
     static String bd = "coltime";

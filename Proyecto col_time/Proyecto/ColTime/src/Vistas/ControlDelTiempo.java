@@ -168,13 +168,15 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista, PrintStream myPS) {
+        public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista, PrintStream myPS) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
 //#------------------------------------------------------------------
-        if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {
+//Restricciones de permisos
+/*FE=1 TE=2 EN=3 AL=4*/
+        if (cargo == 2 && (Integer.parseInt(datos[2]) == 1 || Integer.parseInt(datos[2]) == 2)) {//Tiene permiso de leer FE y TE
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), myPS);
-        } else if (cargo == 3 && Integer.parseInt(datos[2]) == 3) {
+        } else if (cargo == 3 && (Integer.parseInt(datos[2]) == 3 || Integer.parseInt(datos[2]) == 2)) {//Tiene permiso de leer EN y TE
             res = obj.iniciar_Pausar_Reiniciar_Toma_Tiempo(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), myPS);
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No tienes permiso de leer el QR", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);

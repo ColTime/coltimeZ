@@ -16,6 +16,7 @@ import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
 import java.awt.Color;
+import java.awt.Image;
 import java.io.File;
 import java.io.PrintStream;
 import javax.sql.rowset.CachedRowSet;
@@ -37,9 +38,10 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     ConexionPS CPS = null;
     DetallesAreaInfo informacion = null;
 
-    public Menu(int cargo, String nombre) {
+    public Menu(int cargo, String nombre, String doc) {
         initComponents();
         this.cargo = cargo;
+        consultarImagenUsuario(doc);
         Animacion.Animacion.mover_derecha(935, 1135, 0, 2, jPanel3);
         new CambiaPanel(jPContenido, new Inicio());
         btn1.setColorHover(cor);
@@ -55,13 +57,13 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         DisponibilidadConexion dispo = new DisponibilidadConexion();
         Thread conec = new Thread(dispo);
         conec.start();
-        //Toma de tiempos automatica
-        if (cargo == 2 || cargo == 3) {
-            if (soloUnaVez == 1) {
-                Thread tomaTiempo = new Thread(this);
-                tomaTiempo.start();
-            }
-        }
+//        Toma de tiempos automatica
+//        if (cargo == 2 || cargo == 3) {
+//            if (soloUnaVez == 1) {
+//                Thread tomaTiempo = new Thread(this);
+//                tomaTiempo.start();
+//            }
+//        }
         //Fin de toma de tiempos automatica
     }
 
@@ -104,6 +106,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         btn3 = new rsbuttom.RSButtonMetro();
         btn5 = new rsbuttom.RSButtonMetro();
         btn6 = new rsbuttom.RSButtonMetro();
+        jButton3 = new javax.swing.JButton();
         jPContenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -171,6 +174,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             .addGap(0, 56, Short.MAX_VALUE)
         );
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retro.png"))); // NOI18N
         jMenuItem3.setText("Actualizar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,14 +193,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
-            }
-            public void windowDeactivated(java.awt.event.WindowEvent evt) {
-                formWindowDeactivated(evt);
             }
         });
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -429,6 +427,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             }
         });
         jPMenu.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 190, 42));
+
+        jButton3.setText("imagen");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPMenu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
 
         jPContenido.setLayout(new javax.swing.BoxLayout(jPContenido, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -918,7 +924,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jPContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -1209,10 +1215,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_btn3ActionPerformed
 
-    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
-//            System.out.print("Hola");
-    }//GEN-LAST:event_formWindowDeactivated
-
     private void jPSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMousePressed
         posX = evt.getX();
         posY = evt.getY();
@@ -1230,12 +1232,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_formMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (producE == null && producF == null && producT == null) {
-            sesion(0, jDocumento.getText());
-            System.exit(0);
-        } else {
-            new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
-        }
+        cerrarSesion();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1267,7 +1264,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     obj.btnClose.doClick();
                 }
                 try {
-                    sesion(0, jDocumento.getText());
+                    guardarImagenMenuUsuario();//Guarda la imagen del usuario
+                    sesion(0, jDocumento.getText());//Cierra el estado del ususario
                     Thread.sleep(290);
                     new Login().setVisible(true);
                 } catch (Exception e) {
@@ -1276,16 +1274,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
-
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        sesion(0, jDocumento.getText());
+        cerrarSesion();
     }//GEN-LAST:event_formWindowClosing
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-    }//GEN-LAST:event_formWindowClosed
 
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
 
@@ -1465,10 +1458,15 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel18MousePressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 //Metodos de la clase menu----------------------------------------------------->
 
     public void LecturaCodigoQR(String codigo) {
-        String infoP[] = codigo.split(";");
+        String beta[] = codigo.split("/");
+        String infoP[] = beta[1].split(";");
         Proyecto validar = new Proyecto();
         if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
             if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
@@ -1530,6 +1528,21 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         EEjecucion.setText("0");
         ETerminadosHoy.setText("0");
         EPorIniciar.setText("0");
+    }
+
+    public void cerrarSesion() {
+        if (producE == null && producF == null && producT == null) {//Mientras estas ventanas esten abiertas no se puede cerrar la aplicación.
+            if (JOptionPane.showOptionDialog(null, "¿Seguro desea cerrar el sistema?",
+                    "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                    new Object[]{"SI", "NO"}, "SI") == 0) {
+                sesion(0, jDocumento.getText());
+                guardarImagenMenuUsuario();
+                System.exit(0);
+            }
+        } else {
+            new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+        }
     }
 //Toma de tiempo automatica---------------------------------------------------->
 
@@ -1644,8 +1657,28 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     }
 
     //La parte de capturar y gusrdadr la imagen de perfil no se a realizado.
-    public void rutaImagen() {
-        File obj = new File(rSUsuario.image.toString());
+    public void guardarImagenMenuUsuario() {
+        Controlador.Usuario obj = new Controlador.Usuario();
+        obj.imagenUsuario(rSUsuario.getRutaImagen(), jDocumento.getText());
+    }
+
+    public void consultarImagenUsuario(String doc) {
+        Controlador.Usuario obj = new Controlador.Usuario();
+        String rutaImagen = obj.consultarImagenUsuario(doc);
+        if (rutaImagen != null && !rutaImagen.equals("")) {
+            File ruta = new File(rutaImagen);
+            if (ruta.exists()) {
+                try {
+                    //Aun no esta completo
+                    ImageIcon icon=new ImageIcon(rutaImagen);
+                    rSUsuario.setImagenDefault(icon);
+//                    UrSUsuario.set
+//                    rSUsuario.imagenIcon.setImage(icon.getImage());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            }
+        }
     }
 
     /**
@@ -1663,7 +1696,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 //                } catch (Exception e) {
 //                    JOptionPane.showMessageDialog(null, e);
 //                }
-                new Menu(0, "").setVisible(true);
+                new Menu(0, "", "").setVisible(true);
             }
         });
     }
@@ -1693,6 +1726,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public javax.swing.JButton btnMenu;
     public javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton3;
     public static javax.swing.JLabel jDocumento;
     public javax.swing.JInternalFrame jInternalFrame1;
     public static javax.swing.JLabel jLConexion;

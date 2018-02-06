@@ -32,7 +32,7 @@ public class ConexionPS {
     public void enlacePuertos() {
         Menu obj = new Menu();
         CommPort puerto = null;
-        String valor = "";
+        String valorBeta = "";
         try {
             Enumeration commports = CommPortIdentifier.getPortIdentifiers();//Se traen todos los puertos disponibles
             CommPortIdentifier myCPI = null;
@@ -56,12 +56,15 @@ public class ConexionPS {
                             mySC = null;
                             mySC = new Scanner(mySP.getInputStream());
                         }
-                        valor = mySC.next();//Valor de entrada
-
-                        obj.LecturaCodigoQR(valor);//Se encargara de ler el codigo QR
-
-                        obj.myPS.print(mensaje);//Valor de dalida
-                        mensaje = null;
+                        valorBeta = mySC.next();//Valor de entrada
+                        if (valorBeta.charAt(0) == '+') {//Valida que el valor de entrada sea el correcto
+                            //...
+                            obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
+                            //--------------------------------------------------
+                            obj.myPS.print(mensaje);//Valor de dalida
+                            mensaje = null;
+                            System.gc();//Garbage collector.
+                        }
                     }
 //                    puerto.close();
 //                    break;
