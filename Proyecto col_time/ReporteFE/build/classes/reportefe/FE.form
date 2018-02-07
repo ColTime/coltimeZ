@@ -75,7 +75,7 @@
                   <Font name="Tahoma" size="16" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="25" rowCount="4">
+                  <Table columnCount="26" rowCount="1">
                     <Column editable="true" title="N&#xb0;Orden" type="java.lang.Integer"/>
                     <Column editable="true" title="Tipo" type="java.lang.String"/>
                     <Column editable="true" title="tipo_Proyecto" type="java.lang.String"/>
@@ -101,6 +101,7 @@
                     <Column editable="true" title="Ruteo" type="java.lang.Integer"/>
                     <Column editable="true" title="sub_M" type="java.lang.Integer"/>
                     <Column editable="true" title="Maquinas" type="java.lang.Integer"/>
+                    <Column editable="true" title="PNC" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -120,7 +121,7 @@
                 <Property name="showVerticalLines" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new reportefe.MyRender()"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTReporte = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex) {&#xa;        return false; //Disallow the editing of any cell&#xa;    }&#xa;};"/>
               </AuxValues>
             </Component>
           </SubComponents>

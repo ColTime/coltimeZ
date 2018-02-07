@@ -32,7 +32,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     }
     //Variables
     CachedRowSet crs = null;
-    int rep = 0, cantFinal = 0, cantidadProyecto = 0;
+    int rep = 0, cantFinal = 0, cantidadProyecto = 0, entro = 0;
     int cantidadRestante = 0, cantidadPasada = 0;
     String tipo_negocio = "", producto1 = "", Orden1 = "";
     Object v[] = new Object[26];
@@ -104,6 +104,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
             crs = obj.consultarProceso();
             while (crs.next()) {
                 //...
+                entro++;
                 if (rep == 0) {//Se puede cambiar la información principal
                     reinicializarVector(crs);//Se vuleve a poner el vector en estado base
                     rep = 1;
@@ -178,6 +179,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
                     }
                 }
             }
+
             organizarVector();
             cantidadProyecto++;
             df.addRow(v);//Información del proyecto
@@ -189,10 +191,11 @@ public class FE extends javax.swing.JFrame implements Runnable {
             }
             jTReporte.setModel(df);
             jTReporte.setDefaultRenderer(Object.class, new Tabla());
+
             columnasOcultas();
             rep = 0;
             cantFinal = 0;
-            cantidadProyecto=0;
+            cantidadProyecto = 0;
             crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
@@ -500,27 +503,29 @@ public class FE extends javax.swing.JFrame implements Runnable {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTReporte = new reportefe.MyRender();
+        jTReporte = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTReporte = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jTReporte.setAutoCreateRowSorter(true);
         jTReporte.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jTReporte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "N°Orden", "Tipo", "tipo_Proyecto", "C.T", "TipoNegocio", "sub_p", "Perforado", "sub_Q", "Quimicos", "sub_C", "Caminos", "sub_CTH", "C.C.TH", "sub_QUE", "Quemado", "sub_S", "Screen", "sub_E", "Estañado", "sub_C2", "C2", "sub_R", "Ruteo", "sub_M", "Maquinas"
+                "N°Orden", "Tipo", "tipo_Proyecto", "C.T", "TipoNegocio", "sub_p", "Perforado", "sub_Q", "Quimicos", "sub_C", "Caminos", "sub_CTH", "C.C.TH", "sub_QUE", "Quemado", "sub_S", "Screen", "sub_E", "Estañado", "sub_C2", "C2", "sub_R", "Ruteo", "sub_M", "Maquinas", "PNC"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {

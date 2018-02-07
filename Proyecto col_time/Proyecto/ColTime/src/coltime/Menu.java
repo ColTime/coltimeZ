@@ -36,6 +36,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     static int soloUnaVez = 0;
     ConexionPS CPS = null;
     DetallesAreaInfo informacion = null;
+    Thread tomaTiempo = null;
 
     public Menu(int cargo, String nombre, String doc) {
         initComponents();
@@ -52,14 +53,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
         new rojerusan.RSNotifyAnimated("Bienvenido", nombre, 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-        soloUnaVez++;
+        soloUnaVez = 1;
         DisponibilidadConexion dispo = new DisponibilidadConexion();
         Thread conec = new Thread(dispo);
         conec.start();
 //        Toma de tiempos automatica
         if (cargo == 2 || cargo == 3) {
             if (soloUnaVez == 1) {
-                Thread tomaTiempo = new Thread(this);
+                tomaTiempo = new Thread(this);
                 tomaTiempo.start();
             }
         }
@@ -1170,6 +1171,15 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         }
         if (!jPContenido.getComponent(0).getName().equals("inicio")) {
             new CambiaPanel(jPContenido, new Inicio());
+            Vistas.proyecto pro = new proyecto();
+            try {
+                if (pro.puerto != null) {
+                    pro.puerto.close();
+                }
+                pro.QRProyecto.stop();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: " + e);
+            }
         }
     }//GEN-LAST:event_btn1ActionPerformed
 
@@ -1258,7 +1268,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     sesion(0, jDocumento.getText());//Cierra el estado del ususario
                     Thread.sleep(290);
                     new Login().setVisible(true);
+                    if (cargo == 2 || cargo == 3) {
+                        tomaTiempo.stop();
+                    }
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error: " + e);
                 }
             }
         } else {
@@ -1458,35 +1472,37 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
             if (validar.validarEjecucionOParada(Integer.parseInt(infoP[0]))) {//Valida que la orden no este parada
                 //#--------------------------------------------------------------------------------------------------
-                switch (Integer.parseInt(infoP[2])) {
-                    //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
-                    case 1:
-                        if (producF == null) {
-                            producF = new ControlDelTiempo();
-                            producF.setName("FE");
-                            producF.setTitle("Formato estandar");
-                            producF.setVisible(true);
-                        }
-                        producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF, myPS);
-                        break;
-                    case 2:
-                        if (producT == null) {
-                            producT = new ControlDelTiempo();
-                            producT.setName("TE");
-                            producT.setTitle("Teclados");
-                            producT.setVisible(true);
-                        }
-                        producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT, myPS);
-                        break;
-                    case 3:
-                        if (producE == null) {
-                            producE = new ControlDelTiempo();
-                            producE.setName("IN");
-                            producE.setTitle("Ensamble");
-                            producE.setVisible(true);
-                        }
-                        producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE, myPS);
-                        break;
+                if (infoP.length == 6) {//Se valida que si se lea el codigo QR que es necesario
+                    switch (Integer.parseInt(infoP[2])) {
+                        //Se tiene que validar el estado del proyecto a ver si permite o no registrar la toma de tiempo.
+                        case 1:
+                            if (producF == null) {
+                                producF = new ControlDelTiempo();
+                                producF.setName("FE");
+                                producF.setTitle("Formato estandar");
+                                producF.setVisible(true);
+                            }
+                            producF.RegistrarTomaTiempoNegocio(infoP, cargo, producF, myPS);
+                            break;
+                        case 2:
+                            if (producT == null) {
+                                producT = new ControlDelTiempo();
+                                producT.setName("TE");
+                                producT.setTitle("Teclados");
+                                producT.setVisible(true);
+                            }
+                            producT.RegistrarTomaTiempoNegocio(infoP, cargo, producT, myPS);
+                            break;
+                        case 3:
+                            if (producE == null) {
+                                producE = new ControlDelTiempo();
+                                producE.setName("IN");
+                                producE.setTitle("Ensamble");
+                                producE.setVisible(true);
+                            }
+                            producE.RegistrarTomaTiempoNegocio(infoP, cargo, producE, myPS);
+                            break;
+                    }
                 }
                 //#--------------------------------------------------------------------------------------------------
             } else {

@@ -29,9 +29,18 @@ public class Proyecto {
     private String fechaPCBFEoGF = "";
     private String fechaPCBCOMFEoGF = "";
     private String novedadProyecto = "";
-
+    private String estadoPRoyecto = "";
+    private String NFEE = "";
     //Get and set------------------------------------------------>
-    
+
+    public void setNFEE(String NFEE) {
+        this.NFEE = NFEE;
+    }
+
+    public void setEstadoPRoyecto(String estadoPRoyecto) {
+        this.estadoPRoyecto = estadoPRoyecto;
+    }
+
     public void setNovedadProyecto(String novedadProyecto) {
         this.novedadProyecto = novedadProyecto;
     }
@@ -129,7 +138,7 @@ public class Proyecto {
             }
         }
         return obj.registrar_Modificar_Proyecto(idOrden, comercial, nombreCliente, nombreProyecto, tipoProyecto, FE, TE, IN, detalles[0], detalles[1], detalles[2], detalles[3], detalles[4], detalles[5], detalles[6], fecha, detalles[7], detalles[8], op, detalles[9], detalles[10],
-                fechaCiccuitoFEoGF, fechaCiccuitoCOMFEoGF, fechaPCBFEoGF, fechaPCBCOMFEoGF,novedadProyecto);
+                fechaCiccuitoFEoGF, fechaCiccuitoCOMFEoGF, fechaPCBFEoGF, fechaPCBCOMFEoGF, novedadProyecto,estadoPRoyecto,NFEE);
     }
 
     //Registrar mediante un lector de QR----------------------------------------
