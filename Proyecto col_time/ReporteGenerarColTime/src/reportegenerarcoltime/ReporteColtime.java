@@ -26,6 +26,7 @@ public class ReporteColtime extends javax.swing.JFrame {
     }
     //Variables
     CachedRowSet crs = null;
+    CachedRowSet proc = null;
     String namesHeader[] = {"N°Orden", "Cliente", "Proyecto", "U.Negocio", "F.Ingreso", "FEE", "Proceso", "% Proyecto", "Estado", "NFEE", "Parada"};
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,9 +35,12 @@ public class ReporteColtime extends javax.swing.JFrame {
      */
     //Variables
     String orden = "";
-    int rep = 0, parada = 0;
+    int rep = 0, parada = 0, FE = 0, TE = 0, EN = 0, i = -1;
+    int cantidadBeta = 0, procesoBeta = 0, proceso = 0, mayorCantidad = 0;
     Object v[] = new Object[11];
+    String nombreProcesos[] = new String[30];//Cantidad de proceso
     DefaultTableModel df = new DefaultTableModel(null, namesHeader);
+    Modelo obj = null;
 
     /*
     orden=0
@@ -122,32 +126,140 @@ public class ReporteColtime extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void InformeGeneralEmpresaColcircuitos() {
-        Modelo obj = new Modelo();
         try {
+            obj = new Modelo();
             crs = obj.informacionInformeGeneral();
+            obj = null;
             while (crs.next()) {
+                //...
                 if (rep == 0) {
                     vectorInicial();//Inicio del vector
+                    procesoMayorCantidad();
+                    tipoNegocio();//Para calcurar la unidad de negocio
                     rep = 1;
                 } else {
                     if (!v[0].toString().equals(crs.getString(1))) {//Si el numero de orden es diferente a la que se guardo en el vector va a calcular el porcentaje y el proceso donde se encuentra la mayor cantidad de productos
                         //%...
                         //Cantidad Proceso
-                        //Ingreso de vector a la tabla 
+                        //Ingreso de vector a la tabla
+                        asignarTiposNegosio();//Tipo de unidad de negocio
+                        v[6] = asignacionDeProceso(proceso);
                         df.addRow(v);
-                    } else {
+                        //Reinicializacion de variabel
+                        reinicializarVariables();
                         vectorInicial();//Inicio del vector
+                        tipoNegocio();//Para calcurar la unidad de negocio
+                    } else {
+                        //vectorInicial();//Inicio del vector
+                        procesoMayorCantidad();
+                        tipoNegocio();//Para calcurar la unidad de negocio
                         rep = 1;
                     }
                 }
             }
             //%...
             //Cantidad Proceso
+            asignarTiposNegosio();//Tipo de unidad e negocio
+            v[6] = asignacionDeProceso(proceso);
             df.addRow(v);
+            //Reinicializar variables
+            reinicializarVariables();
+            //System.out.println("FE: " + FE + " TE: " + TE + " EN: " + EN);
             jTInforme.setModel(df);//Se agrega el modelo a la tabla
-
+            //...
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }
+
+    private String asignacionDeProceso(int proceso) {
+        try {
+            if (obj == null) {
+                obj = new Modelo();
+                proc = obj.procesos();
+
+                while (proc.next()) {
+                    nombreProcesos[++i] = proc.getString(2);
+                }
+                i = -1;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+        if (proceso == 0) {
+            return "";
+        } else {
+            return nombreProcesos[proceso - 1];
+        }
+    }
+
+    private void reinicializarVariables() {
+        FE = 0;
+        TE = 0;
+        EN = 0;
+        cantidadBeta = 0;
+        proceso = 0;
+        mayorCantidad = 0;
+        procesoBeta = 0;
+    }
+
+    private void procesoMayorCantidad() {
+        try {
+            switch (crs.getInt(6)) {
+                case 1://Formato estandar
+                    procesoBeta = crs.getInt(13);//Proceso beta de formato estandar
+                    cantidadBeta = crs.getInt(14);//Cantidad beta de formato estandar
+                    break;
+                case 2://Teclados
+                    procesoBeta = crs.getInt(15);//Proceso beta de teclados
+                    cantidadBeta = crs.getInt(16);//Cantidad beta de teclados
+                    break;
+                case 3://Ensamble
+                    procesoBeta = crs.getInt(17);//Proceso beta de ensamble
+                    cantidadBeta = crs.getInt(18);//Cantidad beta de ensamble
+                    break;
+            }
+            //Busca la mayor cantidad dentro de todos los proceso y la pone de primera
+            metodoBurbujaManual();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e);
+        }
+    }
+
+    public void metodoBurbujaManual() {
+        if (cantidadBeta > mayorCantidad) {
+            mayorCantidad = cantidadBeta;
+            proceso = procesoBeta;
+        }
+    }
+
+    private void tipoNegocio() {
+        try {
+            switch (crs.getInt(6)) {
+                case 1://Formato estandar
+                    FE++;
+                    break;
+                case 2://Teclados
+                    TE++;
+                    break;
+                case 3://Ensamble
+                    EN++;
+                    break;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e);
+        }
+    }
+
+    private void asignarTiposNegosio() {
+        if (FE >= 1 && TE == 0 && EN == 0) {//Formato estandar
+            v[3] = "FE";//Unidad de negocio;
+        } else if (FE == 0 && TE >= 1 && EN == 0) {//teclado
+            v[3] = "TE";//Unidad de negocio;
+        } else if (FE == 0 && TE == 0 && EN >= 1) {//Ensamble
+            v[3] = "TE";//Unidad de negocio;
+        } else if ((FE >= 1 && TE == 0 && EN >= 1) || (FE >= 1 && TE >= 1 && EN >= 1) || (FE == 0 && TE >= 1 && EN >= 1)) {//Integracion
+            v[3] = "IN";//Unidad de negocio;
         }
     }
 
@@ -158,14 +270,14 @@ public class ReporteColtime extends javax.swing.JFrame {
             v[2] = crs.getString(4);//Nombre Proyecto
             v[4] = crs.getString(7);//Ingreso
             v[5] = crs.getString(8);//FEE
-            if (crs.getString(9) != null) {
-                v[8] = crs.getString(18);//Estado
+            if (crs.getString(9) != null) {//Sub estado de la empresa
+                v[8] = crs.getString(9);//Estado
             } else {
                 v[8] = "Por iniciar";//Estado
             }
-            v[10]=crs.getString(2);
-            v[9]=crs.getString(19);
-            
+            v[10] = crs.getString(2);
+            v[9] = crs.getString(10);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error" + e);
         }

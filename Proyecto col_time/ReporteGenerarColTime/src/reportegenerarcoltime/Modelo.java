@@ -17,14 +17,14 @@ public class Modelo {
     Conexion conexion = null;
 
     public CachedRowSet informacionInformeGeneral() {
-        String Qry="CALL PA_InformeGeneralColtime()";
+        String Qry = "CALL PA_InformeGeneralColtime()";
         try {
-            conexion=new Conexion();
+            conexion = new Conexion();
             conexion.establecerConexion();
-            con=conexion.getConexion();
-            ps=con.prepareStatement(Qry);
-            rs=ps.executeQuery();
-            crs=new CachedRowSetImpl();
+            con = conexion.getConexion();
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
             crs.populate(rs);
             ps.close();
             con.close();
@@ -36,4 +36,23 @@ public class Modelo {
         return crs;
     }
 
+    public CachedRowSet procesos() {
+        String Qry = "CALL PA_ConsultarProcesos()";
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            ps = con.prepareStatement(Qry);
+            rs = ps.executeQuery();
+            crs = new CachedRowSetImpl();
+            crs.populate(rs);
+            ps.close();
+            con.close();
+            conexion.cerrar(rs);
+            conexion.destruir();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+        return crs;
+    }
 }

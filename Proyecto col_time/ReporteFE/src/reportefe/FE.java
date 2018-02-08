@@ -503,17 +503,12 @@ public class FE extends javax.swing.JFrame implements Runnable {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTReporte = new javax.swing.JTable();
+        jTReporte = new reportefe.MyRender();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTReporte = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
-            }
-        };
         jTReporte.setAutoCreateRowSorter(true);
         jTReporte.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jTReporte.setModel(new javax.swing.table.DefaultTableModel(

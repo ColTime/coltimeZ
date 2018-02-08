@@ -1172,14 +1172,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         if (!jPContenido.getComponent(0).getName().equals("inicio")) {
             new CambiaPanel(jPContenido, new Inicio());
             Vistas.proyecto pro = new proyecto();
-            try {
-                if (pro.puerto != null) {
-                    pro.puerto.close();
-                }
-                pro.QRProyecto.stop();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error: " + e);
-            }
+//            try {
+//                if (pro.puerto != null) {
+//                    pro.puerto.close();
+//                }
+//                pro.QRProyecto.stop();
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, "Error: " + e);
+//            }
         }
     }//GEN-LAST:event_btn1ActionPerformed
 
