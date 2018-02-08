@@ -27,10 +27,10 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         jTPEjecucion.getTableHeader().setReorderingAllowed(false);
         jTPIniciar.getTableHeader().setReorderingAllowed(false);
     }
-    String v[] = new String[2];
-    String name[] = {"N°Orden", "Producto"};
+    String v[] = new String[3];
+    String name[] = {"N°Orden", "Producto", "Tipo EJ"};
     private static int area = 0;
-    
+
 //Arreglar la forma de traer la informacion a la vista.-------------------------
     public void consultarDetallesDeProyectos(int area) {
         DefaultTableModel iniciar = new DefaultTableModel(null, name);
@@ -45,7 +45,8 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
                 while (crs.next()) {
                     v[0] = crs.getString(1);
                     v[1] = crs.getString(2);
-
+                    v[2] = crs.getString(4);
+                    
                     switch (crs.getInt(3)) {//Estado
                         case 1://Por iniciar
                             iniciar.addRow(v);
@@ -71,7 +72,7 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         }
     }
 //------------------------------------------------------------------------------
-    
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
@@ -117,20 +118,20 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         };
         jTPTerminado.setAutoCreateRowSorter(true);
         jTPTerminado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTPTerminado.setForeground(new java.awt.Color(128, 128, 131));
+        jTPTerminado.setForeground(new java.awt.Color(111, 111, 113));
         jTPTerminado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "N°Orden", "Producto"
+                "N°Orden", "Producto", "Tipo EJ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -156,24 +157,31 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         };
         jTPPausado.setAutoCreateRowSorter(true);
         jTPPausado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTPPausado.setForeground(new java.awt.Color(128, 128, 131));
+        jTPPausado.setForeground(new java.awt.Color(111, 111, 113));
         jTPPausado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "N°Orden", "Producto"
+                "N°Orden", "Producto", "Tipo EJ"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTPPausado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTPPausado.setFocusable(false);
         jTPPausado.setGridColor(new java.awt.Color(255, 255, 255));
         jTPPausado.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTPPausado.setRowHeight(17);
-        jTPPausado.setRowSorter(null);
         jTPPausado.setSelectionBackground(new java.awt.Color(63, 179, 255));
         jTPPausado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jTPPausado);
@@ -197,18 +205,26 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         };
         jTPIniciar.setAutoCreateRowSorter(true);
         jTPIniciar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTPIniciar.setForeground(new java.awt.Color(128, 128, 131));
+        jTPIniciar.setForeground(new java.awt.Color(111, 111, 113));
         jTPIniciar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "N°Orden", "Producto"
+                "N°Orden", "Producto", "Tipo EJ"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTPIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTPIniciar.setFocusable(false);
         jTPIniciar.setGridColor(new java.awt.Color(255, 255, 255));
@@ -225,18 +241,26 @@ public class DetallesAreaInfo extends javax.swing.JDialog {
         };
         jTPEjecucion.setAutoCreateRowSorter(true);
         jTPEjecucion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTPEjecucion.setForeground(new java.awt.Color(128, 128, 131));
+        jTPEjecucion.setForeground(new java.awt.Color(111, 111, 113));
         jTPEjecucion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "N°Orden", "Producto"
+                "N°Orden", "Producto", "Tipo EJ"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTPEjecucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTPEjecucion.setFocusable(false);
         jTPEjecucion.setGridColor(new java.awt.Color(255, 255, 255));

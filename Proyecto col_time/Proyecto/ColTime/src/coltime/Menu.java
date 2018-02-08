@@ -442,7 +442,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
 
         jPContenido.add(jPanel2);
@@ -923,7 +923,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setForeground(new java.awt.Color(153, 153, 153));
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userNav.png"))); // NOI18N
         jMenu1.setText("Cuenta");
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/password.png"))); // NOI18N
@@ -937,6 +939,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
         jMenu3.setText("Configuración");
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
@@ -945,6 +948,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
         jMenu2.setText("Salir");
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/season.png"))); // NOI18N

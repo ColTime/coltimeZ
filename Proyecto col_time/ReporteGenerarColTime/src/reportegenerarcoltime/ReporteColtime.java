@@ -76,13 +76,13 @@ public class ReporteColtime extends javax.swing.JFrame {
         jTInforme.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jTInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "N°Orden", "Cliente", "N.Negocio", "F.ingreso", "FEE", "Proceso", "% proyecto", "Estado", "NFEE"
+                "N°Orden", "Cliente", "nombreProyecto", "N.Negocio", "F.ingreso", "FEE", "Proceso", "% proyecto", "Estado", "NFEE", "parada"
             }
         ));
         jTInforme.setFocusable(false);
@@ -132,6 +132,10 @@ public class ReporteColtime extends javax.swing.JFrame {
             obj = null;
             while (crs.next()) {
                 //...
+//                if(crs.getString(1).equals("29451")){
+//                    System.out.println("Hola mundo");
+//                }
+                //...
                 if (rep == 0) {
                     vectorInicial();//Inicio del vector
                     procesoMayorCantidad();
@@ -166,10 +170,20 @@ public class ReporteColtime extends javax.swing.JFrame {
             reinicializarVariables();
             //System.out.println("FE: " + FE + " TE: " + TE + " EN: " + EN);
             jTInforme.setModel(df);//Se agrega el modelo a la tabla
+            Render render = new Render();
+            jTInforme.setDefaultRenderer(Object.class, render);
+            ocultarColumnas();//Oculta la columna estado parada del proyecto
             //...
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
+    }
+
+    private void ocultarColumnas() {
+        jTInforme.getColumnModel().getColumn(10).setMaxWidth(0);
+        jTInforme.getColumnModel().getColumn(10).setMinWidth(0);
+        jTInforme.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
+        jTInforme.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
     }
 
     private String asignacionDeProceso(int proceso) {
@@ -239,7 +253,7 @@ public class ReporteColtime extends javax.swing.JFrame {
                 case 1://Formato estandar
                     FE++;
                     break;
-                case 2://Teclados
+                case 2://Teclados   
                     TE++;
                     break;
                 case 3://Ensamble
@@ -252,13 +266,16 @@ public class ReporteColtime extends javax.swing.JFrame {
     }
 
     private void asignarTiposNegosio() {
+//        if (v[0].equals("29452")) {
+//            System.out.println("Marulanda");
+//        }
         if (FE >= 1 && TE == 0 && EN == 0) {//Formato estandar
             v[3] = "FE";//Unidad de negocio;
         } else if (FE == 0 && TE >= 1 && EN == 0) {//teclado
             v[3] = "TE";//Unidad de negocio;
         } else if (FE == 0 && TE == 0 && EN >= 1) {//Ensamble
-            v[3] = "TE";//Unidad de negocio;
-        } else if ((FE >= 1 && TE == 0 && EN >= 1) || (FE >= 1 && TE >= 1 && EN >= 1) || (FE == 0 && TE >= 1 && EN >= 1)) {//Integracion
+            v[3] = "EN";//Unidad de negocio;
+        } else if ((FE >= 1 && TE == 0 && EN >= 1) || (FE >= 1 && TE >= 1 && EN >= 1) || (FE == 0 && TE >= 1 && EN >= 1) || (FE >= 1 && TE >= 1 && EN == 0)) {//Integracion
             v[3] = "IN";//Unidad de negocio;
         }
     }

@@ -1,6 +1,7 @@
 package Vistas;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
+import Controlador.TablaRenderUsuario;
 import coltime.Menu;
 import java.awt.Color;
 import java.awt.Point;
@@ -592,7 +593,7 @@ public class Usuarios1 extends javax.swing.JPanel {
             jTdocumento.setEnabled(true);
             btnUpdate.setEnabled(false);
             btnDelete.setEnabled(false);
-            estadoComponentes(false, new Color(244, 244, 244)); 
+            estadoComponentes(false, new Color(244, 244, 244));
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -765,62 +766,69 @@ public class Usuarios1 extends javax.swing.JPanel {
         try {
             CachedRowSet crs = obj.consultar_Usuario();
             //Peparación de la tabla(jTUsuario) para insertar valores 
-            String names[] = {"Numero de Documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado", "Recuperacción"};
+            String names[] = {"Documento", "T.D", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado", "Recuperacción", "Sesion"};
             DefaultTableModel ds = new DefaultTableModel(null, names);
             while (crs.next()) {
                 //Filas de la tabla
                 if (!crs.getString(1).equals(Menu.jDocumento.getText())) {
-                    String v[] = new String[8];
+                    String v[] = new String[9];
                     v[0] = crs.getString(1);
                     v[1] = crs.getString(2);
                     v[2] = crs.getString(3);
                     v[3] = crs.getString(4);
                     v[4] = crs.getString(5);
                     v[5] = crs.getString(6);
-                    v[6] = (crs.getString(7).equals("true") ? "Activo" : "Inactivo");
+                    v[6] = (crs.getString(7).equals("true") ? "Activo" : "Inactivo");//Estado
                     v[7] = crs.getString(8);
+                    v[8] = crs.getString(9);
                     ds.addRow(v);
                 }
             }
             jTUsuario.setModel(ds);
+            jTUsuario.setDefaultRenderer(Object.class, new TablaRenderUsuario());
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         modifcarColumnas();
     }
 
     public void modifcarColumnas() {
-        jTUsuario.getColumnModel().getColumn(0).setMinWidth(145);
-        jTUsuario.getColumnModel().getColumn(0).setMaxWidth(145);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(145);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(145);
-        jTUsuario.getColumnModel().getColumn(1).setMinWidth(100);
-        jTUsuario.getColumnModel().getColumn(1).setMaxWidth(100);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(100);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMinWidth(100);
-        jTUsuario.getColumnModel().getColumn(2).setMinWidth(206);
-        jTUsuario.getColumnModel().getColumn(2).setMaxWidth(206);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(206);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMinWidth(206);
-        jTUsuario.getColumnModel().getColumn(3).setMinWidth(206);
-        jTUsuario.getColumnModel().getColumn(3).setMaxWidth(206);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(206);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(206);
-        jTUsuario.getColumnModel().getColumn(4).setMinWidth(153);
-        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(153);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(153);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(153);
+        jTUsuario.getColumnModel().getColumn(0).setMinWidth(130);
+        jTUsuario.getColumnModel().getColumn(0).setMaxWidth(130);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(130);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(130);
+        jTUsuario.getColumnModel().getColumn(1).setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(1).setMaxWidth(50);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(50);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(2).setMinWidth(235);
+        jTUsuario.getColumnModel().getColumn(2).setMaxWidth(235);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(235);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMinWidth(235);
+        jTUsuario.getColumnModel().getColumn(3).setMinWidth(222);
+        jTUsuario.getColumnModel().getColumn(3).setMaxWidth(222);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(222);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(222);
+        jTUsuario.getColumnModel().getColumn(4).setMinWidth(163);
+        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(163);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(163);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(163);
         jTUsuario.getColumnModel().getColumn(5).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        jTUsuario.getColumnModel().getColumn(6).setMinWidth(50);
-        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(50);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(50);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(50);
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(61);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(61);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(61);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(61);
         jTUsuario.getColumnModel().getColumn(7).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+        jTUsuario.getColumnModel().getColumn(8).setMinWidth(0);
+        jTUsuario.getColumnModel().getColumn(8).setMaxWidth(0);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
     }
 
     public void limites() {

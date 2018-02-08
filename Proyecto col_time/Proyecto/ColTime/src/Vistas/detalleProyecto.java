@@ -237,6 +237,7 @@ public class detalleProyecto extends javax.swing.JDialog {
         jLabel14.setText("Fecha de entrega PCB GF:");
 
         jTTimepoTotalUnidad.setBorder(null);
+        jTTimepoTotalUnidad.setText(" ");
         jTTimepoTotalUnidad.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTTimepoTotalUnidad.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTTimepoTotalUnidad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -271,17 +272,19 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(jPInformacionLayout.createSequentialGroup()
                 .addGap(171, 171, 171)
-                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPInformacionLayout.createSequentialGroup()
-                        .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPInformacionLayout.createSequentialGroup()
+                        .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
+                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(jPInformacionLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
@@ -297,7 +300,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                 .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFechaIngreso4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPInformacionLayout.setVerticalGroup(
             jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,9 +336,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                         .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPInformacionLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTTimepoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jTFechaIngreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPInformacionLayout.createSequentialGroup()
@@ -343,7 +344,8 @@ public class detalleProyecto extends javax.swing.JDialog {
                                         .addComponent(jLabel11)
                                         .addComponent(jLabel10)
                                         .addComponent(jLabel9))
-                                    .addGap(31, 31, 31))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTTimepoTotalUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addComponent(jTFechaIngreso4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTFechaIngreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPInformacionLayout.createSequentialGroup()
@@ -356,7 +358,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                         .addGroup(jPInformacionLayout.createSequentialGroup()
                             .addComponent(jLabel12)
                             .addGap(31, 31, 31))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -481,10 +483,10 @@ public class detalleProyecto extends javax.swing.JDialog {
 
     private void cargarTabla() {
         Tabla personalizar = new Tabla();
-        personalizar.visualizar(TDetalleProduccion, detalle, negocio);
+        personalizar.visualizar(TDetalleProduccion, detalle, negocio);//Consulta de la informacion de los proceso
         try {
             DetalleProyecto obj = new DetalleProyecto();
-            crs = obj.ConsultarInformacionFiltrariaDelDetalle(detalle);
+            crs = obj.ConsultarInformacionFiltrariaDelDetalle(detalle);//Consulta la información filtraria.
             crs.next();
             jTNombreCliente.setText("  " + crs.getString(1));
             jTNombreProyecto.setText("  " + crs.getString(2));

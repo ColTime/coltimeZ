@@ -1180,7 +1180,8 @@ public class proyecto extends javax.swing.JPanel {
         fecha();
         limpiarID();
         ocultarFechas();
-        Controlador.ProyectoQR obj=new ProyectoQR();
+        Controlador.ProyectoQR obj = new ProyectoQR();
+        jPEstadoProyecto.setVisible(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void limpiarID() {
@@ -2030,7 +2031,7 @@ public class proyecto extends javax.swing.JPanel {
 //        v[10] = jCIntegracion.isSelected() ? true : false;
         obj.setDetalles(v);
         obj.setIdOrden(Integer.parseInt(jTNorden.getText()));
-        obj.setNovedadProyecto(jTNovedades.getText());//Novedade que se puedan presentar en el proyecto (Solo se registraran las novedades cuando se modifique un proyecto)
+        obj.setNovedadProyecto(jTNovedades.getText().equals("") ? "" : jTNovedades.getText());//Novedade que se puedan presentar en el proyecto (Solo se registraran las novedades cuando se modifique un proyecto)
         if (jRATiempo.isSelected()) {
             obj.setEstadoPRoyecto("A tiempo");
             if (jDNFEE.getDate() != null) {
