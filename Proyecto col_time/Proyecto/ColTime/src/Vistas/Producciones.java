@@ -25,8 +25,6 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         EstadoDelMenu(false);
         this.cargo = cargo;
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
-//        new CambiaPanel(Contenido, new ProduccionFE());
-//        generarLabel("28400");
     }
 
     public Producciones() {
@@ -648,7 +646,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 ImageIcon icon = null;
                 if (crs.getBoolean(4)) {//Si la orden no esta parada va hacer esto, sino va hacer lo otro.
                     switch (crs.getInt(2)) {
-                        case 1:
+                        case 1://---------------------------------------------->
                             //Por iniciar
                             switch (crs.getString(3)) {
                                 case "Normal":
@@ -664,9 +662,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                                     icon = new ImageIcon(getClass().getResource("/produccion/ProyectBeginRQT.png"));
                                     break;
                             }
-                            break;
+                            break;//------------------------------------------->
                         case 2:
-                            //Pausado
+                            //Pausado------------------------------------------>
                             switch (crs.getString(3)) {
                                 case "Normal":
                                     //Proyecto normal
@@ -681,28 +679,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                                     icon = new ImageIcon(getClass().getResource("/produccion/ProyectPauseRQT.png"));
                                     break;
                             }
-                            break;
-//                        case 3:
-//                       //Terminado
-//                      //Eliminar----------------------------------------------------------------------------
-//                            switch (crs.getString(3)) {
-//                                case "Normal":
-//                                    //Proyecto normal
-//                                    icon = new ImageIcon("src\\produccion\\ProyectCheck.png");
-//                                    break;
-//                                case "Quick":
-//                                    //Proyecto Quick
-//                                    icon = new ImageIcon("src\\produccion\\ProyectCheckQuick.png");
-//                                    break;
-//                                case "RQT":
-//                                    //Proyecto RQT
-//                                    icon = new ImageIcon("src\\produccion\\ProyectCheckRQT.png");
-//                                    break;
-//                            }
-//                            break;
-                        //Eliminar------------------------------------------------------------------------------
+                            break;//------------------------------------------->
                         case 4:
-                            //Ejecucion
+                            //Ejecucion---------------------------------------->
                             switch (crs.getString(3)) {
                                 case "Normal":
                                     //Proyecto normal
@@ -717,10 +696,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                                     icon = new ImageIcon(getClass().getResource("/produccion/ProyectTimeRQT.png"));
                                     break;
                             }
-                            break;
+                            break;//------------------------------------------->
                     }
                 } else {
-                    switch (crs.getString(3)) {
+                    //Estado parado
+                    switch (crs.getString(3)) {//---------------------------------------------->
                         case "Normal":
                             //Proyecto normal
                             icon = new ImageIcon(getClass().getResource("/produccion/proyectStop.png"));
@@ -738,13 +718,14 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 Icon image = new ImageIcon(icon.getImage().getScaledInstance(jp.getWidth(), jp.getHeight(), Image.SECTION));
                 jp.setIcon(image);
                 this.repaint();
-                //Texto del boton
+                //Texto del boton//-------------------------------------------->
                 jp.setText(String.valueOf(crs.getInt(1)));
                 jp.setHorizontalTextPosition(JButton.CENTER);
                 jp.setContentAreaFilled(false);
                 jp.setForeground(Color.BLACK);
                 jp.setActionCommand(String.valueOf(crs.getInt(1)));
                 jp.setCursor(Cursor.getPredefinedCursor(12));
+                //------------------------------------------------------------->
                 x += 99;
                 cantidad++;
                 if (cantidad == unidad * filas) {

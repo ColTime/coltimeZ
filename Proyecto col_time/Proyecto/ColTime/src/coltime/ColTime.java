@@ -1,20 +1,19 @@
 package coltime;
 
-import Modelo.Conexion;
-import com.sun.awt.AWTUtilities;
-
 public class ColTime {
 
     public static void main(String[] args) {
 
-//        Login lo=new Login();
-//        AWTUtilities.setWindowOpaque(lo, false);
-//        lo.setVisible(true);
+        //Iniciar el proyecto
         Login log = new Login();
         log.setLocationRelativeTo(null);
         log.setVisible(true);
-         //Validación de conectividad con el servidor.
-//        Conexion con = new Conexion();
-//        con.establecerConexion();
+        //Finaliza el proyecto
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

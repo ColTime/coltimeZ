@@ -208,14 +208,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jDFecha.setToolTipText("");
         jDFecha.setDateFormatString("dd/MM/yyyy");
         jDFecha.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDFecha.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaCaretPositionChanged(evt);
-            }
-        });
         jDFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDFechaPropertyChange(evt);
@@ -518,12 +510,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         consultarProyectos(jTNumerOrden.getText(), jTNombreCliente.getText(), jTNombreProyecto.getText(), "", 0);
     }//GEN-LAST:event_jRnuloMouseClicked
 
-    private void jDFechaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaInputMethodTextChanged
-    }//GEN-LAST:event_jDFechaInputMethodTextChanged
-
-    private void jDFechaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaCaretPositionChanged
-    }//GEN-LAST:event_jDFechaCaretPositionChanged
-
     private void jDFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDFechaPropertyChange
         if ((jRIngreso.isSelected() || jREntrega.isSelected() || jRSalida.isSelected()) && jDFecha.getDate() != null) {
             controlBusqueda();
@@ -743,13 +729,13 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.jCPCBTE.setSelected(true);
                                 obj.jTPCBTE.setText(TDetalle.getValueAt(i, 3).toString());
                                 obj.jLMaterialPCB.setText(TDetalle.getValueAt(i, 5).toString());
-                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("IN")) {
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito") && TDetalle.getValueAt(i, 1).toString().equals("EN")) {
                                 obj.jLIDIntegracion.setText(TDetalle.getValueAt(i, 0).toString());
                                 obj.jCIntegracion.setSelected(true);
                                 obj.jCIntegracion.setEnabled(true);
                                 obj.jTIntegracion.setEnabled(true);
                                 obj.jTIntegracion.setText(TDetalle.getValueAt(i, 3).toString());
-                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito-TE") && TDetalle.getValueAt(i, 1).toString().equals("IN")) {
+                            } else if (TDetalle.getValueAt(i, 2).toString().equals("Circuito-TE") && TDetalle.getValueAt(i, 1).toString().equals("EN")) {
                                 obj.jLIDPCBEN.setText(TDetalle.getValueAt(i, 0).toString());
                                 obj.jRPIntegracion.setSelected(true);
                             } else if (TDetalle.getValueAt(i, 2).toString().equals("Teclado") && TDetalle.getValueAt(i, 1).toString().equals("TE")) {

@@ -116,11 +116,6 @@
               <Font name="Arial" size="14" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTRecuperacionActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTRecuperacionKeyPressed"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTRecuperacionKeyTyped"/>
-          </Events>
         </Component>
         <Component class="elaprendiz.gui.button.ButtonColoredAction" name="btnIniciar">
           <Properties>

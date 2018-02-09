@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import coltime.Menu;
@@ -14,10 +10,7 @@ import java.util.Enumeration;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fac.diseño02
- */
+
 public class ConexionPS {
 
     public String mensaje = null;

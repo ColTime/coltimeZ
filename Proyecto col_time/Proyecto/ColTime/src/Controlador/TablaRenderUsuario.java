@@ -12,7 +12,7 @@ public class TablaRenderUsuario extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         setForeground(Color.BLACK);
         if (table.getValueAt(row, 6).toString().equals("Activo")) {
-            if (table.getValueAt(row, 8).toString().equals("1")) {
+            if (table.getValueAt(row, 8).toString().equals("true")) {
                 setBackground(Color.GREEN);
             } else {
                 setBackground(Color.WHITE);

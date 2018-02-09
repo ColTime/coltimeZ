@@ -46,19 +46,6 @@ public class RecuperarContraseña extends javax.swing.JDialog {
         jTRecuperacion.setColorDeBorde(new java.awt.Color(172, 172, 172));
         jTRecuperacion.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTRecuperacion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTRecuperacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTRecuperacionActionPerformed(evt);
-            }
-        });
-        jTRecuperacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTRecuperacionKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTRecuperacionKeyTyped(evt);
-            }
-        });
 
         btnIniciar.setText("Recuperar");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,18 +99,6 @@ public class RecuperarContraseña extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTRecuperacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTRecuperacionKeyPressed
-
-    }//GEN-LAST:event_jTRecuperacionKeyPressed
-
-    private void jTRecuperacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTRecuperacionKeyTyped
-
-    }//GEN-LAST:event_jTRecuperacionKeyTyped
-
-    private void jTRecuperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTRecuperacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTRecuperacionActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         Usuario obj = new Usuario();

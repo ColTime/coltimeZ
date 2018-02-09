@@ -19,6 +19,7 @@ public class ProyectoQR implements Runnable {
     int puertoProyecto = 0;
     proyecto obj = new proyecto();
     DateFormat formato = new SimpleDateFormat("YYYY/MM/dd");
+
     //...
     public ProyectoQR() {
         Thread QRProyecto = new Thread(this);
@@ -213,6 +214,7 @@ public class ProyectoQR implements Runnable {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
+        obj.lector=null;
         //Fin de la lectura del Código QR del proyecto.
     }
 
@@ -220,5 +222,5 @@ public class ProyectoQR implements Runnable {
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

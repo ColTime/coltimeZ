@@ -17,22 +17,19 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.toedter.calendar.JTextFieldDateEditor;
 import elaprendiz.gui.textField.TextFieldRoundBackground;
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Enumeration;
-import java.util.Scanner;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto extends javax.swing.JPanel {
+ //De esta forma esta estructurado el QR de proyectos.
+//NumOrden; Nombre Cliente; Nombre Proyecto; Negocios implicados; Tipo de proyecto; Fecha de entrega al cliente; Cantidad del Conversos; Cantidad del Troque; Cantidad del Repujado; Cantidad del Stencil; Cantidad del Circuito_FE; Material del Circuito; ¿Antisolder del circuito_FE?; ¿Ruteo del circuito_FE?; Cantidad de la PCB_TE; Material de la PCB; ¿Antisolder de la PCB_TE?; ¿Ruteo de la PCB_TE?; Componentes de la PCB_TE; Integraciòn del PCB_TE; Cantidad de Teclados; Cantidad de ensamble; Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble; Fecha de entrega de los componentes del circuito_FE; Fecha de entrega de la PCB_TE(TH,FV,GF); Fecha de entrega de componentes de la PCB_TE  
 
     public proyecto(int p) {
         if (p == 1) {
@@ -51,7 +48,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         op = p;
         limpiarCampos();
-        //---------------------------------------
+        //--------------------------------------------------------------------->
     }
 
     public proyecto() {
@@ -68,7 +65,8 @@ public class proyecto extends javax.swing.JPanel {
     int modificacion = 0;
     int puertoProyecto = 0;
     DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
+    public ProyectoQR lector=null;
+    
     private void fechasEditables() {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jDentrega.getDateEditor();
         editor.setEditable(false);
@@ -574,33 +572,18 @@ public class proyecto extends javax.swing.JPanel {
         jCRuteoC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCRuteoC.setForeground(new java.awt.Color(102, 102, 102));
         jCRuteoC.setText("R");
-        jCRuteoC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jCRuteoCMousePressed(evt);
-            }
-        });
         jPDetalles1.add(jCRuteoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 135, -1, -1));
 
         jCAntisolderC.setBackground(new java.awt.Color(255, 255, 255));
         jCAntisolderC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCAntisolderC.setForeground(new java.awt.Color(102, 102, 102));
         jCAntisolderC.setText("A");
-        jCAntisolderC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jCAntisolderCMousePressed(evt);
-            }
-        });
         jPDetalles1.add(jCAntisolderC, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, -1, -1));
 
         jCAntisolderP.setBackground(new java.awt.Color(255, 255, 255));
         jCAntisolderP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCAntisolderP.setForeground(new java.awt.Color(102, 102, 102));
         jCAntisolderP.setText("A");
-        jCAntisolderP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jCAntisolderPMousePressed(evt);
-            }
-        });
         jPDetalles1.add(jCAntisolderP, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 135, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -617,47 +600,21 @@ public class proyecto extends javax.swing.JPanel {
         jCRuteoP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jCRuteoP.setForeground(new java.awt.Color(102, 102, 102));
         jCRuteoP.setText("R");
-        jCRuteoP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jCRuteoPMousePressed(evt);
-            }
-        });
         jPDetalles1.add(jCRuteoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 135, -1, -1));
 
         jDFechaEntregaFE.setToolTipText("");
         jDFechaEntregaFE.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDFechaEntregaFE.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaEntregaFECaretPositionChanged(evt);
-            }
-        });
         jPDetalles1.add(jDFechaEntregaFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 140, -1));
 
         jDFechaEntregaFECOM.setToolTipText("");
         jDFechaEntregaFECOM.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaFECOM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDFechaEntregaFECOM.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaEntregaFECOMCaretPositionChanged(evt);
-            }
-        });
         jPDetalles1.add(jDFechaEntregaFECOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 130, 20));
 
         jDFechaEntregaPCBGF.setToolTipText("");
         jDFechaEntregaPCBGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDFechaEntregaPCBGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaEntregaPCBGFCaretPositionChanged(evt);
-            }
-        });
         jPDetalles1.add(jDFechaEntregaPCBGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 130, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -686,13 +643,6 @@ public class proyecto extends javax.swing.JPanel {
         jDFechaEntregaPCBCOMGF.setToolTipText("");
         jDFechaEntregaPCBCOMGF.setDateFormatString("dd/MM/yyyy");
         jDFechaEntregaPCBCOMGF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDFechaEntregaPCBCOMGF.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDFechaEntregaPCBCOMGFCaretPositionChanged(evt);
-            }
-        });
         jPDetalles1.add(jDFechaEntregaPCBCOMGF, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 130, -1));
 
         jLpcbGF.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -737,13 +687,6 @@ public class proyecto extends javax.swing.JPanel {
         jDentrega.setToolTipText("");
         jDentrega.setDateFormatString("dd/MM/yyyy");
         jDentrega.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDentrega.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDentregaCaretPositionChanged(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 128, 131));
@@ -783,11 +726,6 @@ public class proyecto extends javax.swing.JPanel {
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Normal", "RQT", "Quick" }));
         cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cbTipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbTipoItemStateChanged(evt);
-            }
-        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(128, 128, 131));
@@ -1035,9 +973,6 @@ public class proyecto extends javax.swing.JPanel {
         jTNovedades.setRows(5);
         jTNovedades.setWrapStyleWord(true);
         jTNovedades.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTNovedadesKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTNovedadesKeyTyped(evt);
             }
@@ -1062,13 +997,6 @@ public class proyecto extends javax.swing.JPanel {
         jDNFEE.setToolTipText("");
         jDNFEE.setDateFormatString("dd/MM/yyyy");
         jDNFEE.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jDNFEE.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jDNFEECaretPositionChanged(evt);
-            }
-        });
 
         jRATiempo.setBackground(new java.awt.Color(255, 255, 255));
         estadoProyecto.add(jRATiempo);
@@ -1081,11 +1009,6 @@ public class proyecto extends javax.swing.JPanel {
         jRRetraso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jRRetraso.setForeground(new java.awt.Color(128, 128, 131));
         jRRetraso.setText("Retraso");
-        jRRetraso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRRetrasoActionPerformed(evt);
-            }
-        });
 
         jLCircuitoFE1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLCircuitoFE1.setForeground(new java.awt.Color(128, 128, 131));
@@ -1180,7 +1103,9 @@ public class proyecto extends javax.swing.JPanel {
         fecha();
         limpiarID();
         ocultarFechas();
-        Controlador.ProyectoQR obj = new ProyectoQR();
+        if(lector==null){
+            lector = new ProyectoQR();
+        }
         jPEstadoProyecto.setVisible(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -1298,18 +1223,6 @@ public class proyecto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbNegocioItemStateChanged
 
-    private void cbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItemStateChanged
-    }//GEN-LAST:event_cbTipoItemStateChanged
-
-    private void jDentregaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDentregaCaretPositionChanged
-    }//GEN-LAST:event_jDentregaCaretPositionChanged
-
-    private void jCAntisolderPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderPMousePressed
-    }//GEN-LAST:event_jCAntisolderPMousePressed
-
-    private void jCRuteoPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoPMousePressed
-    }//GEN-LAST:event_jCRuteoPMousePressed
-
     private void jTConversorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTConversorKeyTyped
         numerosT(evt);
     }//GEN-LAST:event_jTConversorKeyTyped
@@ -1345,14 +1258,6 @@ public class proyecto extends javax.swing.JPanel {
     private void GenerarQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarQRActionPerformed
         generarQR();
     }//GEN-LAST:event_GenerarQRActionPerformed
-
-    private void jCAntisolderCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCAntisolderCMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCAntisolderCMousePressed
-
-    private void jCRuteoCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCRuteoCMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCRuteoCMousePressed
 
     private void btnTomaTiemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomaTiemposActionPerformed
         Menu principal = new Menu();
@@ -1428,11 +1333,6 @@ public class proyecto extends javax.swing.JPanel {
             cbMaterialCircuito.setEnabled(true);
             jCAntisolderC.setEnabled(true);
             jCRuteoC.setEnabled(true);
-//            if (jCIntegracion.isSelected()) {
-//                jDFechaEntregaFE.setEnabled(true);
-//            } else {
-//                jDFechaEntregaFE.setEnabled(false);
-//            }
         } else {
             cbMaterialCircuito.setEnabled(false);
             jCAntisolderC.setEnabled(false);
@@ -1448,8 +1348,6 @@ public class proyecto extends javax.swing.JPanel {
             cbMaterialPCBTE.setEnabled(true);
             jCAntisolderP.setEnabled(true);
             jCRuteoP.setEnabled(true);
-//            jRPCBCOM.setEnabled(true);
-//            jRPIntegracion.setEnabled(true);
         } else {
             cbMaterialPCBTE.setEnabled(false);
             cbMaterialPCBTE.setSelectedIndex(0);
@@ -1482,18 +1380,6 @@ public class proyecto extends javax.swing.JPanel {
         //Validacion para saber si lleva otras fechas de control.
         fechaEntregaFEoGF();
     }//GEN-LAST:event_jCIntegracionActionPerformed
-
-    private void jDFechaEntregaFECaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaFECaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDFechaEntregaFECaretPositionChanged
-
-    private void jDFechaEntregaFECOMCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaFECOMCaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDFechaEntregaFECOMCaretPositionChanged
-
-    private void jDFechaEntregaPCBGFCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaPCBGFCaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDFechaEntregaPCBGFCaretPositionChanged
 
     private void jRParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRParadaActionPerformed
         ejecucionOParada(0);
@@ -1542,10 +1428,6 @@ public class proyecto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbMaterialPCBTEItemStateChanged
 
-    private void jDFechaEntregaPCBCOMGFCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDFechaEntregaPCBCOMGFCaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDFechaEntregaPCBCOMGFCaretPositionChanged
-
     private void jRPCBCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRPCBCOMActionPerformed
         if (jRPCBCOM.isSelected()) {
             if (cbMaterialPCBTE.getSelectedItem().toString().equals("TH") || cbMaterialPCBTE.getSelectedItem().toString().equals("FV")) {
@@ -1586,24 +1468,13 @@ public class proyecto extends javax.swing.JPanel {
         validarCampos();
     }//GEN-LAST:event_jTNombreClienteKeyReleased
 
-    private void jTNovedadesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNovedadesKeyReleased
-    }//GEN-LAST:event_jTNovedadesKeyReleased
-
     private void jTNovedadesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNovedadesKeyTyped
         if (jTNovedades.getText().length() >= 250) {
             evt.consume();
         }
         caracteresRestantes(jTNovedades.getText().length());
     }//GEN-LAST:event_jTNovedadesKeyTyped
-
-    private void jDNFEECaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDNFEECaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDNFEECaretPositionChanged
-
-    private void jRRetrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRRetrasoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRRetrasoActionPerformed
-//Metodos-------------------------------------------------------------------->
+//Metodos---------------------------------------------------------------------->
 
     private void caracteresRestantes(int cant) {
         jLNCaracteres.setText(String.valueOf(250 - cant));
@@ -2927,6 +2798,3 @@ public class proyecto extends javax.swing.JPanel {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
 }
-//Orden del codigo A generar con toda la informaciòn
-
-//NumOrden; Nombre Cliente; Nombre Proyecto; Negocios implicados; Tipo de proyecto; Fecha de entrega al cliente; Cantidad del Conversos; Cantidad del Troque; Cantidad del Repujado; Cantidad del Stencil; Cantidad del Circuito_FE; Material del Circuito; ¿Antisolder del circuito_FE?; ¿Ruteo del circuito_FE?; Cantidad de la PCB_TE; Material de la PCB; ¿Antisolder de la PCB_TE?; ¿Ruteo de la PCB_TE?; Componentes de la PCB_TE; Integraciòn del PCB_TE; Cantidad de Teclados; Cantidad de ensamble; Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble; Fecha de entrega de los componentes del circuito_FE; Fecha de entrega de la PCB_TE(TH,FV,GF); Fecha de entrega de componentes de la PCB_TE  

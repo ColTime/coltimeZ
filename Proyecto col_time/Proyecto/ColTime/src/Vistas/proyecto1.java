@@ -4,7 +4,6 @@ import Controlador.DetalleProyecto;
 import com.barcodelib.barcode.QRCode;
 import java.awt.Color;
 import java.io.File;
-import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;

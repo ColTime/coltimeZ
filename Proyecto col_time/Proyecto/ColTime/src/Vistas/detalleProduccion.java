@@ -14,15 +14,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Aprendiz
- */
 public class detalleProduccion extends javax.swing.JDialog implements ActionListener {
 
-    /**
-     * Creates new form detalleProduccion
-     */
+
     public detalleProduccion(java.awt.Frame parent, boolean modal, int orden, int negocio, int vistaC, int cargo) {
         super(parent, modal);
         initComponents();
@@ -172,7 +166,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 detalle.setContentAreaFilled(false);
                 detalle.setBackground(Color.white);
                 jDetalle.add(detalle);
-                if (cantidad == 5) {//////////////////////////////////////////
+                if (cantidad == 5) {//----------------------------------------->
                     y = 99;
                     x = 0;
                     jDetalle.setPreferredSize(new Dimension(633, jDetalle.getHeight() + x));

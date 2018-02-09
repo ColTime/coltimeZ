@@ -1,8 +1,6 @@
 package Vistas;
 
-import Controlador.ConexionPS;
 import Controlador.FE_TE_IN;
-import Controlador.Proyecto;
 import coltime.Menu;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -140,7 +138,6 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }//GEN-LAST:event_formWindowClosing
     //Metodos para la campura del tiempo--------------------------------------->
-
     //
     //Se valida que el bono no exista en el panle para no reprtirlo***  
     public void validarExitenciadeBotones(int negocio, ControlDelTiempo vista) {
@@ -168,7 +165,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
         }
     }
 
-       public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista, PrintStream myPS) {
+    public void RegistrarTomaTiempoNegocio(String datos[], int cargo, ControlDelTiempo vista, PrintStream myPS) {
         FE_TE_IN obj = new FE_TE_IN();
         this.vista = vista;
 //#------------------------------------------------------------------

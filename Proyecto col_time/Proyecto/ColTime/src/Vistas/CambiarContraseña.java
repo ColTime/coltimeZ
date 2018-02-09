@@ -64,17 +64,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
         jTdocumento.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTdocumento.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTdocumento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTdocumento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTdocumentoKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTdocumentoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTdocumentoKeyTyped(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -146,9 +135,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
         jTpaswward1.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTpaswward1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTpaswward1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTpaswward1KeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTpaswward1KeyReleased(evt);
             }
@@ -158,9 +144,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
         jTpaswward2.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTpaswward2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTpaswward2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTpaswward2KeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTpaswward2KeyReleased(evt);
             }
@@ -170,9 +153,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
         jTpaswward3.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTpaswward3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTpaswward3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTpaswward3KeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTpaswward3KeyReleased(evt);
             }
@@ -266,18 +246,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTdocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyPressed
-
-    }//GEN-LAST:event_jTdocumentoKeyPressed
-
-    private void jTdocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyReleased
-
-    }//GEN-LAST:event_jTdocumentoKeyReleased
-
-    private void jTdocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyTyped
-
-    }//GEN-LAST:event_jTdocumentoKeyTyped
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Controlador.Usuario obj = new Usuario();
         obj.setDocumento(Menu.jDocumento.getText());
@@ -302,18 +270,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         this.setLocation((evt.getXOnScreen() - posX), (evt.getYOnScreen() - posy));
     }//GEN-LAST:event_formMouseDragged
-
-    private void jTpaswward1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpaswward1KeyPressed
-
-    }//GEN-LAST:event_jTpaswward1KeyPressed
-
-    private void jTpaswward2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpaswward2KeyPressed
-
-    }//GEN-LAST:event_jTpaswward2KeyPressed
-
-    private void jTpaswward3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpaswward3KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTpaswward3KeyPressed
 
     private void jTpaswward2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpaswward2KeyReleased
         if (jTpaswward2.getText().length() > 7) {

@@ -80,11 +80,6 @@ public class ConsultarPNC extends javax.swing.JFrame {
         jTNorden.setColorDeBorde(new java.awt.Color(204, 204, 204));
         jTNorden.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTNorden.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jTNorden.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTNordenMousePressed(evt);
-            }
-        });
         jTNorden.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTNordenKeyReleased(evt);
@@ -206,20 +201,6 @@ public class ConsultarPNC extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jTNordenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTNordenMousePressed
-
-    }//GEN-LAST:event_jTNordenMousePressed
-
-    private void jTNordenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNordenKeyReleased
-        if (jTNorden.getText().length() >= 5) {
-            consutarDetalle();
-        } else {
-            String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material", "Ubicacion"};
-            TDetalle.setModel(new DefaultTableModel(null, encabezado1));
-        }
-        tamañoColumnas();
-    }//GEN-LAST:event_jTNordenKeyReleased
     private void tamañoColumnas() {
         if (vista == 2) {
             TDetalle.getColumnModel().getColumn(2).setMinWidth(100);
@@ -296,6 +277,16 @@ public class ConsultarPNC extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTNordenKeyTyped
+
+    private void jTNordenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNordenKeyReleased
+        if (jTNorden.getText().length() >= 5) {
+            consutarDetalle();
+        } else {
+            String encabezado1[] = {"idDetalle", "Negocio", "Tipo de negocio", "Cantidad", "Estado", "Material", "Ubicacion"};
+            TDetalle.setModel(new DefaultTableModel(null, encabezado1));
+        }
+        tamañoColumnas();
+    }//GEN-LAST:event_jTNordenKeyReleased
     //Metodos de consultarPNC--------------------------------------------------->
 
     private void exportarInformacion(int pos) {

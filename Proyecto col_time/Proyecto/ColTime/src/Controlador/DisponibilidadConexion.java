@@ -28,7 +28,6 @@ public class DisponibilidadConexion implements Runnable {
             }
         }
     }
-
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.

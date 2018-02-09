@@ -323,7 +323,6 @@ public class Login extends javax.swing.JFrame {
         return obj.nombreUsuario(doc);
     }
 }
-
 //Notificaciones 
 //       new rojerusan.RSNotifyFade("¡ERROR!", "Este es un mensaje de errordel sistema.", 7, RSNotifyFade.PositionNotify.BottomRight, RSNotifyFade.TypeNotify.ERROR).setVisible(true);
 //       new rojerusan.RSNotifyAnimated("Bien Hecho", "Ádios lokita", 7, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);

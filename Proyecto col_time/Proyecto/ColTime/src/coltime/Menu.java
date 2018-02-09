@@ -31,7 +31,6 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public Color cor = new Color(189, 189, 189);
     public Color corF = new Color(219, 219, 219);
     public static Producciones bp = null;
-    private int longitudByte;
     int cont = 0;
     static int soloUnaVez = 0;
     ConexionPS CPS = null;
@@ -199,7 +198,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 138, 138)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 138, 138), 2));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPSuperior.setBackground(new java.awt.Color(63, 179, 255));
@@ -300,8 +299,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jPanel4.setBackground(new java.awt.Color(219, 219, 219));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        rSUsuario.setColorBorde(new java.awt.Color(51, 51, 51));
         rSUsuario.setColorBordePopu(new java.awt.Color(204, 204, 204));
         rSUsuario.setColorButtonOptions(new java.awt.Color(128, 128, 131));
+        rSUsuario.setFocusable(false);
+        rSUsuario.setImagenDefault(null);
         jPanel4.add(rSUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 110, 100));
 
         jPMenu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 110));
@@ -442,7 +444,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
 
         jPContenido.add(jPanel2);
@@ -1551,7 +1553,10 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
         }
     }
+    //!!!!!!!!!!!!!!!!!!!!!!!
 //Toma de tiempo automatica---------------------------------------------------->
+    //---------------------------------------------------------------------------->
+    //--------------------------------------------------------------------------->
 
     @Override
     public void run() {
@@ -1560,8 +1565,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             CPS.enlacePuertos();//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
         }
     }
-
+    //------------------------------------------------------------------------->
+    //--------------------------------------------------------------------------->
 //Fien de toma de tiempo automatica-------------------------------------------->
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     public void InformacionAreasProduccion() {
         Proyecto obj = new Proyecto();
         int accion = 1;
@@ -1573,14 +1581,22 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     case 1:
                         //proyectos ingresados hoy--------------------------------->
                         while (crs.next()) {
-                            if (crs.getInt(2) == 1) {//<Formato estandar>
-                                FIngresadosHoy.setText(crs.getString(1));
-                            } else if (crs.getInt(2) == 2) {//<Teclados>
-                                TIngresadosHoy.setText(crs.getString(1));
-                            } else if (crs.getInt(2) == 3) {//<Ensamble>
-                                EIngresadosHoy.setText(crs.getString(1));
-                            } else {
-                                AIngresadosHoy.setText(crs.getString(1));
+                            switch (crs.getInt(2)) {
+                                case 1:
+                                    //<Formato estandar>
+                                    FIngresadosHoy.setText(crs.getString(1));
+                                    break;
+                                case 2:
+                                    //<Teclados>
+                                    TIngresadosHoy.setText(crs.getString(1));
+                                    break;
+                                case 3:
+                                    //<Ensamble>
+                                    EIngresadosHoy.setText(crs.getString(1));
+                                    break;
+                                default:
+                                    AIngresadosHoy.setText(crs.getString(1));
+                                    break;
                             }
                         }
                         crs.close();
@@ -1599,14 +1615,22 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     case 3:
                         //Proyectos que se encuentran en estado de ejecución------->
                         while (crs.next()) {
-                            if (crs.getInt(2) == 1) {//<Formato estandar>
-                                FEjecucion.setText(crs.getString(1));
-                            } else if (crs.getInt(2) == 2) {//<Teclados>
-                                TEjecucion.setText(crs.getString(1));
-                            } else if (crs.getInt(2) == 3) {//<Ensamble>
-                                EEjecucion.setText(crs.getString(1));
-                            } else {
-                                Ajecucion.setText(crs.getString(1));
+                            switch (crs.getInt(2)) {
+                                case 1:
+                                    //<Formato estandar>
+                                    FEjecucion.setText(crs.getString(1));
+                                    break;
+                                case 2:
+                                    //<Teclados>
+                                    TEjecucion.setText(crs.getString(1));
+                                    break;
+                                case 3:
+                                    //<Ensamble>
+                                    EEjecucion.setText(crs.getString(1));
+                                    break;
+                                default:
+                                    Ajecucion.setText(crs.getString(1));
+                                    break;
                             }
                         }
                         crs.close();
@@ -1615,12 +1639,21 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                     case 4:
                         //Proyectos que se encuentran en estado por iniciar-------->
                         while (crs.next()) {
-                            if (crs.getInt(2) == 1) {//<Formato estandar>
-                                FPorIniciar.setText(crs.getString(1));
-                            } else if (crs.getInt(2) == 2) {//<Teclados>
-                                TPorIniciar.setText(crs.getString(1));
-                            } else if (crs.getInt(2) == 3) {//<Ensamble>
-                                EPorIniciar.setText(crs.getString(1));
+                            switch (crs.getInt(2)) {
+                                case 1:
+                                    //<Formato estandar>
+                                    FPorIniciar.setText(crs.getString(1));
+                                    break;
+                                case 2:
+                                    //<Teclados>
+                                    TPorIniciar.setText(crs.getString(1));
+                                    break;
+                                case 3:
+                                    //<Ensamble>
+                                    EPorIniciar.setText(crs.getString(1));
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                         crs.close();
@@ -1678,7 +1711,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                 try {
                     //Aun no esta completo
                     ImageIcon icon = new ImageIcon(rutaImagen);
-                    rSUsuario.setImagenDefault(icon);
+//                    rSUsuario
 //                    UrSUsuario.set
 //                    rSUsuario.imagenIcon.setImage(icon.getImage());
                 } catch (Exception e) {
