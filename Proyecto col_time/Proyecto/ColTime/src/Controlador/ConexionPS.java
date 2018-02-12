@@ -1,20 +1,24 @@
-
 package Controlador;
 
 import coltime.Menu;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+import java.awt.Component;
 import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Scanner;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-
+import javax.swing.JRadioButtonMenuItem;
 
 public class ConexionPS {
 
     public String mensaje = null;
     private int existePuerto = 0;
+    private String v[] = null;
+    private static String puertoCOM = "COM6";
+    private static String usuariodoc = "";
 
     public ConexionPS() {//Constructos
     }
@@ -22,7 +26,7 @@ public class ConexionPS {
     int conexion = 0;
 //Falta validar que el puerto este abierto y disponible para poder mandar informacion, y de no ser asì se va a notificar al usuario que no puede realizar la toma de tiempo correspondiente a si àrea de producciòn.
 
-    public void enlacePuertos() {
+    public void enlacePuertos(Menu menu) {
         Menu obj = new Menu();
         CommPort puerto = null;
         String valorBeta = "";
@@ -33,7 +37,7 @@ public class ConexionPS {
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible
                 existePuerto = 1;
                 myCPI = (CommPortIdentifier) commports.nextElement();
-                if (myCPI.getName().equals("COM6")) {
+                if (myCPI.getName().equals(obj.puertoActual)) {
                     puerto = myCPI.open("Puerto Serial Operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
                     //
@@ -50,9 +54,8 @@ public class ConexionPS {
                             mySC = new Scanner(mySP.getInputStream());
                         }
                         valorBeta = mySC.next();//Valor de entrada
-                        
-//                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
 
+//                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
                         if (valorBeta.charAt(0) == '/') {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
                             //...
                             obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
@@ -68,7 +71,35 @@ public class ConexionPS {
             }
             //
             if (conexion == 0) {// 0 =No se pudo realizar la conexion, 1: Conexion realizada correactamente.
-                JOptionPane.showMessageDialog(null, "Error: " + "No se pudo conectar al puerto serial COM3.");
+                if (JOptionPane.showOptionDialog(null, "Error: " + "No se pudo conectar al puerto serial " + obj.puertoActual + ". " + "¿Desea seleccionar otro puerto serial disponible?",
+                        "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                        new Object[]{"SI", "NO"}, "SI") == 0) {
+                    //Se podra modificar el puerto
+                    puertosDisponibles();
+                    Object dig = JOptionPane.showInputDialog(new JComboBox(),
+                            "Seleccione el puerto",
+                            "Selector de opciones",
+                            JOptionPane.QUESTION_MESSAGE,
+                            null, // null para icono defecto
+                            vectorObjet(v),
+                            "Cantidad proyectos área");
+                    Usuario reg = new Usuario();
+                    reg.RegistrarModificarPuertoSerialUsuario(obj.jDocumento.getText(), dig.toString());
+                    obj.puertoActual = obj.ConsultarPueroGurdado(obj.jDocumento.getText());
+                    
+//                    menu.jMenu4.setEnabled(false);
+                    
+//                    Component botones[] = menu.jMenu4.getComponents();
+//                    for (int i = 0; i < botones.length; i++) {
+//                        if (botones[i].getName().equals(menu.puertoActual)) {
+//                            JRadioButtonMenuItem opPuerto = (JRadioButtonMenuItem) botones[i];
+//                            opPuerto.setSelected(true);
+//                            break;
+//                        }
+//                    }
+
+                }
             }
             //
             if (existePuerto == 0) {//Se mostrara un mensaje diciendo que no existe ningun puerto serial disponible
@@ -81,6 +112,40 @@ public class ConexionPS {
             JOptionPane.showMessageDialog(null, "Error: " + e);
             puerto.close();
         }
+    }
+
+    public String[] puertosDisponibles() {
+        CommPortIdentifier comportIdenti = null;
+        int pos = 0;
+        try {
+            //Se utiliza para saber que longitud se va a realizar el vector
+            Enumeration comports = CommPortIdentifier.getPortIdentifiers();
+            while (comports.hasMoreElements()) {
+                comports.nextElement();
+                pos++;
+            }
+            v = new String[pos];
+            pos = 0;
+            comports = CommPortIdentifier.getPortIdentifiers();
+            //Se a gregan lo valores al vector con longitud ya definida 
+            while (comports.hasMoreElements()) {
+                comportIdenti = (CommPortIdentifier) comports.nextElement();
+                v[pos] = comportIdenti.getName();
+                pos++;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+        return v;
+    }
+
+    public Object[] vectorObjet(String v[]) {
+        Object items[] = new Object[v.length];
+        for (int i = 0; i < items.length; i++) {
+            items[i] = v[i];
+        }
+        v = null;
+        return items;
     }
 
     @Override

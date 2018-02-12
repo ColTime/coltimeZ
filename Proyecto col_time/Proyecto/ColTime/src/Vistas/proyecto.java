@@ -65,7 +65,7 @@ public class proyecto extends javax.swing.JPanel {
     int modificacion = 0;
     int puertoProyecto = 0;
     DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    public ProyectoQR lector=null;
+    public static ProyectoQR lector=null;
     
     private void fechasEditables() {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jDentrega.getDateEditor();

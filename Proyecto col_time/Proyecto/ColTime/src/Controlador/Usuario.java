@@ -116,14 +116,25 @@ public class Usuario {
         Modelo.UsuarioM obj = new UsuarioM();
         return obj.nombreUsuarioM(doc);
     }
-    
-    public void imagenUsuario(String ruta,String doc) {
+
+    public void imagenUsuario(String ruta, String doc) {
         Modelo.UsuarioM obj = new UsuarioM();
-        obj.imagenUsuariM(ruta,doc);
+        obj.imagenUsuariM(ruta, doc);
     }
-     public String consultarImagenUsuario(String doc) {
+
+    public String consultarImagenUsuario(String doc) {
         Modelo.UsuarioM obj = new UsuarioM();
         return obj.consultarImagenUsuariM(doc);
+    }
+
+    public String consultarPuertoUsario(String documento) {
+        UsuarioM obj = new UsuarioM();
+        return obj.consultarPuertoUsarioM(documento);
+    }
+
+    public void RegistrarModificarPuertoSerialUsuario(String documento,String com) {
+        UsuarioM obj = new UsuarioM();
+        obj.RegistrarModificarPuertoSerialUsuarioM(documento, com);
     }
 
     //Metodo de liberacion de memoria------------------------------------------>

@@ -409,7 +409,7 @@ public class Diagramas {
                     } else if (crs.getInt(3) == 4) {//Estado Ejecucion
                         fe.get(0).ejecucion = crs.getInt(2);
                     }
-                } else if (crs.getInt(1) == 16) {//Proceso Limpieza.
+                } else if (crs.getInt(1) == 16) {//Proceso Automatico
                     if (crs.getInt(3) == 1) {//estado por iniciar.
                         fe.get(1).porIniciar = crs.getInt(2);
                     } else if (crs.getInt(3) == 2) {//Estado pausado
@@ -433,30 +433,6 @@ public class Diagramas {
                     } else if (crs.getInt(3) == 4) {//Estado Ejecucion
                         fe.get(3).ejecucion = crs.getInt(2);
                     }
-                } else if (crs.getInt(1) == 19) {//Proceso Stencil.
-                    if (crs.getInt(3) == 1) {//estado por iniciar.
-                        fe.get(4).porIniciar = crs.getInt(2);
-                    } else if (crs.getInt(3) == 2) {//Estado pausado
-                        fe.get(4).pausa = crs.getInt(2);
-                    } else if (crs.getInt(3) == 4) {//Estado Ejecucion
-                        fe.get(4).ejecucion = crs.getInt(2);
-                    }
-                } else if (crs.getInt(1) == 20) {//Proceso Linea.
-                    if (crs.getInt(3) == 1) {//estado por iniciar.
-                        fe.get(5).porIniciar = crs.getInt(2);
-                    } else if (crs.getInt(3) == 2) {//Estado pausado
-                        fe.get(5).pausa = crs.getInt(2);
-                    } else if (crs.getInt(3) == 4) {//Estado Ejecucion
-                        fe.get(5).ejecucion = crs.getInt(2);
-                    }
-                } else if (crs.getInt(1) == 21) {//Proceso Arnes.
-                    if (crs.getInt(3) == 1) {//estado por iniciar.
-                        fe.get(6).porIniciar = crs.getInt(2);
-                    } else if (crs.getInt(3) == 2) {//Estado pausado
-                        fe.get(6).pausa = crs.getInt(2);
-                    } else if (crs.getInt(3) == 4) {//Estado Ejecucion
-                        fe.get(6).ejecucion = crs.getInt(2);
-                    }
                 }
             }
             crs.close();
@@ -473,23 +449,11 @@ public class Diagramas {
             ds.addValue(fe.get(2).porIniciar, "por iniciar", "Control calidad");
             ds.addValue(fe.get(2).pausa, "Pausado", "Control calidad");
             ds.addValue(fe.get(2).ejecucion, "Ejecucion", "Control calidad");
-
+                       //Cantidad             //Columna      //proceso
             ds.addValue(fe.get(3).porIniciar, "por iniciar", "Empaque");
             ds.addValue(fe.get(3).pausa, "Pausado", "Empaque");
             ds.addValue(fe.get(3).ejecucion, "Ejecucion", "Empaque");
-
-            ds.addValue(fe.get(4).porIniciar, "por iniciar", "Stencil");
-            ds.addValue(fe.get(4).pausa, "Pausado", "Stencil");
-            ds.addValue(fe.get(4).ejecucion, "Ejecucion", "Stencil");
-
-            ds.addValue(fe.get(5).porIniciar, "por iniciar", "Linea");
-            ds.addValue(fe.get(5).pausa, "Pausado", "Linea");
-            ds.addValue(fe.get(5).ejecucion, "Ejecucion", "Linea");
-
-            ds.addValue(fe.get(6).porIniciar, "por iniciar", "Arnes");
-            ds.addValue(fe.get(6).pausa, "Pausado", "Arnes");
-            ds.addValue(fe.get(6).ejecucion, "Ejecucion", "Arnes");
-
+                        
             fe.clear();
 
             if (diseño == 1) {

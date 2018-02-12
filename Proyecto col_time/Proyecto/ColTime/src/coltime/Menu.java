@@ -5,6 +5,7 @@ import Controlador.DetalleProyecto;
 import Controlador.DisponibilidadConexion;
 import Controlador.FE_TE_IN;
 import Controlador.Proyecto;
+import Controlador.Usuario;
 import Controlador.generarXlsx;
 import Vistas.CambiarContraseña;
 import Vistas.ControlDelTiempo;
@@ -16,17 +17,22 @@ import Vistas.Usuarios1;
 import Vistas.proyecto;
 import Vistas.proyecto1;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.PrintStream;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
-public class Menu extends javax.swing.JFrame implements Runnable {
+public class Menu extends javax.swing.JFrame implements Runnable, ActionListener {
 
     public Color cor = new Color(189, 189, 189);
     public Color corF = new Color(219, 219, 219);
@@ -36,6 +42,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     ConexionPS CPS = null;
     DetallesAreaInfo informacion = null;
     Thread tomaTiempo = null;
+    public static String puertoActual = "COM6";//Por defecto va a ser el Puerto COM6
 
     public Menu(int cargo, String nombre, String doc) {
         initComponents();
@@ -51,19 +58,28 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         funcionalidades(cargo);
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
+        //Mensaje de bienvenida-------------------------------------------------
         new rojerusan.RSNotifyAnimated("Bienvenido", nombre, 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         soloUnaVez = 1;
+        //Puerto Por el cual se va a ingresar la información--------------------
+        puertoActual = ConsultarPueroGurdado(doc);
+        //Fine del puerto-------------------------------------------------------
+        //Busqueda de los puertos seriales disponibles--------------------------
+        puertosSerialDisponibles();
+        //fin de la busqueda de puertos-----------------------------------------
+        //Validación continua de la conexion a la base de datos-----------------
         DisponibilidadConexion dispo = new DisponibilidadConexion();
         Thread conec = new Thread(dispo);
         conec.start();
-//        Toma de tiempos automatica
+        //fin de la calidacion a la base de datos-------------------------------
+        //Toma de tiempos automatica--------------------------------------------
         if (cargo == 2 || cargo == 3) {
             if (soloUnaVez == 1) {
                 tomaTiempo = new Thread(this);
                 tomaTiempo.start();
             }
         }
-        //Fin de toma de tiempos automatica
+        //Fin de toma de tiempos automatica-------------------------------------
     }
 
     public Menu() {
@@ -79,8 +95,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     int px = 0, cantidad = 0, unidad = 13;
     int py = 0, filas = 1;
     CachedRowSet crs = null;
-    CambiarContraseña obj = null;
+    public static CambiarContraseña obj = null;
     public static PrintStream myPS;
+    ButtonGroup grupoCom = null;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -93,7 +110,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jPSuperior = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBMinimizar = new javax.swing.JButton();
         jDocumento = new javax.swing.JLabel();
         jLConexion = new javax.swing.JLabel();
         jPMenu = new javax.swing.JPanel();
@@ -155,7 +172,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -240,14 +257,14 @@ public class Menu extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus1.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus1.png"))); // NOI18N
+        jBMinimizar.setBorderPainted(false);
+        jBMinimizar.setContentAreaFilled(false);
+        jBMinimizar.setFocusPainted(false);
+        jBMinimizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus.png"))); // NOI18N
+        jBMinimizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBMinimizarActionPerformed(evt);
             }
         });
 
@@ -269,7 +286,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                         .addGap(275, 275, 275)
                         .addComponent(jDocumento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPSuperiorLayout.createSequentialGroup()
@@ -288,7 +305,7 @@ public class Menu extends javax.swing.JFrame implements Runnable {
                             .addComponent(jButton1)
                             .addGroup(jPSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jDocumento)
-                                .addComponent(jButton2)))
+                                .addComponent(jBMinimizar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLConexion))))
         );
@@ -944,9 +961,9 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
         jMenu3.setText("Configuración");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
-        jMenuItem4.setText("Puertos COM");
-        jMenu3.add(jMenuItem4);
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
+        jMenu4.setText("Puerto COM");
+        jMenu3.add(jMenu4);
 
         jMenuBar1.add(jMenu3);
 
@@ -1241,18 +1258,15 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         cerrarSesion();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMinimizarActionPerformed
         setExtendedState(JFrame.CROSSHAIR_CURSOR);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBMinimizarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if (obj == null) {
             obj = new CambiarContraseña();
             obj.setVisible(true);
-        } else {
-            obj.setFocusCycleRoot(true);
         }
-
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -1469,6 +1483,48 @@ public class Menu extends javax.swing.JFrame implements Runnable {
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel18MousePressed
 //Metodos de la clase menu----------------------------------------------------->
+//Configuracion de los puertos seriales-----------------------------------------
+
+    public static String ConsultarPueroGurdado(String doc) {
+        Controlador.Usuario obj = new Controlador.Usuario();
+        String puerto = obj.consultarPuertoUsario(doc);
+        return puerto.equals("") ? "COM6" : puerto;
+    }
+
+    public void puertosSerialDisponibles() {
+//        jMenu4.removeAll();
+//        jMenu4.updateUI();
+        try {//DELETE FROM usuariopuerto WHERE documentousario='9813053240'
+            ConexionPS obj = new ConexionPS();
+            String v[] = obj.puertosDisponibles();
+            grupoCom = new ButtonGroup();
+            for (int i = 0; i < v.length; i++) {
+                JRadioButtonMenuItem opPuerto = new JRadioButtonMenuItem(v[i]);//Boton
+                opPuerto.setName(v[i]);//Nombre del componente
+                opPuerto.setActionCommand(v[i]);//Acción de comando
+                opPuerto.addActionListener(this);//Evento
+                if (puertoActual.equals(v[i])) {
+                    opPuerto.setSelected(true);
+                }
+                grupoCom.add(opPuerto);
+                jMenu4.add(opPuerto);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }
+
+//Action del boton cuando es activado
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        ButtonModel boton = grupoCom.getSelection();
+        Usuario obj = new Usuario();
+        puertoActual = boton.getActionCommand();
+        obj.RegistrarModificarPuertoSerialUsuario(jDocumento.getText(), boton.getActionCommand());
+    }
+//Fin de la configuracion de los puertos seriales-------------------------------
 
     public void LecturaCodigoQR(String codigo) {
         String beta[] = codigo.split("/");
@@ -1562,7 +1618,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public void run() {
         CPS = new ConexionPS();//Establecemos la conecion con el puerto serial(COM)
         while (true) {
-            CPS.enlacePuertos();//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
+            //El puerto es asignado desde esta variable "puertoActual".
+            CPS.enlacePuertos(this);//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
         }
     }
     //------------------------------------------------------------------------->
@@ -1764,8 +1821,8 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public rsbuttom.RSButtonMetro btn5;
     public rsbuttom.RSButtonMetro btn6;
     public javax.swing.JButton btnMenu;
+    public javax.swing.JButton jBMinimizar;
     public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
     public static javax.swing.JLabel jDocumento;
     public javax.swing.JInternalFrame jInternalFrame1;
     public static javax.swing.JLabel jLConexion;
@@ -1795,11 +1852,11 @@ public class Menu extends javax.swing.JFrame implements Runnable {
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
     public javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu4;
     public javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenuItem jMenuItem1;
     public javax.swing.JMenuItem jMenuItem2;
     public javax.swing.JMenuItem jMenuItem3;
-    public javax.swing.JMenuItem jMenuItem4;
     public javax.swing.JPanel jPContenido;
     public javax.swing.JPanel jPMenu;
     public javax.swing.JPanel jPSuperior;

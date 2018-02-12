@@ -247,12 +247,10 @@ public class Inicio extends javax.swing.JPanel {
 //Muestra la estadistica de las areas y permitira buscar por rango de fechas
 //Falta el diagrama de cantidad de proyecto de a´reas de produccion con el rango de fechas--------------------------------------------------------------------------->
 //Tener en cuenta que lo reportes tiene que cargar los proceso que esten activos desde la base de datos, coregirlo porque se hizo quemado.
-        proyecto1 diagrama = new proyecto1();
         Object obj[] = null;
         int bus = 0;
         int tipo = 1;
         Object diag = null;
-        Object fech = null;
         Object busqueda = JOptionPane.showInputDialog(new JComboBox(),
                 "Seleccione el diagrama",
                 "Selector de opciones",

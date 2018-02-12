@@ -139,19 +139,19 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
                 switch (crs.getInt(3)) {
                     case 1:
                         //Por iniciar
-                        icono = new ImageIcon("src\\produccion\\DetalleBegin.png");
+                        icono = new ImageIcon(getClass().getResource("/produccion/DetalleBegin.png"));
                         break;
                     case 2:
                         //Pausado
-                        icono = new ImageIcon("src\\produccion\\DetallePause.png");
+                        icono = new ImageIcon(getClass().getResource("/produccion/DetallePause.png"));
                         break;
                     case 3:
                         //Terminado
-                        icono = new ImageIcon("src\\produccion\\DetalleCheck.png");
+                        icono = new ImageIcon(getClass().getResource("/produccion/DetalleCheck.png"));
                         break;
                     case 4:
                         //Ejecucion
-                        icono = new ImageIcon("src\\produccion\\DetalleTime.png");
+                        icono = new ImageIcon(getClass().getResource("/produccion/DetalleTime.png"));
                         break;
                     default:
                         break;

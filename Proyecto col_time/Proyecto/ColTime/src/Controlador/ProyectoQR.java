@@ -1,6 +1,7 @@
 package Controlador;
 
 import Vistas.proyecto;
+import coltime.Menu;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
@@ -19,6 +20,7 @@ public class ProyectoQR implements Runnable {
     int puertoProyecto = 0;
     proyecto obj = new proyecto();
     DateFormat formato = new SimpleDateFormat("YYYY/MM/dd");
+    Menu menu = new Menu();
 
     //...
     public ProyectoQR() {
@@ -48,18 +50,18 @@ public class ProyectoQR implements Runnable {
                 }
             }
         }
+        obj.lector = null;
     }
 
     private String proyectoQR() {
         String valor = "";
-        int op = 0;
         try {
             Enumeration commports = CommPortIdentifier.getPortIdentifiers();//Enumeracion de todos los puertos.
             CommPortIdentifier myCPI = null;
             Scanner mySC;
             while (commports.hasMoreElements()) {
                 myCPI = (CommPortIdentifier) commports.nextElement();
-                if (myCPI.getName().equals("COM6")) {//Localización del puerto 
+                if (myCPI.getName().equals(menu.puertoActual)) {//Localización del puerto 
                     puertoProyecto = 1;
                     puerto = myCPI.open("Puerto serial Proyecto", 100);//Apertura y nombre del puerto
                     SerialPort mySP = (SerialPort) puerto;
@@ -74,7 +76,7 @@ public class ProyectoQR implements Runnable {
                             mySC = new Scanner(mySP.getInputStream());
                         }
                         valor = mySC.next();
-                        if (valor.charAt(0) == '/') {
+                        if (Character.isDigit(valor.charAt(0))) {
                             //Cerrar puerto
                             puerto.close();
                             puerto = null;
@@ -98,16 +100,18 @@ public class ProyectoQR implements Runnable {
         //29359;Micro Hom Cali S.A.S;Control Planta;FE;Normal;15/01/2018;null;null;null;null;25;TH;SI;SI;null;null;NO;NO;null;null;null;null;null;null;null;null
         String nombreCliente = "";
         try {
-            String valor[] = QRProyecto.split("/");
-            String cadena = "";
-            for (int i = 1; i <= 4; i++) {
-                if (i == 4) {
-                    cadena = cadena + valor[i];
-                } else {
-                    cadena = cadena + valor[i] + "/";
-                }
-            }
-            String InformacionProyecto[] = cadena.split(";");
+//            String valor[] = QRProyecto.split("/");
+////            String cadena = "";
+////            for (int i = 1; i <= 4; i++) {
+////                if (i == 4) {
+////                    cadena = cadena + valor[i];
+////                } else {
+////                    cadena = cadena + valor[i] + "/";
+////                }
+////            }
+
+            String InformacionProyecto[] = QRProyecto.split(";");
+            System.out.println(InformacionProyecto.length);
             if (InformacionProyecto.length == 26) {
                 obj.jTNorden.setText(InformacionProyecto[0]);//Numero de orden
                 String infoC[] = InformacionProyecto[1].split("-");
@@ -214,7 +218,7 @@ public class ProyectoQR implements Runnable {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
-        obj.lector=null;
+        obj.lector = null;
         //Fin de la lectura del Código QR del proyecto.
     }
 

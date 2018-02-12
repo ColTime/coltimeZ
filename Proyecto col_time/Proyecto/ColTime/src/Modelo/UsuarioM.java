@@ -97,9 +97,9 @@ public class UsuarioM {
 
     public CachedRowSet consultar_Usuario(String doc, String nombreAp, int cargo) {
         try {
-            Conexion obj = new Conexion();
-            obj.establecerConexion();
-            con = obj.getConexion();
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
             //Consulta-------
             String Qry = "CALL PA_ConsultarUsuarios(?,?,?);";
             ps = con.prepareCall(Qry);
@@ -116,7 +116,8 @@ public class UsuarioM {
             rs.close();
             ps.close();
             con.close();
-            obj.destruir();
+            conexion.cerrar(rs);
+            conexion.destruir();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
@@ -254,7 +255,7 @@ public class UsuarioM {
         return nombre;
     }
 
-    public void imagenUsuariM(String ruta,String doc) {
+    public void imagenUsuariM(String ruta, String doc) {
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -267,14 +268,16 @@ public class UsuarioM {
             ps.execute();
             //Destrucción de conexiones
             con.close();
+            conexion.cerrar(rs);
             conexion.destruir();
             ps.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
     }
+
     public String consultarImagenUsuariM(String doc) {
-        String ruta="";
+        String ruta = "";
         try {
             conexion = new Conexion();
             conexion.establecerConexion();
@@ -283,9 +286,55 @@ public class UsuarioM {
             String Qry = "CALL PA_ConsultarImagenUsuario(?)";
             ps = con.prepareCall(Qry);
             ps.setString(1, doc);
-            rs= ps.executeQuery();
+            rs = ps.executeQuery();
             rs.next();
-            ruta=rs.getString(1);
+            ruta = rs.getString(1);
+            //Destrucción de conexiones
+            con.close();
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return ruta;
+    }
+
+    public String consultarPuertoUsarioM(String documento) {
+        String puerto = "";
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_ConsultarPuertoSerialUsuario(?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, documento);
+            rs = ps.executeQuery();
+            rs.next();
+            puerto = rs.getString(1);
+            //Destrucción de conexiones
+            con.close();
+            conexion.cerrar(rs);
+            conexion.destruir();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "¡Error!" + e);
+        }
+        return puerto;
+    }
+
+    public void RegistrarModificarPuertoSerialUsuarioM(String documento, String com) {
+        try {
+            conexion = new Conexion();
+            conexion.establecerConexion();
+            con = conexion.getConexion();
+            //Query y ejecución------------------------------------------------------------>
+            String Qry = "CALL PA_RegistrarModificarPuertoSerialUsuario(?,?)";
+            ps = con.prepareCall(Qry);
+            ps.setString(1, documento);
+            ps.setString(2, com);
+            ps.executeQuery();
             //Destrucción de conexiones
             con.close();
             conexion.destruir();
@@ -293,7 +342,6 @@ public class UsuarioM {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Error!" + e);
         }
-        return ruta;
     }
 
     @Override

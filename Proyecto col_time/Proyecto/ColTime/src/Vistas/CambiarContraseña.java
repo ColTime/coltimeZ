@@ -18,9 +18,7 @@ import rojerusan.RSNotifyAnimated;
  */
 public class CambiarContraseña extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CambiarContraseña
-     */
+    
     public CambiarContraseña() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -40,7 +38,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
 
     private int posX = 0;
     private int posy = 0;
-
+    Menu menu=new Menu();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,6 +257,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        menu.obj=null;
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
