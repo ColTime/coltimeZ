@@ -4,13 +4,11 @@ import coltime.Menu;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
-import java.awt.Component;
 import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Scanner;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButtonMenuItem;
 
 public class ConexionPS {
 
@@ -26,7 +24,7 @@ public class ConexionPS {
     int conexion = 0;
 //Falta validar que el puerto este abierto y disponible para poder mandar informacion, y de no ser asì se va a notificar al usuario que no puede realizar la toma de tiempo correspondiente a si àrea de producciòn.
 
-    public void enlacePuertos(Menu menu) {
+    public void enlacePuertos(Menu menu) {//Ese metodo lo utilizan los roles de encargados de FE, EN y TE
         Menu obj = new Menu();
         CommPort puerto = null;
         String valorBeta = "";
@@ -52,21 +50,32 @@ public class ConexionPS {
                             mySC.close();
                             mySC = null;
                             mySC = new Scanner(mySP.getInputStream());
+                            //Se va a cerrar la conexion del puerto si el usuario se salio de la sesión.
+                            if (!menu.diponible) {
+                                puerto.close();
+                                break;
+                            }
                         }
-                        valorBeta = mySC.next();//Valor de entrada
+                        if (!menu.diponible) {//Si se cierra la sesion del encargado de algun area de producción tambien se tiene que cerrar el puerto, de lo contrario se seguira trabajando con el puerto. 
+                            break;
+                        } else {
+                            //Procedimiento de toma de tiempo
+                            valorBeta = mySC.next();//Valor de entrada
 
 //                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
-                        if (valorBeta.charAt(0) == '/') {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
-                            //...
-                            obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
-                            //--------------------------------------------------
+                            if (Character.isDigit(valorBeta.charAt(0))) {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
+                                //...
+                                obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
+                                //--------------------------------------------------
 //                            obj.myPS.print(mensaje);//Valor de dalida
 //                            mensaje = null;
-                            System.gc();//Garbage collector.
+                                System.gc();//Garbage collector.
+                            }
+                        }
+                        if (!menu.diponible) {
+                            break;
                         }
                     }
-//                    puerto.close();
-//                    break;
                 }
             }
             //
@@ -87,9 +96,8 @@ public class ConexionPS {
                     Usuario reg = new Usuario();
                     reg.RegistrarModificarPuertoSerialUsuario(obj.jDocumento.getText(), dig.toString());
                     obj.puertoActual = obj.ConsultarPueroGurdado(obj.jDocumento.getText());
-                    
+
 //                    menu.jMenu4.setEnabled(false);
-                    
 //                    Component botones[] = menu.jMenu4.getComponents();
 //                    for (int i = 0; i < botones.length; i++) {
 //                        if (botones[i].getName().equals(menu.puertoActual)) {
@@ -98,7 +106,6 @@ public class ConexionPS {
 //                            break;
 //                        }
 //                    }
-
                 }
             }
             //

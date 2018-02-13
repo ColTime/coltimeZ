@@ -5,6 +5,8 @@
  */
 package reportegenerarcoltime;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -37,6 +39,9 @@ public class ReporteColtime extends javax.swing.JFrame {
     String orden = "";
     int rep = 0, parada = 0, FE = 0, TE = 0, EN = 0, i = -1;
     int cantidadBeta = 0, procesoBeta = 0, proceso = 0, mayorCantidad = 0;
+    int cantidadTotalProceso = 0, cantidadTotatlUnidadesAProcesasP = 0;
+    float porProyecto = 0, porUnidad = 0;
+
     Object v[] = new Object[11];
     String nombreProcesos[] = new String[30];//Cantidad de proceso
     DefaultTableModel df = new DefaultTableModel(null, namesHeader);
@@ -140,6 +145,9 @@ public class ReporteColtime extends javax.swing.JFrame {
                     vectorInicial();//Inicio del vector
                     procesoMayorCantidad();
                     tipoNegocio();//Para calcurar la unidad de negocio
+                    //...
+                    sumaCantidadTotalTerminadaPRoceso();
+                    sacarTotalCandidadesAProcesarProyectos();
                     rep = 1;
                 } else {
                     if (!v[0].toString().equals(crs.getString(1))) {//Si el numero de orden es diferente a la que se guardo en el vector va a calcular el porcentaje y el proceso donde se encuentra la mayor cantidad de productos
@@ -148,15 +156,27 @@ public class ReporteColtime extends javax.swing.JFrame {
                         //Ingreso de vector a la tabla
                         asignarTiposNegosio();//Tipo de unidad de negocio
                         v[6] = asignacionDeProceso(proceso);
+                        //Se calcula el porcentaje (Aprox) del proyecto
+                        calcularProcentajeProyecto();
+                        //calcularProcentajeTotalProceso();//Se calcula el porcentaje (Aprox.) del proyecto.
                         df.addRow(v);
                         //Reinicializacion de variabel
                         reinicializarVariables();
                         vectorInicial();//Inicio del vector
+                        //Se tiene en cuenta la linea que se esta cruzando
                         tipoNegocio();//Para calcurar la unidad de negocio
+                        procesoMayorCantidad();
+                        //...
+                        sumaCantidadTotalTerminadaPRoceso();
+                        sacarTotalCandidadesAProcesarProyectos();
+                        //se cuentan los proceso del siguiente proyecto
                     } else {
                         //vectorInicial();//Inicio del vector
                         procesoMayorCantidad();
                         tipoNegocio();//Para calcurar la unidad de negocio
+                        //...
+                        sumaCantidadTotalTerminadaPRoceso();
+                        sacarTotalCandidadesAProcesarProyectos();
                         rep = 1;
                     }
                 }
@@ -165,6 +185,7 @@ public class ReporteColtime extends javax.swing.JFrame {
             //Cantidad Proceso
             asignarTiposNegosio();//Tipo de unidad e negocio
             v[6] = asignacionDeProceso(proceso);
+            calcularProcentajeProyecto();//Se calcula el porcentaje (Aprox) del proyecto
             df.addRow(v);
             //Reinicializar variables
             reinicializarVariables();
@@ -184,6 +205,58 @@ public class ReporteColtime extends javax.swing.JFrame {
         jTInforme.getColumnModel().getColumn(10).setMinWidth(0);
         jTInforme.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
         jTInforme.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
+    }
+
+    private void sumaCantidadTotalTerminadaPRoceso() {
+        try {
+            switch (crs.getInt(6)) {
+                case 1://Formato estandar
+                    cantidadTotalProceso += crs.getInt(14);//Cantidad beta de formato estandar
+                    break;
+                case 2://Teclados
+                    cantidadTotalProceso += crs.getInt(16);//Cantidad beta de teclados
+                    break;
+                case 3://Ensamble
+                    cantidadTotalProceso += crs.getInt(18);//Cantidad beta de ensamble
+                    break;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }
+
+    private void sacarTotalCandidadesAProcesarProyectos() {
+        try {
+            cantidadTotatlUnidadesAProcesasP += crs.getInt(19);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }
+
+    private void calcularProcentajeProyecto() {
+        float cien = 100;
+        //Se busca el procentaje por unidad.
+        porUnidad = cien / cantidadTotatlUnidadesAProcesasP;
+//        redondearDecimales(porUnidad,2);
+        //Se multiplica el procentaje por unidad por la cantidad total terminada de todos lo proceso.
+        porProyecto = porUnidad * cantidadTotalProceso;
+        DecimalFormat decimal = new DecimalFormat("#.00");
+        //El valor final se le da un formato y se redondea a dos cifras .
+        //se le asigna la variable al vector.
+        if (porProyecto > 100) {
+            porProyecto=100;
+        }
+        v[7] = decimal.format(porProyecto);
+    }
+
+    public static double redondearDecimales(double valorInicial, int numeroDecimales) {
+        double parteEntera, resultado;
+        resultado = valorInicial;
+        parteEntera = Math.floor(resultado);
+        resultado = (resultado - parteEntera) * Math.pow(10, numeroDecimales);
+        resultado = Math.round(resultado);
+        resultado = (resultado / Math.pow(10, numeroDecimales)) + parteEntera;
+        return resultado;
     }
 
     private String asignacionDeProceso(int proceso) {
@@ -215,9 +288,12 @@ public class ReporteColtime extends javax.swing.JFrame {
         proceso = 0;
         mayorCantidad = 0;
         procesoBeta = 0;
+        cantidadTotalProceso = 0;
+        cantidadTotatlUnidadesAProcesasP = 0;
     }
 
     private void procesoMayorCantidad() {
+        //Presenta problemas
         try {
             switch (crs.getInt(6)) {
                 case 1://Formato estandar
@@ -241,6 +317,7 @@ public class ReporteColtime extends javax.swing.JFrame {
     }
 
     public void metodoBurbujaManual() {
+
         if (cantidadBeta > mayorCantidad) {
             mayorCantidad = cantidadBeta;
             proceso = procesoBeta;
@@ -266,7 +343,7 @@ public class ReporteColtime extends javax.swing.JFrame {
     }
 
     private void asignarTiposNegosio() {
-//        if (v[0].equals("29452")) {
+//        if (v[0].equals("29456")) {
 //            System.out.println("Marulanda");
 //        }
         if (FE >= 1 && TE == 0 && EN == 0) {//Formato estandar

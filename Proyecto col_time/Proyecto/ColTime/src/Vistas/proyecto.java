@@ -66,6 +66,7 @@ public class proyecto extends javax.swing.JPanel {
     int puertoProyecto = 0;
     DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     public static ProyectoQR lector=null;
+    public static boolean disponibilidad=false;//Cierra la conexion con el puerto serial
     
     private void fechasEditables() {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jDentrega.getDateEditor();
@@ -1104,7 +1105,8 @@ public class proyecto extends javax.swing.JPanel {
         limpiarID();
         ocultarFechas();
         if(lector==null){
-            lector = new ProyectoQR();
+            disponibilidad=true;
+            lector = new ProyectoQR(this);
         }
         jPEstadoProyecto.setVisible(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -1146,6 +1148,7 @@ public class proyecto extends javax.swing.JPanel {
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI");
+        disponibilidad=false;
         if (seleccion == 0) {
             Proyecto obj = new Proyecto();
             if (obj.validarNumerOrden(Integer.parseInt(jTNorden.getText()))) {//Se valida que la orden no exista

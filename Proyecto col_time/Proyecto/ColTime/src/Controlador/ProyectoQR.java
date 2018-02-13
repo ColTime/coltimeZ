@@ -21,10 +21,12 @@ public class ProyectoQR implements Runnable {
     proyecto obj = new proyecto();
     DateFormat formato = new SimpleDateFormat("YYYY/MM/dd");
     Menu menu = new Menu();
+    proyecto pro = null;
 
     //...
-    public ProyectoQR() {
+    public ProyectoQR(proyecto pro) {
         Thread QRProyecto = new Thread(this);
+        this.pro = pro;
         QRProyecto.start();
     }
 
@@ -33,6 +35,9 @@ public class ProyectoQR implements Runnable {
         int abierto = 1;
         while (abierto == 1) {
             String valor = proyectoQR();
+            if (!this.pro.disponibilidad) {
+                break;
+            }
             if (puertoProyecto == 1) {
                 puertoProyecto = 0;
                 llenarCamporProyecto(valor);
@@ -74,16 +79,28 @@ public class ProyectoQR implements Runnable {
                             mySC.close();
                             mySC = null;
                             mySC = new Scanner(mySP.getInputStream());
+                            if (!this.pro.disponibilidad) {//Si ya no se va a esperar nada del puerto se va a cerrar
+                                puerto.close();
+                                break;
+                            }
                         }
-                        valor = mySC.next();
-                        if (Character.isDigit(valor.charAt(0))) {
-                            //Cerrar puerto
-                            puerto.close();
-                            puerto = null;
-                            break;//Salida del loop
+                        if (!this.pro.disponibilidad) {//se sale de la espera del dato en el puerto
+                            break;
+                        } else {
+                            valor = mySC.next();
+                            System.out.println(valor);
+                            if (Character.isDigit(valor.charAt(0))) {
+                                //Cerrar puerto
+                                puerto.close();
+                                puerto = null;
+                                break;//Salida del loop
+                            }
                         }
                     }
                     //----------------------------------------------------------
+                }
+                if (!this.pro.disponibilidad) {
+                    break;
                 }
             }
         } catch (Exception e) {

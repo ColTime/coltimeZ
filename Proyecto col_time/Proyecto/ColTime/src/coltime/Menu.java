@@ -38,11 +38,13 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     public Color corF = new Color(219, 219, 219);
     public static Producciones bp = null;
     int cont = 0;
+    public static boolean diponible = false;//Se utiliza para saber si se cierra la conexion del puerto o no.
     static int soloUnaVez = 0;
     ConexionPS CPS = null;
     DetallesAreaInfo informacion = null;
     Thread tomaTiempo = null;
     public static String puertoActual = "COM6";//Por defecto va a ser el Puerto COM6
+    proyecto pro = null;
 
     public Menu(int cargo, String nombre, String doc) {
         initComponents();
@@ -75,6 +77,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         //Toma de tiempos automatica--------------------------------------------
         if (cargo == 2 || cargo == 3) {
             if (soloUnaVez == 1) {
+                diponible = true;
                 tomaTiempo = new Thread(this);
                 tomaTiempo.start();
             }
@@ -1195,14 +1198,11 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         if (!jPContenido.getComponent(0).getName().equals("inicio")) {
             new CambiaPanel(jPContenido, new Inicio());
             Vistas.proyecto pro = new proyecto();
-//            try {
-//                if (pro.puerto != null) {
-//                    pro.puerto.close();
-//                }
-//                pro.QRProyecto.stop();
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, "Error: " + e);
-//            }
+
+            if (pro != null) {
+                pro.disponibilidad = false;
+                pro = null;
+            }
         }
     }//GEN-LAST:event_btn1ActionPerformed
 
@@ -1235,6 +1235,10 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         }
         if (!jPContenido.getComponent(0).getName().equals("usuarios")) {
             new CambiaPanel(jPContenido, new Usuarios1());
+            if (pro != null) {
+                pro.disponibilidad = false;
+                pro = null;
+            }
         }
     }//GEN-LAST:event_btn3ActionPerformed
 
@@ -1276,6 +1280,8 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                     JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                     new Object[]{"SI", "NO"}, "SI") == 0) {
                 //Cierra el menu y abre el login
+//                tomaTiempo.destroy();
+                diponible = false;
                 if (bp != null) {
                     bp.jBSalir.doClick();//La vista de produccion tiene que cerrarce cuando se salga de la aplicación.
                 }
@@ -1288,9 +1294,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                     sesion(0, jDocumento.getText());//Cierra el estado del ususario
                     Thread.sleep(290);
                     new Login().setVisible(true);
-                    if (cargo == 2 || cargo == 3) {
-                        tomaTiempo.stop();
-                    }
+//                    if (cargo == 2 || cargo == 3) {
+//                        tomaTiempo.destroy();
+//                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Error: " + e);
                 }
@@ -1395,6 +1401,10 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         }
         if (!jPContenido.getComponent(0).getName().equals("Procesos")) {
             new CambiaPanel(jPContenido, new Procesos());
+            if (pro != null) {
+                pro.disponibilidad = false;
+                pro = null;
+            }
         }
     }//GEN-LAST:event_btn6ActionPerformed
 
@@ -1516,7 +1526,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     }
 
 //Action del boton cuando es activado
-
     @Override
     public void actionPerformed(ActionEvent e) {
         ButtonModel boton = grupoCom.getSelection();
@@ -1527,8 +1536,8 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
 //Fin de la configuracion de los puertos seriales-------------------------------
 
     public void LecturaCodigoQR(String codigo) {
-        String beta[] = codigo.split("/");
-        String infoP[] = beta[1].split(";");
+//        String beta[] = codigo.split("/");
+        String infoP[] = codigo.split(";");
 //        String infoP[] = codigo.split(";");
         Proyecto validar = new Proyecto();
         if (validar.validarEliminacion(Integer.parseInt(infoP[0]))) {//Valido si la orden esta eliminada o no
@@ -1620,6 +1629,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         while (true) {
             //El puerto es asignado desde esta variable "puertoActual".
             CPS.enlacePuertos(this);//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
+            if (!diponible) {//Se va a salir del ciclo infinito y va a finalizar el hilo.
+                break;
+            }
         }
     }
     //------------------------------------------------------------------------->
@@ -1741,7 +1753,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
             switch (cargo) {
                 case 1:
                 case 4:
-                    new CambiaPanel(jPContenido, new proyecto(1));
+                    new CambiaPanel(jPContenido, pro = new proyecto(1));
                     break;
                 case 2:
                     new CambiaPanel(jPContenido, new proyecto1(1));

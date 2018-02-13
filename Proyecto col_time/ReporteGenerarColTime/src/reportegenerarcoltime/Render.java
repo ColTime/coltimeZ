@@ -18,7 +18,7 @@ public class Render extends DefaultTableCellRenderer {
         if (table.getValueAt(row, 10).toString().equals("true")) {//No esta parada
             if (table.getValueAt(row, 8).toString().equals("A tiempo")) {
                 setBackground(Color.GREEN);
-            } else if (table.getValueAt(row, 8).toString().equals("retraso")) {
+            } else if (table.getValueAt(row, 8).toString().equals("Retraso")) {
                 setBackground(Color.ORANGE);
             } else if (table.getValueAt(row, 8).toString().equals("Por iniciar")) {
                 setBackground(Color.WHITE);
