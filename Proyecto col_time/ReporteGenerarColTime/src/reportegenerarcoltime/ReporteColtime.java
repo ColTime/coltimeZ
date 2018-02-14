@@ -7,6 +7,8 @@ package reportegenerarcoltime;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author comunicaciones03
  */
-public class ReporteColtime extends javax.swing.JFrame {
+public class ReporteColtime extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form ReporteColtime
@@ -24,7 +26,7 @@ public class ReporteColtime extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(ReporteColtime.MAXIMIZED_BOTH);
         jTInforme.getTableHeader().setReorderingAllowed(false);
-        InformeGeneralEmpresaColcircuitos();
+        reporte.start();
     }
     //Variables
     CachedRowSet crs = null;
@@ -38,14 +40,14 @@ public class ReporteColtime extends javax.swing.JFrame {
     //Variables
     String orden = "";
     int rep = 0, parada = 0, FE = 0, TE = 0, EN = 0, i = -1;
-    int cantidadBeta = 0, procesoBeta = 0, proceso = 0, mayorCantidad = 0;
+    int cantidadBeta = 0, procesoBeta = 0, proceso = 0, mayorCantidad = 0, entro = 0;
     int cantidadTotalProceso = 0, cantidadTotatlUnidadesAProcesasP = 0;
     float porProyecto = 0, porUnidad = 0;
 
     Object v[] = new Object[11];
     String nombreProcesos[] = new String[30];//Cantidad de proceso
-    DefaultTableModel df = new DefaultTableModel(null, namesHeader);
     Modelo obj = null;
+    Thread reporte = new Thread(this);
 
     /*
     orden=0
@@ -130,11 +132,25 @@ public class ReporteColtime extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    @Override
+    public void run() {
+        while (true) {
+            InformeGeneralEmpresaColcircuitos();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ReporteColtime.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     private void InformeGeneralEmpresaColcircuitos() {
         try {
             obj = new Modelo();
             crs = obj.informacionInformeGeneral();
             obj = null;
+            DefaultTableModel df = new DefaultTableModel(null, namesHeader);
+//          jTInforme.setModel(null);
             while (crs.next()) {
                 //...
 //                if(crs.getString(1).equals("29451")){
@@ -181,20 +197,24 @@ public class ReporteColtime extends javax.swing.JFrame {
                     }
                 }
             }
-            //%...
-            //Cantidad Proceso
-            asignarTiposNegosio();//Tipo de unidad e negocio
-            v[6] = asignacionDeProceso(proceso);
-            calcularProcentajeProyecto();//Se calcula el porcentaje (Aprox) del proyecto
-            df.addRow(v);
-            //Reinicializar variables
-            reinicializarVariables();
-            //System.out.println("FE: " + FE + " TE: " + TE + " EN: " + EN);
-            jTInforme.setModel(df);//Se agrega el modelo a la tabla
-            Render render = new Render();
-            jTInforme.setDefaultRenderer(Object.class, render);
+            //Se ejecuta siempre y cuando haya entrada una vez al loop
+            if (entro != 0) {
+                asignarTiposNegosio();//Tipo de unidad e negocio
+                v[6] = asignacionDeProceso(proceso);
+                calcularProcentajeProyecto();//Se calcula el porcentaje (Aprox) del proyecto
+                df.addRow(v);
+                //Reinicializar variables
+                reinicializarVariables();
+                //System.out.println("FE: " + FE + " TE: " + TE + " EN: " + EN);
+
+                jTInforme.setModel(df);//Se agrega el modelo a la tabla
+                Render render = new Render();
+                jTInforme.setDefaultRenderer(Object.class, render);
+            }
+            //Se ejecuta siempre
             ocultarColumnas();//Oculta la columna estado parada del proyecto
             //...
+            rep = 0;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
@@ -244,7 +264,7 @@ public class ReporteColtime extends javax.swing.JFrame {
         //El valor final se le da un formato y se redondea a dos cifras .
         //se le asigna la variable al vector.
         if (porProyecto > 100) {
-            porProyecto=100;
+            porProyecto = 100;
         }
         v[7] = decimal.format(porProyecto);
     }
@@ -418,4 +438,5 @@ public class ReporteColtime extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTInforme;
     // End of variables declaration//GEN-END:variables
+
 }

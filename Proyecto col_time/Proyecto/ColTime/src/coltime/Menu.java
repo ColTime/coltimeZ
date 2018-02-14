@@ -1281,7 +1281,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                     new Object[]{"SI", "NO"}, "SI") == 0) {
                 //Cierra el menu y abre el login
 //                tomaTiempo.destroy();
-                diponible = false;
+                diponible = false;//Variable del menu para los roles encargados de FE, TE y EN
+                pro.disponibilidad=false;//Variable  de la vista proyecto para los roles administrativos del sistema.
+                
                 if (bp != null) {
                     bp.jBSalir.doClick();//La vista de produccion tiene que cerrarce cuando se salga de la aplicación.
                 }

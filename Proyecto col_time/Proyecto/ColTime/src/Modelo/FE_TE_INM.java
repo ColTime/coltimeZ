@@ -64,6 +64,7 @@ public boolean iniciar_Pausar_Reiniciar_Toma_Tiempo(int orden, int detalle, int 
                 } else if (rs.getInt(2) + cantidadTerminada == rs.getInt(1)) {
                     cantidadAntigua = rs.getInt(2);
                     estado = 3;
+                    //Calcular cantidad por unidad.
                     //Si la cantidad terminada ingresada es mayor a la cantidad que en total se deben realizar.
                 } else {
                     cantidadAntigua = rs.getInt(2);

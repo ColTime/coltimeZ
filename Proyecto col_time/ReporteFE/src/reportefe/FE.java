@@ -179,19 +179,22 @@ public class FE extends javax.swing.JFrame implements Runnable {
                     }
                 }
             }
-
-            organizarVector();
-            cantidadProyecto++;
-            df.addRow(v);//Información del proyecto
-            cantidadProceso[25] = cantidadProyecto;
-            df.addRow(cantidadProceso);
-            for (int i = 0; i < 10; i++) {
-                cantidadProceso[6 + (i + i)] = 0;
-                cantidadProceso[5 + (i + i)] = 1;
+            //Solo se ejecutara si por lo menos ingreso una vez en el loop while.
+            if (entro != 0) {
+                organizarVector();
+                cantidadProyecto++;
+                df.addRow(v);//Información del proyecto
+                cantidadProceso[25] = "------";
+                cantidadProceso[1] = cantidadProyecto;//Cantidad total de proyectos en el área de producción.
+                df.addRow(cantidadProceso);
+                for (int i = 0; i < 10; i++) {
+                    cantidadProceso[6 + (i + i)] = 0;
+                    cantidadProceso[5 + (i + i)] = 1;
+                }
+                jTReporte.setModel(df);
+                jTReporte.setDefaultRenderer(Object.class, new Tabla());
             }
-            jTReporte.setModel(df);
-            jTReporte.setDefaultRenderer(Object.class, new Tabla());
-
+            //Se ejecutara siempre, no importa si entro o no entro al loop.
             columnasOcultas();
             rep = 0;
             cantFinal = 0;
@@ -341,7 +344,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     private void organizarVector() {
         int cantidadPasada = 0, prceso = 8, subProceso = 7;
         //Dependiendo del proceso se organizan las cantidades
-        if (v[0].toString().equals("29436")) {
+        if (v[0].toString().equals("29455")) {
             rep = rep;
         }
         if (v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado")) {//Se pasan la cantidad de productos de perforado a quemado
@@ -365,14 +368,14 @@ public class FE extends javax.swing.JFrame implements Runnable {
             //------------------------------------------------------------------
         }
         //----------------------------------------------------------------------
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {//Se va a repetir la cantidad de procesos totales
             //...
             if (prceso == 24) {
                 v[prceso] = Integer.parseInt(v[prceso].toString()) - cantFinal;
                 cantFinal = 0;
             } else {
                 if (!v[subProceso].toString().equals("-1") && !v[subProceso].toString().equals("1")) {//Todos los sub
-                    if (prceso == 14) {//Control calidad TH
+                    if (prceso == 14 && v[15].toString().equals("-1")) {//Control calidad TH
                         cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 4].toString());//Se restan las cantidades
                         v[prceso] = cantidadPasada;
                     } else {

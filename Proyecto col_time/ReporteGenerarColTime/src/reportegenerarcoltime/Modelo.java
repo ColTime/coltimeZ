@@ -36,29 +36,28 @@ public class Modelo {
         return crs;
     }
 
-    public int[] cantidadTotalProyecto(String orden) {
-        String Qry = "CALL PA_CantidadUnidadesProyecto(?)";
-        int cantidadTotal[]=new int[2];
-        try {
-            conexion = new Conexion();
-            conexion.establecerConexion();
-            con = conexion.getConexion();
-            ps = con.prepareStatement(Qry);
-            ps.setString(1, orden);
-            rs = ps.executeQuery();
-            rs.next();
-            cantidadTotal[0]=rs.getInt(1);
-            cantidadTotal[1]=rs.getInt(2);
-            ps.close();
-            con.close();
-            conexion.cerrar(rs);
-            conexion.destruir();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
-        }
-        return cantidadTotal;
-    }
-
+//    public int[] cantidadTotalProyecto(String orden) {
+//        String Qry = "CALL PA_CantidadUnidadesProyecto(?)";
+//        int cantidadTotal[]=new int[2];
+//        try {
+//            conexion = new Conexion();
+//            conexion.establecerConexion();
+//            con = conexion.getConexion();
+//            ps = con.prepareStatement(Qry);
+//            ps.setString(1, orden);
+//            rs = ps.executeQuery();
+//            rs.next();
+//            cantidadTotal[0]=rs.getInt(1);
+//            cantidadTotal[1]=rs.getInt(2);
+//            ps.close();
+//            con.close();
+//            conexion.cerrar(rs);
+//            conexion.destruir();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
+//        }
+//        return cantidadTotal;
+//    }
     public CachedRowSet procesos() {
         String Qry = "CALL PA_ConsultarProcesos()";
         try {

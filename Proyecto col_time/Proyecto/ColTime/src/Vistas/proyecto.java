@@ -1564,7 +1564,7 @@ public class proyecto extends javax.swing.JPanel {
         }
         tipoPrpyecto.setFont(new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL));
         tipoPrpyecto.add(negoci + " - " + tip + "\n");
-        tipoPrpyecto.setSpacingAfter(10);
+        tipoPrpyecto.setSpacingAfter(8);
         return tipoPrpyecto;
     }
 
@@ -1625,14 +1625,14 @@ public class proyecto extends javax.swing.JPanel {
             PdfPTable tabla = new PdfPTable(3);
             PdfPCell header = new PdfPCell(new Paragraph("Orden numero: " + jTNorden.getText() + "\n"));
             Image logo = Image.getInstance(getClass().getResource("/imagenesEmpresa/logo.png"));
-            logo.scaleAbsolute(300, 125);
+            logo.scaleAbsolute(350, 125);
             logo.setAlignment(Image.ALIGN_CENTER);
 
             header.setBorder(Rectangle.NO_BORDER);
             header.setColspan(3);
             tabla.addCell(header);
-            tabla.setWidthPercentage(100);
-            tabla.setWidths(new float[]{3, 3, 3});
+            tabla.setWidthPercentage(90);
+            tabla.setWidths(new float[]{2, 2, 2});
             //se creo y se abrio el documento
             Document doc = new Document(PageSize.A4, 20, 20, 30, 30);
             //se obtine la ruta del proyecto en tiempo de ejecucion.
@@ -1661,12 +1661,12 @@ public class proyecto extends javax.swing.JPanel {
                     cod.setTopMargin(ms);
                     cod.setBottomMargin(min);
                     cod.setRotate(rot);
-                    cod.setModuleSize(tam);
+                    cod.setModuleSize(tam);//Tamaño del QR con el cul se genera
                     cod.renderBarcode(ruta + "\\ImágenesQR\\" + texto + ".png");
 
                     Image imagenQR = Image.getInstance(ruta + "\\ImágenesQR\\" + texto + ".png");
-                    imagenQR.setWidthPercentage(90);
-                    imagenQR.setAlignment(Image.ALIGN_CENTER);
+                    imagenQR.setWidthPercentage(50);//Tamaño del QR con el cual va a ser insertado en el documento PDF
+                    imagenQR.setAlignment(Image.ALIGN_CENTER);//Alineamiento de lo Codigos en las celdas
                     //Personalizar cell
                     PdfPCell celda = new PdfPCell();
                     celda.setBorder(Rectangle.NO_BORDER);

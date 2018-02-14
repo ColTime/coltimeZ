@@ -193,7 +193,7 @@ public class ControlDelTiempo extends javax.swing.JFrame implements ActionListen
 
     }
 
-    public void agregarBotones(ControlDelTiempo vista, int orden) {
+        public void agregarBotones(ControlDelTiempo vista, int orden) {
         JButton obj = new JButton(String.valueOf(orden));
         obj.setActionCommand(String.valueOf(orden));
         obj.setName(String.valueOf(orden));

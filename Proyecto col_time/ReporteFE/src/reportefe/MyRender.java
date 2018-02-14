@@ -15,8 +15,10 @@ public class MyRender extends JTable {
     @Override
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component cell = super.prepareRenderer(renderer, row, column);
+        //Colores por defecto
         cell.setBackground(Color.white);
         cell.setForeground(Color.BLACK);
+        //
         if (getValueAt(row, column) != null) {
             if (getValueAt(row, column) != null && column == 0 && (Object.class.equals(this.getColumnClass(column)))) {
                 if (getValueAt(row, column).getClass().equals(String.class)) {
