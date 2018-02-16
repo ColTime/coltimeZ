@@ -70,9 +70,10 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         puertosSerialDisponibles();
         //fin de la busqueda de puertos-----------------------------------------
         //Validación continua de la conexion a la base de datos-----------------
-        DisponibilidadConexion dispo = new DisponibilidadConexion();
+        DisponibilidadConexion dispo = new DisponibilidadConexion();//Creo que esta es la falla de que el ejecutable no funcione correctamente.
         Thread conec = new Thread(dispo);
         conec.start();
+//        JOptionPane.showMessageDialog(null, "El contrustructor del menu se ejecuto correcta");
         //fin de la calidacion a la base de datos-------------------------------
         //Toma de tiempos automatica--------------------------------------------
         if (cargo == 2 || cargo == 3) {
@@ -1282,8 +1283,8 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 //Cierra el menu y abre el login
 //                tomaTiempo.destroy();
                 diponible = false;//Variable del menu para los roles encargados de FE, TE y EN
-                pro.disponibilidad=false;//Variable  de la vista proyecto para los roles administrativos del sistema.
-                
+                pro.disponibilidad = false;//Variable  de la vista proyecto para los roles administrativos del sistema.
+
                 if (bp != null) {
                     bp.jBSalir.doClick();//La vista de produccion tiene que cerrarce cuando se salga de la aplicación.
                 }

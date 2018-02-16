@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 
 public class ProyectoController {
 //Variables
@@ -31,7 +31,7 @@ public class ProyectoController {
             con.close();
             conexion.destruir();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         return crs;
     }

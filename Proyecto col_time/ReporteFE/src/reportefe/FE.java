@@ -201,7 +201,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
             cantidadProyecto = 0;
             crs.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+            JOptionPane.showMessageDialog(null, "Error: " + e);//Salta error
         }
     }
 
@@ -344,9 +344,9 @@ public class FE extends javax.swing.JFrame implements Runnable {
     private void organizarVector() {
         int cantidadPasada = 0, prceso = 8, subProceso = 7;
         //Dependiendo del proceso se organizan las cantidades
-        if (v[0].toString().equals("29455")) {
-            rep = rep;
-        }
+//        if (v[0].toString().equals("29455")) {
+//            rep = rep;
+//        }
         if (v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado")) {//Se pasan la cantidad de productos de perforado a quemado
             v[12] = v[8];
             v[8] = 0;

@@ -84,6 +84,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPEncabezado.setBackground(new java.awt.Color(63, 179, 255));
+        jPEncabezado.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 0, 2, new java.awt.Color(153, 153, 153)));
         jPEncabezado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPEncabezado.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -139,7 +140,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 2));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTtipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -434,7 +435,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
         );
 
         pack();
@@ -895,6 +896,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jRSalidaActionPerformed
 
     private void btnEliminadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminadosActionPerformed
+        //Arreglar el boton de consultar eliminados------------------------------------------>
         consultarProyectos("", "", "", "", 1);
         TDetalle.setModel(new DefaultTableModel(null, encabezado1));
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
@@ -907,6 +909,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRIngreso.setEnabled(false);
         jTtipo.setText("");
         estado = 0;
+        //------------------------------------------------------------------------------------>
     }//GEN-LAST:event_btnEliminadosActionPerformed
 
     /**

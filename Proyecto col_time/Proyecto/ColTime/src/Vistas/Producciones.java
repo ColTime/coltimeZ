@@ -76,7 +76,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         });
 
         jPanel1.setBackground(new java.awt.Color(63, 179, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 0, 2, new java.awt.Color(153, 153, 153)));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -132,7 +132,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 149, 55));
+        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 149, 54));
 
         btn2.setBackground(new java.awt.Color(63, 179, 255));
         btn2.setText("Teclados");
@@ -151,7 +151,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 1, 140, 55));
+        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 2, 140, 54));
 
         btn3.setBackground(new java.awt.Color(63, 179, 255));
         btn3.setText("Ensamble");
@@ -170,7 +170,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn3ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 1, 131, 55));
+        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 2, 131, 54));
 
         btn4.setBackground(new java.awt.Color(63, 179, 255));
         btn4.setText("Almacen");
@@ -189,10 +189,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                 btn4ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 1, -1, 55));
+        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(422, 2, -1, 54));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
 
         jPMenu.setBackground(new java.awt.Color(255, 255, 255));
         jPMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204)), "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
