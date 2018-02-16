@@ -2,8 +2,9 @@ package Controlador;
 
 import coltime.Menu;
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DisponibilidadConexion implements Runnable {
 
@@ -24,14 +25,14 @@ public class DisponibilidadConexion implements Runnable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(DisponibilidadConexion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error: " + ex);
             }
         }
     }
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

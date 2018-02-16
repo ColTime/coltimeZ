@@ -45,7 +45,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     Thread tomaTiempo = null;
     public static String puertoActual = "COM6";//Por defecto va a ser el Puerto COM6
     proyecto pro = null;
-
+    ///---------------------------------------------------------------------------
+    //Al generar el ejecutable o acceso directo, no carga el menu principal. Estar atento a esta novedad para solucionarlo lo más pronto posible.
+    //----------------------------------------------------------------------------
     public Menu(int cargo, String nombre, String doc) {
         initComponents();
         this.cargo = cargo;
@@ -64,15 +66,17 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         new rojerusan.RSNotifyAnimated("Bienvenido", nombre, 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         soloUnaVez = 1;
         //Puerto Por el cual se va a ingresar la información--------------------
-        puertoActual = ConsultarPueroGurdado(doc);
+        puertoActual = ConsultarPueroGurdado(doc);//????????????????????????????
         //Fine del puerto-------------------------------------------------------
         //Busqueda de los puertos seriales disponibles--------------------------
-        puertosSerialDisponibles();
+        puertosSerialDisponibles();//???????????????????????????????????????????
         //fin de la busqueda de puertos-----------------------------------------
         //Validación continua de la conexion a la base de datos-----------------
+        //??????????????????????????????????????????????????????????????????????
         DisponibilidadConexion dispo = new DisponibilidadConexion();//Creo que esta es la falla de que el ejecutable no funcione correctamente.
         Thread conec = new Thread(dispo);
         conec.start();
+        //??????????????????????????????????????????????????????????????????????
 //        JOptionPane.showMessageDialog(null, "El contrustructor del menu se ejecuto correcta");
         //fin de la calidacion a la base de datos-------------------------------
         //Toma de tiempos automatica--------------------------------------------

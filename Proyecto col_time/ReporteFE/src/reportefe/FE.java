@@ -40,7 +40,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
     int P = 0, Q = 0, C = 0, CTH = 0, QUE = 0, S = 0, E = 0, C2 = 0, R = 0, M = 0;
     Thread informe = new Thread(this);//Hilo
     Object cantidadProceso[] = new Object[26];
-
+    //Hilo de ejecución:
     @Override
     public void run() {
         ejecutarInforme();
@@ -133,7 +133,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
                             break;
                         case 2://Quimicos
                             v[7] = crs.getInt(8);//Estado de quimicos
-//                          //...
+                            //...
                             v[10] = crs.getInt(6);//Cantidad que se le pasa al siguiente proceso
                             break;
                         case 3://Caminos
@@ -344,9 +344,9 @@ public class FE extends javax.swing.JFrame implements Runnable {
     private void organizarVector() {
         int cantidadPasada = 0, prceso = 8, subProceso = 7;
         //Dependiendo del proceso se organizan las cantidades
-//        if (v[0].toString().equals("29455")) {
-//            rep = rep;
-//        }
+        if (v[0].toString().equals("29649")) {
+            rep = rep;
+        }
         if (v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado")) {//Se pasan la cantidad de productos de perforado a quemado
             v[12] = v[8];
             v[8] = 0;
@@ -375,8 +375,10 @@ public class FE extends javax.swing.JFrame implements Runnable {
                 cantFinal = 0;
             } else {
                 if (!v[subProceso].toString().equals("-1") && !v[subProceso].toString().equals("1")) {//Todos los sub
-                    if (prceso == 14 && v[15].toString().equals("-1")) {//Control calidad TH
-                        cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 4].toString());//Se restan las cantidades
+                    //Si se cumple la condición se va a realizar el salto al siguiente proceso y se efectuara la resta con ese proceso.
+                    if ((prceso == 14 && v[15].toString().equals("-1")) || (prceso == 20 && v[21].toString().equals("-1"))) {//Control calidad TH
+                        //De control calidad salta a estañado o de control calida 2 salta a maquinas.
+                        cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 4].toString());//Se restan las cantidades saltando un proceso
                         v[prceso] = cantidadPasada;
                     } else {
                         cantidadPasada = Integer.parseInt(v[prceso].toString()) - Integer.parseInt(v[prceso + 2].toString());//Se restan las cantidades
@@ -391,17 +393,19 @@ public class FE extends javax.swing.JFrame implements Runnable {
         if ((v[4].toString().equals("Troquel") || v[4].toString().equals("Repujado") || v[4].toString().equals("Stencil"))) {//Se valida que el troquel y el repujado no pasen más cantidades.
             v[14] = 0;//CTH
         }
-        //Esto hace parte de los saltos de procesos. "Parte numero 2"
-        //----------------------------------------------------------------------
-        if (v[15].toString().equals("-1")) {//Cuendo no lleva Screen.
-            v[16] = 0;
-        }
-        if (v[21].toString().equals("-1")) {//Cuando no lleva ruteo
-            v[20] = 0;
-        }
-        //----------------------------------------------------------------------
+        //Reinicialización de variables
         prceso = 8;
         subProceso = 7;
+        //Esto ya no es necesario para el funcionamiento del sistema
+        //Esto hace parte de los saltos de procesos. "Parte numero 2"
+        //----------------------------------------------------------------------
+//        if (v[15].toString().equals("-1")) {//Cuendo no lleva Screen.
+//            v[16] = 0;
+//        }
+//        if (v[21].toString().equals("-1")) {//Cuando no lleva ruteo
+//            v[22] = 0;
+//        }
+        //----------------------------------------------------------------------
         /* Indices del vector
                     subs_POS
                     -subP=5;
