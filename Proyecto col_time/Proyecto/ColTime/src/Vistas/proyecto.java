@@ -67,7 +67,7 @@ public class proyecto extends javax.swing.JPanel {
     DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     public static ProyectoQR lector=null;
     public static boolean disponibilidad=false;//Cierra la conexion con el puerto serial
-    
+    //Revisar las validaciones de los botones cuando esta activo un registro y se consulta la información de otra para modificar.
     private void fechasEditables() {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jDentrega.getDateEditor();
         editor.setEditable(false);

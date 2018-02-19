@@ -201,7 +201,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
             cantidadProyecto = 0;
             crs.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);//Salta error
+//            JOptionPane.showMessageDialog(null, "Error: " + e);//Salta error
         }
     }
 
@@ -500,7 +500,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
             v[23] = -1;
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 

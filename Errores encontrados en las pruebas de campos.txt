@@ -1,0 +1,2 @@
+1) se encontro en el modulo de proyectos una falla a la hora de activar los botones,
+ cuando se esta registrando un proyecto y se consulta a otro proyecto es donde se genera la inconformidad en el software.

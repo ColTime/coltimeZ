@@ -5,10 +5,7 @@
  */
 package reportegenerarcoltime;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -139,7 +136,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(ReporteColtime.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(ReporteColtime.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -158,6 +155,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
 //                }
                 //...
                 if (rep == 0) {
+                    entro++;
                     vectorInicial();//Inicio del vector
                     procesoMayorCantidad();
                     tipoNegocio();//Para calcurar la unidad de negocio
@@ -208,15 +206,15 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                 //System.out.println("FE: " + FE + " TE: " + TE + " EN: " + EN);
 
                 jTInforme.setModel(df);//Se agrega el modelo a la tabla
-                Render render = new Render();
-                jTInforme.setDefaultRenderer(Object.class, render);
             }
+            Render render = new Render();
+            jTInforme.setDefaultRenderer(Object.class, render);
             //Se ejecuta siempre
             ocultarColumnas();//Oculta la columna estado parada del proyecto
             //...
             rep = 0;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
@@ -241,7 +239,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                     break;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
@@ -249,7 +247,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
         try {
             cantidadTotatlUnidadesAProcesasP += crs.getInt(19);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
@@ -291,7 +289,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                 i = -1;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         if (proceso == 0) {
             return "";
@@ -332,7 +330,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
             //Busca la mayor cantidad dentro de todos los proceso y la pone de primera
             metodoBurbujaManual();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e);
+//            JOptionPane.showMessageDialog(null, "Erro: " + e);
         }
     }
 
@@ -358,7 +356,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                     break;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e);
+//            JOptionPane.showMessageDialog(null, "Erro: " + e);
         }
     }
 
@@ -393,7 +391,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
             v[9] = crs.getString(10);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error" + e);
+//            JOptionPane.showMessageDialog(null, "Error" + e);
         }
     }
 

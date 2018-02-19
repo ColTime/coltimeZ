@@ -116,7 +116,7 @@ public class ConexionPS {
             }
             //
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
             puerto.close();
         }
     }
@@ -141,7 +141,7 @@ public class ConexionPS {
                 pos++;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         return v;
     }
