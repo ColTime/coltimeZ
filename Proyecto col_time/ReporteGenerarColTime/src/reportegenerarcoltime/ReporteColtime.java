@@ -77,6 +77,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                 return false; //Disallow the editing of any cell
             }
         };
+        jTInforme.setAutoCreateRowSorter(true);
         jTInforme.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jTInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,7 +135,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
         while (true) {
             InformeGeneralEmpresaColcircuitos();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(10000);//Diez segundos
             } catch (InterruptedException ex) {
 //                Logger.getLogger(ReporteColtime.class.getName()).log(Level.SEVERE, null, ex);
             }
