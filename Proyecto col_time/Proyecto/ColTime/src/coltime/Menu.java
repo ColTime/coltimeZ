@@ -1353,9 +1353,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 new Object[]{"Tiempos de producción", "General"}, "");
         if (seleccion != -1) {
             if (seleccion == 0) {
+                //Este reporte se realizo de otra forma, por ende ya no es necesario esta opción en el sistema. 
                 //Reporte de tiempos 
                 //Cuerpo del algoritmo esta pendiente.
-                //...
             } else {
                 //Reporte general Excel.
                 DetalleProyecto obj = new DetalleProyecto();
@@ -1368,7 +1368,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 File guardar = Chocer.getSelectedFile();
                 //Generar archivo .xlsx
                 generarXlsx excel = new generarXlsx();
-                if (excel.generarExcel(crs, String.valueOf(guardar))) {
+                if (excel.generarExcel(crs, String.valueOf(guardar))) {//Información y ruta de guardado.
                     //Documento creado correctamente
                     new rojerusan.RSNotifyAnimated("Listo!", "El reporte General de producción fue creado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                 } else {

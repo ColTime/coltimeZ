@@ -28,10 +28,10 @@ public class MyRender extends JTable {
                         cell.setBackground(Color.white);
                         cell.setForeground(Color.BLACK);
                     } else if (valor.equals("Quick")) {
-                        cell.setBackground(new Color(1, 174, 240));
+                        cell.setBackground(new Color(1, 174, 240));//Azul
                         cell.setForeground(Color.WHITE);
                     } else if (valor.equals("RQT")) {
-                        cell.setBackground(Color.PINK);
+                        cell.setBackground(Color.PINK);//Rosado
                         cell.setForeground(Color.BLACK);
                     }
                 }

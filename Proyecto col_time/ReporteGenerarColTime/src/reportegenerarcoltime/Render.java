@@ -17,14 +17,14 @@ public class Render extends DefaultTableCellRenderer {
         //Celdas de la tabla
         if (table.getValueAt(row, 10).toString().equals("true")) {//No esta parada
             if (table.getValueAt(row, 8).toString().equals("A tiempo")) {
-                setBackground(Color.GREEN);
+                setBackground(new Color(116, 251, 83));//Green
             } else if (table.getValueAt(row, 8).toString().equals("Retraso")) {
-                setBackground(new Color(255, 132, 8));//Naranjado
+                setBackground(new Color(255, 132, 8));//Orange
             } else if (table.getValueAt(row, 8).toString().equals("Por iniciar")) {
                 setBackground(Color.WHITE);
             }
         } else {//esta parada
-            setBackground(Color.RED);//Estado parada
+            setBackground(new Color(251, 83, 83));//Estado parada (RED)
         }
         //Header de la tabla
         table.getTableHeader().setFont(new Font("Arial", 1, 20));

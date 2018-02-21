@@ -4,6 +4,7 @@ import java.io.File;
 import javax.sql.rowset.CachedRowSet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
+import jxl.format.Colour;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
@@ -15,11 +16,13 @@ public class generarXlsx {
         try {
             WorkbookSettings conf = new WorkbookSettings();
             conf.setEncoding("ISO-8859-1");
-            WritableWorkbook woorBook = Workbook.createWorkbook(new File(ruta + "\\ReporteGeneral.xls"));
+            WritableWorkbook woorBook = Workbook.createWorkbook(new File(ruta + "\\ReporteGeneral.xls"));//se busca la ruta para generar el archivo xls.
 
-            WritableSheet sheet = woorBook.createSheet("Reporte General", 0);
-            WritableFont h = new WritableFont(WritableFont.COURIER, 16, WritableFont.NO_BOLD);
-            WritableCellFormat hFormat = new WritableCellFormat(h);
+            WritableSheet sheet = woorBook.createSheet("Reporte General", 0);//se crea el archivo xls
+            WritableFont h = new WritableFont(WritableFont.COURIER, 16, WritableFont.NO_BOLD);//Se da un formato al tipo de letra con el que se va a escribir sobre la hoja
+            h.setColour(Colour.BLUE);
+            WritableCellFormat hFormat = new WritableCellFormat(h);//Se da formato a cada letra
+
             int i = 0;
             //Numero de orden
             sheet.addCell(new jxl.write.Label(0, i, "Numero de orden", hFormat));

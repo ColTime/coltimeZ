@@ -13,12 +13,12 @@ public class TablaRenderUsuario extends DefaultTableCellRenderer {
         setForeground(Color.BLACK);
         if (table.getValueAt(row, 6).toString().equals("Activo")) {
             if (table.getValueAt(row, 8).toString().equals("true")) {
-                setBackground(Color.GREEN);
+                setBackground(new Color(116, 251, 83));
             } else {
                 setBackground(Color.WHITE);
             }
         } else if (table.getValueAt(row, 6).toString().equals("Inactivo")) {
-            setBackground(Color.RED);
+            setBackground(new Color(251, 83, 83));
         }
         table.getTableHeader().setFont(new Font("Arial", 1, 16));
         

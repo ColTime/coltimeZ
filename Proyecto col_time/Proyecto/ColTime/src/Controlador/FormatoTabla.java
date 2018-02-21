@@ -23,11 +23,11 @@ public class FormatoTabla extends DefaultTableCellRenderer {
                 if (table.getValueAt(row, columna_patron).equals("Por iniciar")) {
                     setBackground(Color.white);
                 } else if (table.getValueAt(row, columna_patron).equals("Pausado")) {
-                    setBackground(Color.ORANGE);
+                    setBackground(new Color(255, 168, 27));//Orange
                 } else if (table.getValueAt(row, columna_patron).equals("Terminado")) {
-                    setBackground(Color.GREEN);
+                    setBackground(new Color(116, 251, 83));//Green
                 } else if (table.getValueAt(row, columna_patron).equals("Ejecucion")) {
-                    setBackground(Color.gray);
+                    setBackground(new Color(176, 176, 176));//Gray
                 }
             } else {
                 setBackground(Color.red);
@@ -36,13 +36,13 @@ public class FormatoTabla extends DefaultTableCellRenderer {
             if (table.getValueAt(row, columna_patron).equals("Por iniciar")) {
                 setBackground(Color.white);
             } else if (table.getValueAt(row, columna_patron).equals("Pausado")) {
-                setBackground(Color.ORANGE);
+                setBackground(new Color(255, 168, 27));//Orange
             } else if (table.getValueAt(row, columna_patron).equals("Terminado")) {
-                setBackground(Color.GREEN);
+                setBackground(new Color(116, 251, 83));//Green
             } else if (table.getValueAt(row, columna_patron).equals("Ejecucion")) {
-                setBackground(Color.gray);
+                setBackground(new Color(176, 176, 176));//Gray
             } else if (table.getValueAt(row, columna_patron).equals("Parada")) {
-                setBackground(Color.RED);
+                setBackground(new Color(251, 83, 83));//Red
             }
         }
 

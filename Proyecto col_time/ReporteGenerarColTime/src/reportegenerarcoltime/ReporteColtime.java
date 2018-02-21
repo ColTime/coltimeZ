@@ -67,10 +67,14 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTInforme = new javax.swing.JTable();
+        jTtipo3 = new javax.swing.JLabel();
+        jTtipo4 = new javax.swing.JLabel();
+        jTtipo5 = new javax.swing.JLabel();
+        jTtipo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 220, 226));
 
         jTInforme = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -96,6 +100,30 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
         jTInforme.setRowHeight(50);
         jScrollPane1.setViewportView(jTInforme);
 
+        jTtipo3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo3.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (3).png"))); // NOI18N
+        jTtipo3.setText("A tiempo");
+
+        jTtipo4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo4.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (1).png"))); // NOI18N
+        jTtipo4.setText("Retrasado");
+
+        jTtipo5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo5.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (2).png"))); // NOI18N
+        jTtipo5.setText("Parada");
+
+        jTtipo2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo2.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (5).png"))); // NOI18N
+        jTtipo2.setText("Por iniciar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,13 +132,28 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jTtipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTtipo5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTtipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTtipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTtipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTtipo5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -436,6 +479,10 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTInforme;
+    private javax.swing.JLabel jTtipo2;
+    private javax.swing.JLabel jTtipo3;
+    private javax.swing.JLabel jTtipo4;
+    private javax.swing.JLabel jTtipo5;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -25,6 +25,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         EstadoDelMenu(false);
         this.cargo = cargo;
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
+        toltipSugerencia();
     }
 
     public Producciones() {
@@ -62,6 +63,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jLabel6 = new javax.swing.JLabel();
         cbTipo = new elaprendiz.gui.comboBox.ComboBoxRound();
         jBActualizar = new javax.swing.JButton();
+        jSugerencia = new javax.swing.JLabel();
         Contenido = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -277,6 +279,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         });
         jPMenu.add(jBActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, 20, 20));
 
+        jSugerencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-help-3-16.png"))); // NOI18N
+        jPMenu.add(jSugerencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
+
         Contenido.setBackground(new java.awt.Color(255, 255, 255));
         Contenido.setName("contenido"); // NOI18N
         Contenido.setLayout(new javax.swing.BoxLayout(Contenido, javax.swing.BoxLayout.LINE_AXIS));
@@ -396,6 +401,13 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         EstadoDelMenu(true);
         cambiarPanel(3);
     }//GEN-LAST:event_btn3ActionPerformed
+    private void toltipSugerencia() {
+//String rutaime = System.getProperty("user.dir");
+//Cambiar el tamaño de la imagenes para el tooltip
+//Realizar una imagen que contenga todos los iconos de los estados. Esta pendiente.
+        jSugerencia.setToolTipText("<html><h1>Estados</h1><br><div style='background-color: white;'><h3>Por iniciar</h3><img src=" + getClass().getResource("/produccion/ProyectBegin.png") + "></div>"
+                + "<div style='background-color: white;'><h3>Pausado</h3><img src=" + getClass().getResource("/produccion/ProyectBegin.png") + "></div></html>");
+    }
 
     public void cambiarPanel(int op) {
         switch (op) {
@@ -858,6 +870,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel jSugerencia;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNombre;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTOrden;
     private elaprendiz.gui.textField.TextFieldRoundBackground jTProyecto;

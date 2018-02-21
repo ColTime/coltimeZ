@@ -53,6 +53,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTtipo = new javax.swing.JLabel();
+        jTtipo2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jTNumerOrden = new elaprendiz.gui.textField.TextFieldRoundBackground();
         jLabel3 = new javax.swing.JLabel();
@@ -68,6 +69,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jRnulo = new javax.swing.JRadioButton();
         btnEliminados = new elaprendiz.gui.button.ButtonColoredAction();
         jTtipo1 = new javax.swing.JLabel();
+        jTtipo3 = new javax.swing.JLabel();
+        jTtipo4 = new javax.swing.JLabel();
+        jTtipo5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TProyecto = new javax.swing.JTable();
@@ -147,7 +151,14 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jTtipo.setForeground(new java.awt.Color(128, 128, 131));
         jTtipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jTtipo.setText("Tipo:");
-        jPanel4.add(jTtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 110, 71, -1));
+        jPanel4.add(jTtipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 110, 71, -1));
+
+        jTtipo2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo2.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (2).png"))); // NOI18N
+        jTtipo2.setText("Parada");
+        jPanel4.add(jTtipo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 120, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 204)), "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
@@ -289,6 +300,27 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         jTtipo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jTtipo1.setText("Tipo:");
         jPanel4.add(jTtipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 110, 60, -1));
+
+        jTtipo3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo3.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (3).png"))); // NOI18N
+        jTtipo3.setText("Terminado");
+        jPanel4.add(jTtipo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 100, 100, 30));
+
+        jTtipo4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo4.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (1).png"))); // NOI18N
+        jTtipo4.setText("Pausado");
+        jPanel4.add(jTtipo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 120, 30));
+
+        jTtipo5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo5.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (4).png"))); // NOI18N
+        jTtipo5.setText("Ejecución");
+        jPanel4.add(jTtipo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 120, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153)), "Proyecto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(204, 204, 204))); // NOI18N
@@ -1310,5 +1342,9 @@ public class ConsutaProyecto extends javax.swing.JFrame {
     private elaprendiz.gui.textField.TextFieldRoundBackground jTNumerOrden;
     private javax.swing.JLabel jTtipo;
     private javax.swing.JLabel jTtipo1;
+    private javax.swing.JLabel jTtipo2;
+    private javax.swing.JLabel jTtipo3;
+    private javax.swing.JLabel jTtipo4;
+    private javax.swing.JLabel jTtipo5;
     // End of variables declaration//GEN-END:variables
 }

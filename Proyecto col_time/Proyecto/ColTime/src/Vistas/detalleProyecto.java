@@ -488,16 +488,17 @@ public class detalleProyecto extends javax.swing.JDialog {
             DetalleProyecto obj = new DetalleProyecto();
             crs = obj.ConsultarInformacionFiltrariaDelDetalle(detalle);//Consulta la información filtraria.
             crs.next();
-            jTNombreCliente.setText("  " + crs.getString(1));
-            jTNombreProyecto.setText("  " + crs.getString(2));
-            jTFechaIngreso.setText("  " + crs.getString(3));
-            jTFechaEntrega.setText("  " + crs.getString(4));
-            jTCantidadTotal.setText("  " + crs.getString(5));
-            jTTimepoTotal.setText("  " + crs.getString(6));
-            jTFechaIngreso1.setText("  " + (crs.getString(7) == null ? "" : crs.getString(7)));
-            jTFechaIngreso2.setText("  " + (crs.getString(8) == null ? "" : crs.getString(7)));
-            jTFechaIngreso3.setText("  " + (crs.getString(9) == null ? "" : crs.getString(7)));
-            jTFechaIngreso4.setText("  " + (crs.getString(10) == null ? "" : crs.getString(7)));
+            jTNombreCliente.setText("  " + crs.getString(1));//Orden
+            jTNombreProyecto.setText("  " + crs.getString(2));//Nombre proyecto
+            jTFechaIngreso.setText("  " + crs.getString(3));//Fecha de ingreso
+            jTFechaEntrega.setText("  " + crs.getString(4));//Fecha de entraga
+            jTCantidadTotal.setText("  " + crs.getString(5));//cantidad total
+            jTTimepoTotal.setText(crs.getString(6) == null ? "  00:00" : "  " + crs.getString(6));//Timepo total
+            jTTimepoTotalUnidad.setText(crs.getString(7) == null ? "  00:00" : "  " + crs.getString(7));//Timepo total por unidad
+            jTFechaIngreso1.setText("  " + (crs.getString(8) == null ? "" : crs.getString(8)));//fecha numero 1
+            jTFechaIngreso2.setText("  " + (crs.getString(9) == null ? "" : crs.getString(9)));//fecha numero 2
+            jTFechaIngreso3.setText("  " + (crs.getString(10) == null ? "" : crs.getString(10)));//fecha numero 3
+            jTFechaIngreso4.setText("  " + (crs.getString(11) == null ? "" : crs.getString(11)));//fecha numero 4
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!! " + e);
         }

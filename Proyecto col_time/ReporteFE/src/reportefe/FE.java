@@ -511,10 +511,18 @@ public class FE extends javax.swing.JFrame implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTReporte = new reportefe.MyRender();
+        jTtipo2 = new javax.swing.JLabel();
+        jTtipo3 = new javax.swing.JLabel();
+        jTtipo4 = new javax.swing.JLabel();
+        jTtipo5 = new javax.swing.JLabel();
+        jTtipo6 = new javax.swing.JLabel();
+        jTtipo7 = new javax.swing.JLabel();
+        jTtipo8 = new javax.swing.JLabel();
+        jTtipo9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 220, 226));
 
         jTReporte.setAutoCreateRowSorter(true);
         jTReporte.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -543,21 +551,97 @@ public class FE extends javax.swing.JFrame implements Runnable {
         jTReporte.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTReporte);
 
+        jTtipo2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo2.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (5).png"))); // NOI18N
+        jTtipo2.setText("Por iniciar");
+
+        jTtipo3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo3.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (3).png"))); // NOI18N
+        jTtipo3.setText("Terminado");
+
+        jTtipo4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo4.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (2).png"))); // NOI18N
+        jTtipo4.setText("Pausado");
+
+        jTtipo5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo5.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (1).png"))); // NOI18N
+        jTtipo5.setText("Ejecución");
+
+        jTtipo6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo6.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (4).png"))); // NOI18N
+        jTtipo6.setText("N/A");
+
+        jTtipo7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo7.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (6).png"))); // NOI18N
+        jTtipo7.setText("RQT");
+
+        jTtipo8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo8.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (7).png"))); // NOI18N
+        jTtipo8.setText("Quick");
+
+        jTtipo9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTtipo9.setForeground(new java.awt.Color(128, 128, 131));
+        jTtipo9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTtipo9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (5).png"))); // NOI18N
+        jTtipo9.setText("Normal");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1262, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1262, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jTtipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTtipo5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTtipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTtipo6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTtipo9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTtipo8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTtipo7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTtipo6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTtipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTtipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTtipo5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTtipo7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTtipo8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTtipo9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -610,6 +694,14 @@ public class FE extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTReporte;
+    private javax.swing.JLabel jTtipo2;
+    private javax.swing.JLabel jTtipo3;
+    private javax.swing.JLabel jTtipo4;
+    private javax.swing.JLabel jTtipo5;
+    private javax.swing.JLabel jTtipo6;
+    private javax.swing.JLabel jTtipo7;
+    private javax.swing.JLabel jTtipo8;
+    private javax.swing.JLabel jTtipo9;
     // End of variables declaration//GEN-END:variables
 
 }
