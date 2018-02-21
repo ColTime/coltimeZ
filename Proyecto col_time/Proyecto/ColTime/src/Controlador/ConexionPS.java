@@ -2,6 +2,7 @@ package Controlador;
 
 import coltime.Menu;
 import gnu.io.CommPort;
+import gnu.io.RXTXPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import java.io.PrintStream;
@@ -29,7 +30,10 @@ public class ConexionPS {
         CommPort puerto = null;
         String valorBeta = "";
         try {
-            Enumeration commports = CommPortIdentifier.getPortIdentifiers();//Se traen todos los puertos disponibles
+            //Presenta problemas en la enumeration o en el getPortIdentifiers
+            Enumeration commports;//Se traen todos los puertos disponibles
+            commports = CommPortIdentifier.getPortIdentifiers();
+            JOptionPane.showMessageDialog(null, "Esta en estado de lectura");
             CommPortIdentifier myCPI = null;
             Scanner mySC;
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible
@@ -122,7 +126,6 @@ public class ConexionPS {
     }
 
     public String[] puertosDisponibles() {
-        CommPortIdentifier comportIdenti = null;
         int pos = 0;
         try {
             //Se utiliza para saber que longitud se va a realizar el vector
@@ -136,7 +139,7 @@ public class ConexionPS {
             comports = CommPortIdentifier.getPortIdentifiers();
             //Se a gregan lo valores al vector con longitud ya definida 
             while (comports.hasMoreElements()) {
-                comportIdenti = (CommPortIdentifier) comports.nextElement();
+                CommPortIdentifier comportIdenti = (CommPortIdentifier) comports.nextElement();
                 v[pos] = comportIdenti.getName();
                 pos++;
             }
