@@ -405,8 +405,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 //String rutaime = System.getProperty("user.dir");
 //Cambiar el tamaño de la imagenes para el tooltip
 //Realizar una imagen que contenga todos los iconos de los estados. Esta pendiente.
-        jSugerencia.setToolTipText("<html><h1>Estados</h1><br><div style='background-color: white;'><h3>Por iniciar</h3><img src=" + getClass().getResource("/produccion/ProyectBegin.png") + "></div>"
-                + "<div style='background-color: white;'><h3>Pausado</h3><img src=" + getClass().getResource("/produccion/ProyectBegin.png") + "></div></html>");
+        jSugerencia.setToolTipText("<html><h1>Estados</h1><br><div style='background-color: white;'><img src=" + getClass().getResource("/produccion/EstadosProyectos.jpg") + "></div><br></html>");
     }
 
     public void cambiarPanel(int op) {

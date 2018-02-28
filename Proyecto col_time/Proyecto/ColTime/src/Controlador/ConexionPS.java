@@ -2,7 +2,6 @@ package Controlador;
 
 import coltime.Menu;
 import gnu.io.CommPort;
-import gnu.io.RXTXPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import java.io.PrintStream;
@@ -33,7 +32,7 @@ public class ConexionPS {
             //Presenta problemas en la enumeration o en el getPortIdentifiers
             Enumeration commports;//Se traen todos los puertos disponibles
             commports = CommPortIdentifier.getPortIdentifiers();
-            JOptionPane.showMessageDialog(null, "Esta en estado de lectura");
+//            JOptionPane.showMessageDialog(null, "Esta en estado de lectura");
             CommPortIdentifier myCPI = null;
             Scanner mySC;
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible

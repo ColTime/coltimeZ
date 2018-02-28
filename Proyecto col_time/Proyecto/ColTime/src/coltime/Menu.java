@@ -67,14 +67,12 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         new rojerusan.RSNotifyAnimated("Bienvenido", nombre, 6, RSNotifyAnimated.PositionNotify.BottomLeft, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
         soloUnaVez = 1;
         //Puerto Por el cual se va a ingresar la información--------------------
-        puertoActual = ConsultarPueroGurdado(doc);//????????????????????????????
+        puertoActual = ConsultarPueroGurdado(doc);
         //Fine del puerto-------------------------------------------------------
         //Busqueda de los puertos seriales disponibles--------------------------
-        //El problema va en las enumeraciones
-//        puertosSerialDisponibles();//<------------------------------------------Error!!!!!!!! Al comvertir el archivo a .jar
+        puertosSerialDisponibles();
         //fin de la busqueda de puertos-----------------------------------------
         //Validación continua de la conexion a la base de datos-----------------
-        //??????????????????????????????????????????????????????????????????????
         DisponibilidadConexion dispo = new DisponibilidadConexion();//Creo que esta es la falla de que el ejecutable no funcione correctamente.
         Thread conec = new Thread(dispo);
         conec.start();
@@ -1625,6 +1623,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
             }
         } else {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "No puedes cerrar la aplicacion mientras un producto en ejecución.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         }
     }
     //!!!!!!!!!!!!!!!!!!!!!!!
