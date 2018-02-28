@@ -5,27 +5,40 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 //import javax.swing.JOptionPane;
 
-public class EN extends javax.swing.JFrame {
+public class EN extends javax.swing.JFrame implements Runnable {
 
     public EN() {
         initComponents();
         this.setExtendedState(EN.MAXIMIZED_BOTH);
         //...
+        this.setTitle("Informe de Ensamble");
         jTReporte.getTableHeader().setReorderingAllowed(false);
-        consultarProcesosEncabezados();
+        hilo.start();
     }
     //Variables
     CachedRowSet crs = null;
     String names[] = null;
     static String namesBeta[] = null, nombreProcesos[] = null;
-    String beta = "N°Orden;C.T;Tipo", betaNames = "";
+    String beta = "N°Orden;C.T;Tipo;producto", betaNames = "";
     Modelo obj = new Modelo();
     Object row[] = null;//Proyectos
     static int posProceso = 0, rep = 0, canColumnas = 0;
-    DefaultTableModel df = null;
     int totalProyectos = 0, cantidadTotatlUnidades = 0;
+    Thread hilo = new Thread(this);
 
     //Metodos
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                consultarProcesosEncabezados();
+                Thread.sleep(5000);//5 segundos
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }
+
     private void consultarProcesosEncabezados() {
         try {
             String nuevaCadena = "";
@@ -42,17 +55,18 @@ public class EN extends javax.swing.JFrame {
             names = (beta + nuevaCadena).split(";");//Encabezado de las columnas
             //...
             //Modelo de la tabla con encabezados
-            df = new DefaultTableModel(null, names);
+            DefaultTableModel df = new DefaultTableModel(null, names);
             //...
             canColumnas = names.length;
             //...
-            consultarInformacionEnsamble();//Cuerpo del modelo...
+            nuevaCadena = "";
+            consultarInformacionEnsamble(df);//Cuerpo del modelo...
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
-    private void consultarInformacionEnsamble() {
+    private void consultarInformacionEnsamble(DefaultTableModel df) {
         try {
             crs = obj.consultarInformacionEnsambleM();
             row = new Object[names.length];
@@ -62,12 +76,13 @@ public class EN extends javax.swing.JFrame {
                     row[0] = crs.getString(1);//Numero de orden
                     row[1] = crs.getString(2);//C.T
                     row[2] = crs.getString(6);//Tipo de proyecto
+                    row[3] = crs.getString(7);//producto
                     cantidadTotatlUnidades += crs.getInt(2);
                     //...
                     agregarNoperariosProceso();
                     rep = 1;
                 } else {
-                    if (row[0].toString().equals(crs.getString(1))) {
+                    if (row[0].toString().equals(crs.getString(1)) && row[3].toString().equals(crs.getString(7))) {
                         //...
                         agregarNoperariosProceso();
                     } else {
@@ -79,6 +94,7 @@ public class EN extends javax.swing.JFrame {
                         row[0] = crs.getString(1);//Numero de orden
                         row[1] = crs.getString(2);//C.T
                         row[2] = crs.getString(6);//Tipo de proyecto
+                        row[3] = crs.getString(7);//producto
                         cantidadTotatlUnidades += crs.getInt(2);
                         //...
                         agregarNoperariosProceso();
@@ -88,6 +104,7 @@ public class EN extends javax.swing.JFrame {
             if (rep == 1) {
                 df.addRow(row);
                 totalProyectos++;
+                rep = 0;
             }
             vaciarVector();
             row[0] = totalProyectos;
@@ -95,10 +112,15 @@ public class EN extends javax.swing.JFrame {
             df.addRow(row);
             jTReporte.setModel(df);
             jTReporte.setDefaultRenderer(Object.class, new Tabla());
-
             ColumnasAOcultar();
+            row = null;
+            namesBeta = null;
+            nombreProcesos = null;
+            betaNames = "";
+            totalProyectos = 0;
+            cantidadTotatlUnidades = 0;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
@@ -107,7 +129,7 @@ public class EN extends javax.swing.JFrame {
             row[consultarPosicionProceso(crs.getString(3))] = crs.getString(4);//Numero de operarios
             row[consultarPosicionProceso(crs.getString(3)) - 1] = crs.getString(5);//Estado de proceso
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
@@ -134,8 +156,8 @@ public class EN extends javax.swing.JFrame {
     }
 
     private void ColumnasAOcultar() {
-        for (int i = 3; i <= namesBeta.length + namesBeta.length + 1; i++) {
-            if (i % 2 == 1) {
+        for (int i = 4; i <= namesBeta.length + namesBeta.length + 2; i++) {
+            if (i % 2 == 0) {
                 jTReporte.getColumnModel().getColumn(i).setMinWidth(0);
                 jTReporte.getColumnModel().getColumn(i).setMaxWidth(0);
                 jTReporte.getTableHeader().getColumnModel().getColumn(i).setMaxWidth(0);
@@ -339,5 +361,10 @@ public class EN extends javax.swing.JFrame {
     private javax.swing.JLabel jTtipo8;
     private javax.swing.JLabel jTtipo9;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

@@ -21,6 +21,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
      */
     public ReporteColtime() {
         initComponents();
+        this.setTitle("Informe de General de la empresa");
         this.setExtendedState(ReporteColtime.MAXIMIZED_BOTH);
         jTInforme.getTableHeader().setReorderingAllowed(false);
         reporte.start();

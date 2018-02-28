@@ -20,7 +20,7 @@ public class generarXlsx {
 
             WritableSheet sheet = woorBook.createSheet("Reporte General", 0);//se crea el archivo xls
             WritableFont h = new WritableFont(WritableFont.COURIER, 16, WritableFont.NO_BOLD);//Se da un formato al tipo de letra con el que se va a escribir sobre la hoja
-            h.setColour(Colour.BLUE);
+//            h.setColour(Colour.BLUE);
             WritableCellFormat hFormat = new WritableCellFormat(h);//Se da formato a cada letra
 
             int i = 0;

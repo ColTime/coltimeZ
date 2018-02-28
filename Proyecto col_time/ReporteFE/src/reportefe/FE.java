@@ -22,7 +22,7 @@ public class FE extends javax.swing.JFrame implements Runnable {
      */
     public FE() {
         initComponents();
-
+                this.setTitle("Informe de Formato Estandar");
         this.setExtendedState(FE.MAXIMIZED_BOTH);
         //Hilo de ejecución
         informe.start();

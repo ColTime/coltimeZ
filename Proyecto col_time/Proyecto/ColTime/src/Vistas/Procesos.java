@@ -11,7 +11,7 @@ public class Procesos extends javax.swing.JPanel {
     public Procesos() {
         initComponents();
         consultarProcesos();
-//        jLID.setVisible(false);
+        jLID.setVisible(false);
         tamañoColumnas(jTFE);
         tamañoColumnas(jTTE);
         tamañoColumnas(jTEN);
