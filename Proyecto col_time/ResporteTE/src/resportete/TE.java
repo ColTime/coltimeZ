@@ -1,6 +1,7 @@
 package resportete;
 
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 //import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ public class TE extends javax.swing.JFrame implements Runnable {
         if (unaSolaVez == 0) {
             initComponents();
             this.setTitle("Informe de Teclados");
+            this.setIconImage(new ImageIcon(getClass().getResource("/img/TE.png")).getImage());
             this.setExtendedState(TE.MAXIMIZED_BOTH);
             //...
             jTReporte.getTableHeader().setReorderingAllowed(false);

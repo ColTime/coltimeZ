@@ -5,9 +5,10 @@
  */
 package reportefe;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.ImageIcon;
 //import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,17 +25,18 @@ public class FE extends javax.swing.JFrame implements Runnable {
         if (soloUnaVez == 0) {
             initComponents();
             this.setTitle("Informe de Formato Estandar");
+            this.setIconImage(new ImageIcon(getClass().getResource("/img/FE.png")).getImage());
             this.setExtendedState(FE.MAXIMIZED_BOTH);
             //Hilo de ejecución
             informe.start();
             //...
             jTReporte.getTableHeader().setReorderingAllowed(false);
             //...
-            DisponibilidadConexion conexion=new DisponibilidadConexion();
-            Thread conc=new Thread(conexion);
+            DisponibilidadConexion conexion = new DisponibilidadConexion();
+            Thread conc = new Thread(conexion);
             conc.start();
         }
-        soloUnaVez=1;
+        soloUnaVez = 1;
     }
     //Variables
     CachedRowSet crs = null;

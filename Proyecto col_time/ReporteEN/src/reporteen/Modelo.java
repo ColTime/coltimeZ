@@ -39,7 +39,7 @@ public class Modelo {
             ps.close();
             con.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e);
+//            JOptionPane.showMessageDialog(null, "Erro: " + e);
         }
         return crs;
     }
@@ -62,7 +62,7 @@ public class Modelo {
             ps.close();
             con.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e);
+//            JOptionPane.showMessageDialog(null, "Erro: " + e);
         }
         return crs;
     }
