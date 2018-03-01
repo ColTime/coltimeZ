@@ -1,6 +1,5 @@
-package Controlador;
+package reportefe;
 
-import coltime.Menu;
 import java.awt.Color;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
@@ -8,15 +7,17 @@ import javax.swing.JOptionPane;
 
 public class DisponibilidadConexion implements Runnable {
 
+    Color green = new Color(0, 185, 0);
+
     @Override
     public void run() {
-        Menu vista = new Menu();
+        FE vista = new FE();
         while (true) {
-            Modelo.Conexion obj = new Modelo.Conexion();
+            Conexion obj = new Conexion();
             obj.establecerConexion();
             if (obj.getConexion() != null) {
                 vista.jLConexion.setText("Linea");
-                vista.jLConexion.setForeground(Color.GREEN);
+                vista.jLConexion.setForeground(green);
             } else {
                 vista.jLConexion.setText("Sin conexión");
                 vista.jLConexion.setForeground(Color.RED);

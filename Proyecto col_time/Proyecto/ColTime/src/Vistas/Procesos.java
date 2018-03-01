@@ -449,7 +449,12 @@ public class Procesos extends javax.swing.JPanel {
 
     private void cbAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAreaItemStateChanged
         if (!jTNombreProceso.getText().equals("") && cbArea.getSelectedIndex() != 0) {
-            btnGuardar.setEnabled(true);
+            if (cbArea.getSelectedIndex() == 1) {
+                btnGuardar.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Los procesos de FE no se pueden modificar por el momento...", "coming soon...", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                btnGuardar.setEnabled(true);
+            }
         } else {
             btnGuardar.setEnabled(false);
         }
@@ -527,11 +532,16 @@ public class Procesos extends javax.swing.JPanel {
         }
     }
     private void jTFEMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFEMousePressed
+        //Falta Hacer el mejoramiento a este modulo
         seleccionarProceso(jTFE);
-        btnUpdate.setEnabled(true);
+        btnUpdate.setEnabled(false);//True
         activarBotonesEliminacion(jTFE.getValueAt(jTFE.getSelectedRow(), 2).toString().equals("Activo") ? 1 : 0);
         estadoCampos(true);
         btnGuardar.setEnabled(false);
+        //...
+        //Los procesos de FE no se pueden modificar hasta realizar la proxima versión del sistema de información 
+        btnDelete.setEnabled(false);
+        btnActivar.setEnabled(false);
     }//GEN-LAST:event_jTFEMousePressed
 
     private void jTTEMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTEMousePressed

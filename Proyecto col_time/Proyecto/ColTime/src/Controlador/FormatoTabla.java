@@ -12,6 +12,10 @@ public class FormatoTabla extends DefaultTableCellRenderer {
     public FormatoTabla(int Colpatron) {
         this.columna_patron = Colpatron;
     }
+    Color orange = new Color(255, 168, 27);
+    Color green = new Color(116, 251, 83);
+    Color gray = new Color(176, 176, 176);
+    Color red = new Color(251, 83, 83);
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
@@ -23,26 +27,26 @@ public class FormatoTabla extends DefaultTableCellRenderer {
                 if (table.getValueAt(row, columna_patron).equals("Por iniciar")) {
                     setBackground(Color.white);
                 } else if (table.getValueAt(row, columna_patron).equals("Pausado")) {
-                    setBackground(new Color(255, 168, 27));//Orange
+                    setBackground(orange);//Orange
                 } else if (table.getValueAt(row, columna_patron).equals("Terminado")) {
-                    setBackground(new Color(116, 251, 83));//Green
+                    setBackground(green);//Green
                 } else if (table.getValueAt(row, columna_patron).equals("Ejecucion")) {
-                    setBackground(new Color(176, 176, 176));//Gray
+                    setBackground(gray);//Gray
                 }
             } else {
-                setBackground(Color.red);
+                setBackground(red);
             }
         } else {
             if (table.getValueAt(row, columna_patron).equals("Por iniciar")) {
                 setBackground(Color.white);
             } else if (table.getValueAt(row, columna_patron).equals("Pausado")) {
-                setBackground(new Color(255, 168, 27));//Orange
+                setBackground(orange);//Orange
             } else if (table.getValueAt(row, columna_patron).equals("Terminado")) {
-                setBackground(new Color(116, 251, 83));//Green
+                setBackground(green);//Green
             } else if (table.getValueAt(row, columna_patron).equals("Ejecucion")) {
-                setBackground(new Color(176, 176, 176));//Gray
+                setBackground(gray);//Gray
             } else if (table.getValueAt(row, columna_patron).equals("Parada")) {
-                setBackground(new Color(251, 83, 83));//Red
+                setBackground(red);//Red
             }
         }
 

@@ -8,23 +8,31 @@ import javax.swing.table.DefaultTableModel;
 public class EN extends javax.swing.JFrame implements Runnable {
 
     public EN() {
-        initComponents();
-        this.setExtendedState(EN.MAXIMIZED_BOTH);
         //...
-        this.setTitle("Informe de Ensamble");
-        jTReporte.getTableHeader().setReorderingAllowed(false);
-        hilo.start();
+        if (soloUnaVez == 0) {
+            initComponents();
+            this.setExtendedState(EN.MAXIMIZED_BOTH);
+            this.setTitle("Informe de Ensamble");
+            jTReporte.getTableHeader().setReorderingAllowed(false);
+            hilo = new Thread(this);
+            hilo.start();//Hilo de consulta de la información
+            //...
+            DisponibilidadConexion conexion = new DisponibilidadConexion();
+            Thread conec = new Thread(conexion);
+            conec.start();//Hilo de validación de linea al servidor.
+        }
+        soloUnaVez = 1;
     }
-    //Variables
+//Variables
     CachedRowSet crs = null;
     String names[] = null;
     static String namesBeta[] = null, nombreProcesos[] = null;
     String beta = "N°Orden;C.T;Tipo;producto", betaNames = "";
     Modelo obj = new Modelo();
-    Object row[] = null;//Proyectos
-    static int posProceso = 0, rep = 0, canColumnas = 0;
+    Object row[] = new Object[20];//Proyectos
+    static int posProceso = 0, rep = 0, canColumnas = 0, soloUnaVez = 0;
     int totalProyectos = 0, cantidadTotatlUnidades = 0;
-    Thread hilo = new Thread(this);
+    Thread hilo = null;
 
     //Metodos
     @Override
@@ -32,10 +40,11 @@ public class EN extends javax.swing.JFrame implements Runnable {
         try {
             while (true) {
                 consultarProcesosEncabezados();
+                jPanel1.updateUI();
                 Thread.sleep(5000);//5 segundos
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
 
@@ -68,6 +77,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
 
     private void consultarInformacionEnsamble(DefaultTableModel df) {
         try {
+            row = null;
             crs = obj.consultarInformacionEnsambleM();
             row = new Object[names.length];
             inicializarVector();//Vector en estado inicial
@@ -111,7 +121,9 @@ public class EN extends javax.swing.JFrame implements Runnable {
             row[1] = cantidadTotatlUnidades;
             df.addRow(row);
             jTReporte.setModel(df);
-            jTReporte.setDefaultRenderer(Object.class, new Tabla());
+            jTReporte
+                    .setDefaultRenderer(Object.class,
+                            new Tabla());
             ColumnasAOcultar();
             row = null;
             namesBeta = null;
@@ -186,6 +198,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
         jTtipo7 = new javax.swing.JLabel();
         jTtipo8 = new javax.swing.JLabel();
         jTtipo9 = new javax.swing.JLabel();
+        jLConexion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -260,6 +273,11 @@ public class EN extends javax.swing.JFrame implements Runnable {
         jTtipo9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (5).png"))); // NOI18N
         jTtipo9.setText("Normal");
 
+        jLConexion.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLConexion.setForeground(new java.awt.Color(0, 185, 0));
+        jLConexion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLConexion.setText("Linea");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -275,6 +293,8 @@ public class EN extends javax.swing.JFrame implements Runnable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTtipo7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
                         .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTtipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,7 +315,8 @@ public class EN extends javax.swing.JFrame implements Runnable {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTtipo4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTtipo5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTtipo3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLConexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jTtipo7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTtipo8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,16 +348,24 @@ public class EN extends javax.swing.JFrame implements Runnable {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -350,6 +379,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel jLConexion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTReporte;

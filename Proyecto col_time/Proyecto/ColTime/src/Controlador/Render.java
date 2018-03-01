@@ -9,13 +9,13 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class Render extends DefaultTableCellRenderer {
-    
+
     int columna_patron = 0;
-    
+
     public Render(int columnaPatron) {
         this.columna_patron = columnaPatron;
     }
-    
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         //Se da color a las filas 
@@ -36,7 +36,7 @@ public class Render extends DefaultTableCellRenderer {
             JButton btn = (JButton) value;
             //Sabe que boton se activa y cual no
             if (btn.getText().equals("Tiempo")) {
-                if (table.getValueAt(row, columna_patron).equals("Terminado")) {
+                if (table.getValueAt(row, columna_patron).equals("Terminado") || table.getValueAt(row, columna_patron).equals("Pausado")) {
                     btn.setEnabled(false);
                     btn.setActionCommand("2");
                 } else if (table.getValueAt(row, columna_patron).equals("Ejecucion")) {
@@ -52,7 +52,7 @@ public class Render extends DefaultTableCellRenderer {
                     btn.setActionCommand("1");//1
                 }
             }
-            
+
             if (isSelected) {
                 btn.setForeground(table.getSelectionForeground());
                 btn.setBackground(table.getSelectionBackground());
@@ -62,14 +62,14 @@ public class Render extends DefaultTableCellRenderer {
             }
             return btn;
         }
-        
+
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
         return this;
     }
-    
+
     @Override
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

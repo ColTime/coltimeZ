@@ -632,7 +632,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                 obj.Notificacion1.setForeground(Color.GRAY);
                                 obj.btnTomaTiempos.setVisible(false);//Es false
                                 obj.btnDelete.setEnabled(false);
-                                obj.jRParada.setEnabled(false);
+                                obj.jRParada.setEnabled(true);
                             }
                             //Estado en ejecución
                             obj.jREjecucion.setSelected(true);

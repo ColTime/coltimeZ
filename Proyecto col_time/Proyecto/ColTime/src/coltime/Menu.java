@@ -73,11 +73,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         puertosSerialDisponibles();
         //fin de la busqueda de puertos-----------------------------------------
         //Validación continua de la conexion a la base de datos-----------------
-        DisponibilidadConexion dispo = new DisponibilidadConexion();//Creo que esta es la falla de que el ejecutable no funcione correctamente.
+        DisponibilidadConexion dispo = new DisponibilidadConexion();
         Thread conec = new Thread(dispo);
         conec.start();
-        //??????????????????????????????????????????????????????????????????????
-//        JOptionPane.showMessageDialog(null, "El contrustructor del menu se ejecuto correcta");
         //fin de la calidacion a la base de datos-------------------------------
         //Toma de tiempos automatica--------------------------------------------
         if (cargo == 2 || cargo == 3) {
