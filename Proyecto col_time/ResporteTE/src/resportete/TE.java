@@ -44,6 +44,7 @@ public class TE extends javax.swing.JFrame implements Runnable {
             while (true) {
                 consultarProcesosEncabezados();
                 jPanel1.updateUI();
+                System.gc();//Garbaje collector
                 Thread.sleep(5000);//5 segundos
             }
         } catch (Exception e) {

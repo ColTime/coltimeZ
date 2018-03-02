@@ -19,49 +19,58 @@ public class MyRenderEN extends JTable {
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component cell = super.prepareRenderer(renderer, row, column); //To change body of generated methods, choose Tools | Templates.
 
-        if (column != 1 && column != 0 && column >= 2) {
-            if (column % 2 == 0) {//pares son los sub_procesos *******
-                switch (getValueAt(row, column).toString()) {
-                    case "1"://Por iniciar
-                    case "":
-                        cell.setBackground(Color.WHITE);//white
-                        break;
-                    case "2"://Pausado
-                        cell.setBackground(red);//Red
-                        break;
-                    case "3"://Terminado
-                        cell.setBackground(green);//green
-                        break;
-                    case "4"://Ejecución
-                        cell.setBackground(orange);//Orange
-                        break;
-                    case "*******":
-                        cell.setBackground(new Color(34, 137, 254));//Orange
-                        break;
-                }
-            }
-        } else {
-            if (column == 0) {
-                switch (getValueAt(row, 2).toString()) {
-                    case "Normal":
-                        cell.setBackground(Color.WHITE);//white
-                        break;
-                    case "Quick":
-                        cell.setBackground(blueligth);//Blueligth
-                        break;
-                    case "RQT":
-                        cell.setBackground(Color.PINK);//Pink
-                        break;
-                    default:
-                        cell.setBackground(Color.WHITE);//white
-                        break;
+//        if (column % 2 == 1) {//Impares
+//            //Colores por defecto
+//            cell.setBackground(Color.WHITE);
+//            cell.setForeground(Color.BLACK);
+//        } else {
+            if (column != 1 && column != 0 && column >= 2) {
+                if (column % 2 == 1) {//pares son los sub_procesos *******
+                    switch (getValueAt(row, column-1).toString()) {
+                        case "1"://Por iniciar
+                        case "":
+                            cell.setBackground(Color.WHITE);//white
+                            break;
+                        case "2"://Pausado
+                            cell.setBackground(red);//Red
+                            break;
+                        case "3"://Terminado
+                            cell.setBackground(green);//green
+                            break;
+                        case "4"://Ejecución
+                            cell.setBackground(orange);//Orange
+                            break;
+                        case "*******":
+                            cell.setBackground(new Color(34, 137, 254));//blue
+                            break;
+                        default:
+                            cell.setBackground(Color.WHITE);//white
+                            break;
+                    }
                 }
             } else {
-                //Colores por defecto
-                cell.setBackground(Color.white);
-                cell.setForeground(Color.BLACK);
+                if (column == 0) {
+                    switch (getValueAt(row, 2).toString()) {
+                        case "Normal":
+                            cell.setBackground(Color.WHITE);//white
+                            break;
+                        case "Quick":
+                            cell.setBackground(blueligth);//Blueligth
+                            break;
+                        case "RQT":
+                            cell.setBackground(Color.PINK);//Pink
+                            break;
+                        default:
+                            cell.setBackground(Color.WHITE);//white
+                            break;
+                    }
+                } else {
+                    //Colores por defecto
+                    cell.setBackground(Color.white);
+                    cell.setForeground(Color.BLACK);
+                }
             }
-        }
+//        }
 
         return cell;
     }

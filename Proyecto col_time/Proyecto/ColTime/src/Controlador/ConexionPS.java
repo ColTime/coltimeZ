@@ -42,7 +42,7 @@ public class ConexionPS {
                     puerto = myCPI.open("Puerto Serial Operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
                     //
-                    mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                    mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);//Configuracion del puerto serial: Velocidad de bits, Data bits, stopbits y Paridad
                     //
                     mySC = new Scanner(mySP.getInputStream());//Datos de entrada al puerto
                     obj.myPS = new PrintStream(mySP.getOutputStream());//Datos de salia del puerto

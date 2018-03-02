@@ -280,6 +280,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         jPMenu.add(jBActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 10, 20, 20));
 
         jSugerencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-help-3-16.png"))); // NOI18N
+        jSugerencia.setToolTipText("");
         jPMenu.add(jSugerencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
 
         Contenido.setBackground(new java.awt.Color(255, 255, 255));
@@ -405,6 +406,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
 //String rutaime = System.getProperty("user.dir");
 //Cambiar el tamaño de la imagenes para el tooltip
 //Realizar una imagen que contenga todos los iconos de los estados. Esta pendiente.
+//        ImageIcon ico = new ImageIcon();
+//        Icon image = new ImageIcon(ico.getImage().getScaledInstance(496, 197, Image.SECTION));
         jSugerencia.setToolTipText("<html><h1>Estados</h1><br><div style='background-color: white;'><img src=" + getClass().getResource("/produccion/EstadosProyectos.jpg") + "></div><br></html>");
     }
 

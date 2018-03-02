@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 //import javax.swing.JOptionPane;
 
 public class EN extends javax.swing.JFrame implements Runnable {
-    
+
     public EN() {
         //...
         if (soloUnaVez == 0) {
@@ -43,13 +43,14 @@ public class EN extends javax.swing.JFrame implements Runnable {
             while (true) {
                 consultarProcesosEncabezados();
                 jPanel1.updateUI();
+                System.gc();//Garbaje collector
                 Thread.sleep(5000);//5 segundos
             }
         } catch (Exception e) {
 //            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
-    
+
     private void consultarProcesosEncabezados() {
         try {
             String nuevaCadena = "";
@@ -76,7 +77,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
 //            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
-    
+
     private void consultarInformacionEnsamble(DefaultTableModel df) {
         try {
             row = null;
@@ -123,9 +124,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
             row[1] = cantidadTotatlUnidades;
             df.addRow(row);
             jTReporte.setModel(df);
-            jTReporte
-                    .setDefaultRenderer(Object.class,
-                            new Tabla());
+            jTReporte.setDefaultRenderer(Object.class, new Tabla());
             ColumnasAOcultar();
             row = null;
             namesBeta = null;
@@ -137,7 +136,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
 //            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
-    
+
     private void agregarNoperariosProceso() {
         try {
             row[consultarPosicionProceso(crs.getString(3))] = crs.getString(4);//Numero de operarios
@@ -146,19 +145,19 @@ public class EN extends javax.swing.JFrame implements Runnable {
 //            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }
-    
+
     private void inicializarVector() {
         for (int i = 0; i < row.length; i++) {
             row[i] = 0;
         }
     }
-    
+
     private void vaciarVector() {
         for (int i = 0; i < row.length; i++) {
             row[i] = "*******";
         }
     }
-    
+
     private int consultarPosicionProceso(String nombreProceso) {
         for (int i = 2; i <= names.length; i++) {
             if (names[i].equals(nombreProceso)) {
@@ -168,7 +167,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
         }
         return posProceso;
     }
-    
+
     private void ColumnasAOcultar() {
         for (int i = 4; i <= namesBeta.length + namesBeta.length + 2; i++) {
             if (i % 2 == 0) {
@@ -185,7 +184,7 @@ public class EN extends javax.swing.JFrame implements Runnable {
         jTReporte.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
         jTReporte.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -350,21 +349,21 @@ public class EN extends javax.swing.JFrame implements Runnable {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(EN.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(EN.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(EN.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(EN.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -398,5 +397,5 @@ public class EN extends javax.swing.JFrame implements Runnable {
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

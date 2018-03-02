@@ -19,11 +19,14 @@ public class MyRenderEN extends JTable {
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component cell = super.prepareRenderer(renderer, row, column); //To change body of generated methods, choose Tools | Templates.
 
+//        cell.setBackground(Color.white);
+//        cell.setForeground(Color.BLACK);
         if (column != 1 && column != 0 && column >= 2) {
             if (column % 2 == 0) {//pares son los sub_procesos *******
-                switch (getValueAt(row, column).toString()) {
+                switch (getValueAt(row, column-1).toString()) {
                     case "1"://Por iniciar
                     case "":
+                    case "0":
                         cell.setBackground(Color.WHITE);//white
                         break;
                     case "2"://Pausado
