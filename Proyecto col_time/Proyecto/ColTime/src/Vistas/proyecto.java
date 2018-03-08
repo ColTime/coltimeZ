@@ -693,7 +693,7 @@ public class proyecto extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel10.setText("Fecha de entraga:");
+        jLabel10.setText("Fecha de entrega:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 51, 51));

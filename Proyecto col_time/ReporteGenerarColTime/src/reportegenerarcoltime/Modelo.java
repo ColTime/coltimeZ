@@ -1,11 +1,12 @@
 package reportegenerarcoltime;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 
 public class Modelo {
 
@@ -31,7 +32,7 @@ public class Modelo {
             conexion.cerrar(rs);
             conexion.destruir();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         return crs;
     }
@@ -73,7 +74,7 @@ public class Modelo {
             conexion.cerrar(rs);
             conexion.destruir();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         return crs;
     }

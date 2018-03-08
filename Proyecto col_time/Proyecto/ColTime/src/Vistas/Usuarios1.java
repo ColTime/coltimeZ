@@ -817,10 +817,10 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        jTUsuario.getColumnModel().getColumn(6).setMinWidth(61);
-        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(61);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(61);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(61);
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(65);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(65);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(65);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(65);
         jTUsuario.getColumnModel().getColumn(7).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);

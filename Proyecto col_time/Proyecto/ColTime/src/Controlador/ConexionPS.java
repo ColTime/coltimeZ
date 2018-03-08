@@ -23,6 +23,7 @@ public class ConexionPS {
 
     int conexion = 0;
 //Falta validar que el puerto este abierto y disponible para poder mandar informacion, y de no ser asì se va a notificar al usuario que no puede realizar la toma de tiempo correspondiente a si àrea de producciòn.
+//Composición del código: orden;nDetalle;Negocio;IDlector;cantidadProductos;cantidadOperarios
 
     public void enlacePuertos(Menu menu) {//Ese metodo lo utilizan los roles de encargados de FE, EN y TE
         Menu obj = new Menu();
@@ -39,10 +40,10 @@ public class ConexionPS {
                 existePuerto = 1;
                 myCPI = (CommPortIdentifier) commports.nextElement();
                 if (myCPI.getName().equals(obj.puertoActual)) {
-                    puerto = myCPI.open("Puerto Serial Operario", 100);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
+                    puerto = myCPI.open("Puerto Serial Operario", 1000);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
-                    //
-                    mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);//Configuracion del puerto serial: Velocidad de bits, Data bits, stopbits y Paridad
+                    //                       Baudios           Data bits               stopBists                  Parity
+                    mySP.setSerialPortParams(19200, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);//Configuracion del puerto serial: Velocidad de bits, Data bits, stopbits y Paridad
                     //
                     mySC = new Scanner(mySP.getInputStream());//Datos de entrada al puerto
                     obj.myPS = new PrintStream(mySP.getOutputStream());//Datos de salia del puerto
@@ -63,17 +64,23 @@ public class ConexionPS {
                             break;
                         } else {
                             //Procedimiento de toma de tiempo
+                            //La trama es:"N°Orden;DetalleSistema;Área;LectorID;Cantidad;N°Operarios".
                             valorBeta = mySC.next();//Valor de entrada
-
-//                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
-                            if (Character.isDigit(valorBeta.charAt(0))) {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
-                                //...
-                                obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
-                                //--------------------------------------------------
+                            //...
+                            System.out.println(valorBeta.split(";").length+"/"+valorBeta);
+                            if (valorBeta.split(";").length == 6) {//El codigo de operario siempre va a contener una longitud del vecto de 6 espaciós en la memoria EEPROM
+                                //                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
+                                if (Character.isDigit(valorBeta.charAt(1))) {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
+                                    //...
+                                    obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
+                                    //--------------------------------------------------
 //                            obj.myPS.print(mensaje);//Valor de dalida
 //                            mensaje = null;
-                                System.gc();//Garbage collector.
+                                    //Limpieza de la memoria Volatil
+                                    System.gc();//Garbage collector.  
+                                }
                             }
+                            //...
                         }
                         if (!menu.diponible) {
                             break;

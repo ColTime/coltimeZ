@@ -5,6 +5,8 @@ import coltime.Menu;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+//import gnu.io.SerialPortEvent;
+//import gnu.io.SerialPortEventListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
@@ -68,10 +70,10 @@ public class ProyectoQR implements Runnable {
                 myCPI = (CommPortIdentifier) commports.nextElement();
                 if (myCPI.getName().equals(menu.puertoActual)) {//Localización del puerto 
                     puertoProyecto = 1;
-                    puerto = myCPI.open("Puerto serial Proyecto", 100);//Apertura y nombre del puerto
+                    puerto = myCPI.open("Puerto serial Proyecto", 1000);//Apertura Time y nombre del puerto
                     SerialPort mySP = (SerialPort) puerto;
                     //Configuracion del puerto
-                    mySP.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                    mySP.setSerialPortParams(19200, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
                     mySC = new Scanner(mySP.getInputStream());//Datos de entrada al puerto
                     //----------------------------------------------------------
                     while (true) {
@@ -79,6 +81,7 @@ public class ProyectoQR implements Runnable {
                             mySC.close();
                             mySC = null;
                             mySC = new Scanner(mySP.getInputStream());
+//                            Thread.sleep(4);
                             if (!this.pro.disponibilidad) {//Si ya no se va a esperar nada del puerto se va a cerrar
                                 puerto.close();
                                 break;
@@ -88,13 +91,21 @@ public class ProyectoQR implements Runnable {
                             break;
                         } else {
                             valor = mySC.next();
+//                            String sub = valor.substring(0, 1);
                             System.out.println(valor);
-                            if (Character.isDigit(valor.charAt(0))) {
+
+//                            String cadenaCompleata = "";
+//                            cadenaCompleata = cadenaCompleata + valor + "\n";
+//                            System.out.println(cadenaCompleata);
+
+//                            System.out.println(valor.split(";").length + " " + valor);
+                            if (Character.isDigit(valor.charAt(1))) {
                                 //Cerrar puerto
                                 puerto.close();
                                 puerto = null;
                                 break;//Salida del loop
                             }
+
                         }
                     }
                     //----------------------------------------------------------
@@ -105,7 +116,7 @@ public class ProyectoQR implements Runnable {
             }
         } catch (Exception e) {
             //Error al leer por el puerto serial.
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+//            JOptionPane.showMessageDialog(null, "Error: " + e);
             puerto.close();
             puerto = null;
         }
@@ -116,20 +127,33 @@ public class ProyectoQR implements Runnable {
         //Registro de proyecto mediante lectura de codigo QR (Actual)
         //29359;Micro Hom Cali S.A.S;Control Planta;FE;Normal;15/01/2018;null;null;null;null;25;TH;SI;SI;null;null;NO;NO;null;null;null;null;null;null;null;null
         String nombreCliente = "";
+//      String valor[] = null;
         try {
-//            String valor[] = QRProyecto.split("/");
-////            String cadena = "";
-////            for (int i = 1; i <= 4; i++) {
-////                if (i == 4) {
-////                    cadena = cadena + valor[i];
-////                } else {
-////                    cadena = cadena + valor[i] + "/";
-////                }
-////            }
-
-            String InformacionProyecto[] = QRProyecto.split(";");
-            System.out.println(InformacionProyecto.length);
-            if (InformacionProyecto.length == 26) {
+//            String cadena = "";
+//            if (valor.length == 26) {
+//                for (int i = 1; i <= 4; i++) {
+//                    if (i == 4) {
+//                        cadena = cadena + valor[i];
+//                    } else {
+//                        cadena = cadena + valor[i] + "/";
+//                    }
+//                }
+//            }
+            //...
+//            System.out.println(QRProyecto.split(";").length);
+            //...
+            if (QRProyecto.split(";").length == 26) {
+//                valor = QRProyecto.split("/");//Quita el primer "/" de la trama ingresada
+//                //...
+//                for (int i = 1; i <= 4; i++) {
+//                    if (i == 4) {
+//                        cadena = cadena + valor[i];
+//                    } else {
+//                        cadena = cadena + valor[i] + "/";
+//                    }
+//                }
+                //Envio de información...
+                String InformacionProyecto[] = QRProyecto.split(";");
                 obj.jTNorden.setText(InformacionProyecto[0]);//Numero de orden
                 String infoC[] = InformacionProyecto[1].split("-");
                 for (int i = 0; i < infoC.length; i++) {
@@ -243,5 +267,13 @@ public class ProyectoQR implements Runnable {
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
+//GET /29359;Micro-Hom-Cali-S.A.S;Control-Planta;FE/TE;Normal;15/02/2018;2;null;null;null;null;null;no;no;null;null;no;no;null;null;null;null;null;null;null;null HTTP/1.1
+//.Host: 192.168.4.1
+//.Connection: keep-alive
+//.Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+//.User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; SM-G313ML Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36
+//.Accept-Encoding: gzip,deflate
+//.Accept-Language: es-US,en-US;q=0.8
+//.X-Requested-With: appinventor.ai_Adimaro_montoya.Manucaptura_WIFI
 
 }
