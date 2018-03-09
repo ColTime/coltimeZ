@@ -750,7 +750,7 @@ public class proyecto extends javax.swing.JPanel {
 
         jREjecucion.setBackground(new java.awt.Color(255, 255, 255));
         ParadasOEjecucion.add(jREjecucion);
-        jREjecucion.setText("Ejecucion");
+        jREjecucion.setText("Ejecución");
         jREjecucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jREjecucionActionPerformed(evt);

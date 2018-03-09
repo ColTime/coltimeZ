@@ -46,7 +46,7 @@ public class ProyectoQR implements Runnable {
                 abierto = 0;
             } else {
                 //No se pudo establecer la conexión con el puerto COM, desea cambiarlo o volver a intentar? 
-                if (JOptionPane.showOptionDialog(null, "No se pudo establecer la conexión con el puerto COM, ¿dese volver a intentarlo?",
+                if (JOptionPane.showOptionDialog(null, "No se pudo establecer la conexión con el puerto COM, ¿desea volver a intentarlo?",
                         "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                         new Object[]{"SI", "NO"}, "SI") == 0) {

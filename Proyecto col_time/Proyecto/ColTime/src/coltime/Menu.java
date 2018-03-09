@@ -539,7 +539,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         FTerminadosHoy.setText("0");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel13.setText("P. Ejecucion:");
+        jLabel13.setText("P. Ejecución:");
 
         FEjecucion.setText("0");
 
@@ -641,7 +641,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         TEjecucion.setText("0");
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel22.setText("P. Ejecucion:");
+        jLabel22.setText("P. Ejecución:");
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel27.setText("P. por iniciar:");
@@ -741,7 +741,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         EEjecucion.setText("0");
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel24.setText("P. Ejecucion:");
+        jLabel24.setText("P. Ejecución:");
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel29.setText("P. por iniciar:");
@@ -840,7 +840,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         Ajecucion.setText("0");
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel25.setText("P. Ejecucion:");
+        jLabel25.setText("P. Ejecución:");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1348,7 +1348,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         int seleccion = JOptionPane.showOptionDialog(null, "¿Qué reporte desea generar?",
                 "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
-                new Object[]{"Tiempos de producción", "General"}, "");
+                new Object[]{"Coming soon...    ", "General"}, "");
         if (seleccion != -1) {
             if (seleccion == 0) {
                 //Este reporte se realizo de otra forma, por ende ya no es necesario esta opción en el sistema. 
@@ -1366,12 +1366,14 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 File guardar = Chocer.getSelectedFile();
                 //Generar archivo .xlsx
                 generarXlsx excel = new generarXlsx();
-                if (excel.generarExcel(crs, String.valueOf(guardar))) {//Información y ruta de guardado.
-                    //Documento creado correctamente
-                    new rojerusan.RSNotifyAnimated("Listo!", "El reporte General de producción fue creado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
-                } else {
-                    //Error al crear el documento
-                    new rojerusan.RSNotifyAnimated("¡Error!", "No puedo crear el reporte General.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                if (guardar != null) {
+                    if (excel.generarExcel(crs, String.valueOf(guardar))) {//Información y ruta de guardado.
+                        //Documento creado correctamente
+                        new rojerusan.RSNotifyAnimated("Listo!", "El reporte General de producción fue creado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    } else {
+                        //Error al crear el documento
+                        new rojerusan.RSNotifyAnimated("¡Error!", "No puedo crear el reporte General.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.ERROR).setVisible(true);
+                    }
                 }
             }
         }

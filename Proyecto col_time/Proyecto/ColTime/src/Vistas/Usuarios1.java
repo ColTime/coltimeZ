@@ -331,7 +331,7 @@ public class Usuarios1 extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel7.setText("Numero de documento:");
+        jLabel7.setText("Número de documento:");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(128, 128, 131));
@@ -362,7 +362,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         });
 
         cBCargoB.setForeground(new java.awt.Color(102, 102, 102));
-        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccióne...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador" }));
+        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador" }));
         cBCargoB.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargoB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cBCargoB.addItemListener(new java.awt.event.ItemListener() {
@@ -442,7 +442,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nuero de documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado", "recuperaccion"
+                "Número de documento", "Tipo documento", "Nombres", "Apellidos", "Cargo", "Imagen", "Estado", "recuperaccion"
             }
         ));
         jTUsuario.setFillsViewportHeight(true);
