@@ -1154,7 +1154,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         } else {
             bp.isFocusableWindow();
         }
-
     }//GEN-LAST:event_btn4ActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed

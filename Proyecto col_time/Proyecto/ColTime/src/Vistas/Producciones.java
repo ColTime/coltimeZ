@@ -31,8 +31,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     public Producciones() {
 
     }
-
-    int posX = 0;
+    int posX = 0,rep=0;
     int posY = 0;
     int panel = 0;
     CachedRowSet crs = null;
@@ -40,6 +39,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     static int negocio = 0, cargo = 0;
     public Color cor = new Color(17, 161, 255);
     public Color corF = new Color(63, 179, 255);
+    ProduccionArea obj = new ProduccionArea();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -412,47 +412,37 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     }
 
     public void cambiarPanel(int op) {
+        reinicializarVariables();
+        String nombreArea = "";
         switch (op) {
             case 1:
-                //Vista de formato estandar
-                if (!Contenido.getComponent(0).getName().equals("FE")) {
-                    ProduccionFE obj = new ProduccionFE();
-                    obj.setName("FE");
-                    new CambiaPanel(Contenido, obj);
-                }
-                reinicializarVariables();
+                nombreArea = "FE";
                 negocio = 1;
-                agregarProyectoEnTabla(1, "", "", "", "");
                 break;
             case 2:
                 //Vista de teclados
-                if (!Contenido.getComponent(0).getName().equals("TE")) {
-                    new CambiaPanel(Contenido, new ProduccionTE());
-                }
-                reinicializarVariables();
+                nombreArea = "TE";
                 negocio = 2;
-                agregarProyectoEnTabla(2, "", "", "", "");
                 break;
             case 3:
                 //Vista de Ensamble
-                if (!Contenido.getComponent(0).getName().equals("IN")) {
-                    new CambiaPanel(Contenido, new ProduccionEN());
-                }
-                reinicializarVariables();
+                nombreArea = "EN";
                 negocio = 3;
-                agregarProyectoEnTabla(3, "", "", "", "");
                 break;
             case 4:
                 //Vista de almacen
-                if (!Contenido.getComponent(0).getName().equals("Almacen")) {
-                    ProduccionFE obj = new ProduccionFE();
-                    obj.setName("Almacen");
-                    new CambiaPanel(Contenido, obj);
-                }
-                reinicializarVariables();
+                nombreArea = "Almacen";
                 negocio = 4;
-                agregarProyectoEnTabla(4, "", "", "", "");
                 break;
+        }
+        //Vistas de la produccion de Areas 
+        if (!Contenido.getComponent(0).getName().equals(nombreArea)) {
+            obj.setName(nombreArea);
+            agregarProyectoEnTabla(negocio, "", "", "", "");
+            if(rep==0){
+                new CambiaPanel(Contenido, obj);//Actualiza
+                rep=1;
+            }
         }
         jTNombre.setText("");
         jTOrden.setText("");
@@ -506,7 +496,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             case "TE":
                 cambiarPanel(2);
                 break;
-            case "IN":
+            case "EN":
                 cambiarPanel(3);
                 break;
             case "Almacen":
@@ -630,26 +620,23 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             //Se realiza la consulta para traer en numero de orden de todos los proyectos registrados
             Proyecto obj = new Proyecto();
             crs = obj.proyectosNegocio(negocio, orden, cliente, proyecto, tipo);
-            reinicializarVariables();
+//            reinicializarVariables();
             //Se valida cual de los tres contenedores se valida primero
-            switch (negocio) {
-                case 4:
-                case 1:
-                    ProduccionFE.contenidoFE.removeAll();
-                    ProduccionFE.contenidoFE.updateUI();
-                    ProduccionFE.contenidoFE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
-                    break;
-                case 2:
-                    ProduccionTE.contenidoTE.removeAll();
-                    ProduccionTE.contenidoTE.updateUI();
-                    ProduccionTE.contenidoTE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
-                    break;
-                case 3:
-                    ProduccionEN.contenidoEN.removeAll();
-                    ProduccionEN.contenidoEN.updateUI();
-                    ProduccionEN.contenidoEN.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
-                    break;
-            }
+//            switch (negocio) {
+//                case 4:
+//                case 1:
+//                    ProduccionArea.contenido.setName("FE");
+//                    break;
+//                case 2:
+//                    ProduccionArea.contenido.setName("TE");
+//                    break;
+//                case 3:
+//                    ProduccionArea.contenido.setName("EN");
+//                    break;
+//            }
+            ProduccionArea.contenido.removeAll();
+            ProduccionArea.contenido.updateUI();
+            ProduccionArea.contenido.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
             while (crs.next()) {
                 JButton jp = new JButton(String.valueOf(crs.getInt(1)));
                 jp.setBounds(0 + x, 0 + y, 98, 98);
@@ -747,39 +734,22 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                     x = 0;
                     filas++;
                     if (cantidad == unidad * conta) {
-                        switch (negocio) {
-                            case 1:
-                                ProduccionFE.contenidoFE.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530 + 400));
-                                break;
-                            case 2:
-                                ProduccionTE.contenidoTE.setPreferredSize(new Dimension(1128, /*ProduccionTE.contenidoTE.getHeight()->*/ 530 + 400));
-                                break;
-                            case 3:
-                                ProduccionEN.contenidoEN.setPreferredSize(new Dimension(1128, /*ProduccionEN.contenidoEN.getHeight()*/ 530 + 400));
-                                break;
-                        }
+                        //---
+                        ProduccionArea.contenido.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530 + 400));
+                        //---
                         conta += 5;
                     }
                     this.Contenido.updateUI();
                 }
                 jp.setBackground(Color.WHITE);
-                switch (negocio) {
-                    case 1:
-                    case 4:
-                        ProduccionFE.contenidoFE.add(jp);
-                        ProduccionFE.contenidoFE.updateUI();
-                        break;
-                    case 2:
-                        ProduccionTE.contenidoTE.add(jp);
-                        ProduccionTE.contenidoTE.updateUI();
-                        break;
-                    case 3:
-                        ProduccionEN.contenidoEN.add(jp);
-                        ProduccionEN.contenidoEN.updateUI();
-                        break;
-                }
+                //...
+                ProduccionArea.contenido.add(jp);
+                //...
                 jp = null;
             }
+            //...      
+            ProduccionArea.contenido.updateUI();
+            //...
             crs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error!!! " + e);

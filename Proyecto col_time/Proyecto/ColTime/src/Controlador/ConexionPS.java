@@ -67,15 +67,13 @@ public class ConexionPS {
                             //La trama es:"N°Orden;DetalleSistema;Área;LectorID;Cantidad;N°Operarios".
                             valorBeta = mySC.next();//Valor de entrada
                             //...
-                            System.out.println(valorBeta.split(";").length+"/"+valorBeta);
+//                            System.out.println(valorBeta.split(";").length+"/"+valorBeta);
                             if (valorBeta.split(";").length == 6) {//El codigo de operario siempre va a contener una longitud del vecto de 6 espaciós en la memoria EEPROM
                                 //                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
                                 if (Character.isDigit(valorBeta.charAt(1))) {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
                                     //...
                                     obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
                                     //--------------------------------------------------
-//                            obj.myPS.print(mensaje);//Valor de dalida
-//                            mensaje = null;
                                     //Limpieza de la memoria Volatil
                                     System.gc();//Garbage collector.  
                                 }
@@ -106,16 +104,6 @@ public class ConexionPS {
                     Usuario reg = new Usuario();
                     reg.RegistrarModificarPuertoSerialUsuario(obj.jDocumento.getText(), dig.toString());
                     obj.puertoActual = obj.ConsultarPueroGurdado(obj.jDocumento.getText());
-
-//                    menu.jMenu4.setEnabled(false);
-//                    Component botones[] = menu.jMenu4.getComponents();
-//                    for (int i = 0; i < botones.length; i++) {
-//                        if (botones[i].getName().equals(menu.puertoActual)) {
-//                            JRadioButtonMenuItem opPuerto = (JRadioButtonMenuItem) botones[i];
-//                            opPuerto.setSelected(true);
-//                            break;
-//                        }
-//                    }
                 }
             }
             //

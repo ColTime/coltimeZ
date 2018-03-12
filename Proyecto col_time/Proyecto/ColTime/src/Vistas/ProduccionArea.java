@@ -1,42 +1,44 @@
 
 package Vistas;
 
-public class ProduccionTE extends javax.swing.JPanel {
+
+public class ProduccionArea extends javax.swing.JPanel {
 
 
-    public ProduccionTE() {
+    public ProduccionArea() {
         initComponents();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        contenidoTE = new javax.swing.JPanel();
+        contenido = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        setName("TE"); // NOI18N
+        setName("FE"); // NOI18N
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1094, 300));
 
-        contenidoTE.setBackground(new java.awt.Color(255, 255, 255));
-        contenidoTE.setMaximumSize(new java.awt.Dimension(40000, 40000));
-        contenidoTE.setPreferredSize(new java.awt.Dimension(0, 500));
+        contenido.setBackground(new java.awt.Color(255, 255, 255));
+        contenido.setMaximumSize(new java.awt.Dimension(40000, 40000));
+        contenido.setName("FE"); // NOI18N
+        contenido.setPreferredSize(new java.awt.Dimension(0, 500));
 
-        javax.swing.GroupLayout contenidoTELayout = new javax.swing.GroupLayout(contenidoTE);
-        contenidoTE.setLayout(contenidoTELayout);
-        contenidoTELayout.setHorizontalGroup(
-            contenidoTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
+        contenido.setLayout(contenidoLayout);
+        contenidoLayout.setHorizontalGroup(
+            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        contenidoTELayout.setVerticalGroup(
-            contenidoTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        contenidoLayout.setVerticalGroup(
+            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 529, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(contenidoTE);
+        jScrollPane1.setViewportView(contenido);
+        contenido.getAccessibleContext().setAccessibleParent(contenido);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,7 +60,7 @@ public class ProduccionTE extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JPanel contenidoTE;
+    public static javax.swing.JPanel contenido;
     public static javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
  @Override
