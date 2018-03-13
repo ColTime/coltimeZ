@@ -39,7 +39,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     static int negocio = 0, cargo = 0;
     public Color cor = new Color(17, 161, 255);
     public Color corF = new Color(63, 179, 255);
-    ProduccionArea obj = new ProduccionArea();
+    private static ProduccionArea obj = new ProduccionArea();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
