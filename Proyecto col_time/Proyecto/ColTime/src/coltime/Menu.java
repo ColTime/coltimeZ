@@ -1297,10 +1297,8 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                     guardarImagenMenuUsuario();//Guarda la imagen del usuario
                     sesion(0, jDocumento.getText());//Cierra el estado del ususario
                     Thread.sleep(290);
+                    System.gc();//Garbaje collector #4
                     new Login().setVisible(true);
-//                    if (cargo == 2 || cargo == 3) {
-//                        tomaTiempo.destroy();
-//                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Error: " + e);
                 }

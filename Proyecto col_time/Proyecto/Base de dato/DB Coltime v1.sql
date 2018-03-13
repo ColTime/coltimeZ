@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-03-2018 a las 17:52:09
+-- Tiempo de generación: 13-03-2018 a las 17:08:35
 -- Versión del servidor: 10.1.29-MariaDB
 -- Versión de PHP: 7.2.0
 
@@ -1839,17 +1839,6 @@ END IF;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pruebas` (IN `nov` INT(250))  NO SQL
-BEGIN
-
-IF nov='' THEN
-
-SELECT 'Hola mundo';
-
-END IF;
-
-END$$
-
 --
 -- Funciones
 --
@@ -2001,10 +1990,10 @@ END$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `FU_RegistrarDetalleProyecto` (`orden` INT(11), `tipoNegocio` VARCHAR(20), `cantidad` VARCHAR(6), `negocio` VARCHAR(20), `estado` TINYINT(1), `material` VARCHAR(6), `pnc` TINYINT(1), `ubic` VARCHAR(30)) RETURNS TINYINT(1) NO SQL
 BEGIN
 IF material != '' THEN
-INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`material`,`PNC`,`ubicacion`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,material,pnc,ubic);
+INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`material`,`PNC`,`ubicacion`,`tiempo_total`,`Total_timepo_Unidad`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,material,pnc,ubic,'00:00','00:00');
 RETURN 1;
 ELSE
-INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`PNC`,`ubicacion`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,pnc,ubic);
+INSERT INTO `detalle_proyecto`(`tipo_negocio_idtipo_negocio`, `canitadad_total`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`,`PNC`,`ubicacion`,`tiempo_total`,`Total_timepo_Unidad`) VALUES ((SELECT idtipo_negocio from tipo_negocio where nombre =tipoNegocio),cantidad,orden,(SELECT idnegocio FROM negocio WHERE nom_negocio =negocio),estado,pnc,ubic,'00:00','00:00');
 RETURN 1;
 END IF;
 END$$
@@ -2361,7 +2350,7 @@ INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_po
 (13, '00:00', '00:00', '0', NULL, NULL, 723, 1, 1, NULL, NULL, 0, 0),
 (14, '00:00', '00:00', '0', NULL, NULL, 723, 3, 1, NULL, NULL, 0, 0),
 (15, '00:00', '00:00', '0', NULL, NULL, 723, 4, 1, NULL, NULL, 0, 0),
-(16, '00:00', '01:16', '0', '2018-03-08', NULL, 725, 1, 2, '10:38:29', '10:39:45', 10, 0),
+(16, '00:00', '00:00', '0', NULL, NULL, 725, 1, 1, NULL, NULL, 0, 0),
 (17, '00:00', '00:00', '0', NULL, NULL, 725, 3, 1, NULL, NULL, 0, 0),
 (18, '00:00', '00:00', '0', NULL, NULL, 725, 4, 1, NULL, NULL, 0, 0),
 (19, '00:00', '00:00', '0', NULL, NULL, 725, 5, 1, NULL, NULL, 0, 0),
@@ -2377,7 +2366,16 @@ INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_po
 (29, '00:00', '00:00', '0', NULL, NULL, 730, 5, 1, NULL, NULL, 0, 0),
 (30, '00:00', '00:00', '0', NULL, NULL, 730, 7, 1, NULL, NULL, 0, 0),
 (31, '00:00', '00:00', '0', NULL, NULL, 730, 8, 1, NULL, NULL, 0, 0),
-(32, '00:00', '00:00', '0', NULL, NULL, 730, 10, 1, NULL, NULL, 0, 0);
+(32, '00:00', '00:00', '0', NULL, NULL, 730, 10, 1, NULL, NULL, 0, 0),
+(33, '00:00', '00:00', '0', NULL, NULL, 735, 1, 1, NULL, NULL, 0, 0),
+(34, '00:00', '00:00', '0', NULL, NULL, 735, 3, 1, NULL, NULL, 0, 0),
+(35, '00:00', '00:00', '0', NULL, NULL, 735, 4, 1, NULL, NULL, 0, 0),
+(36, '00:00', '00:00', '0', NULL, NULL, 735, 5, 1, NULL, NULL, 0, 0),
+(37, '00:00', '00:00', '0', NULL, NULL, 735, 6, 1, NULL, NULL, 0, 0),
+(38, '00:00', '00:00', '0', NULL, NULL, 735, 7, 1, NULL, NULL, 0, 0),
+(39, '00:00', '00:00', '0', NULL, NULL, 735, 8, 1, NULL, NULL, 0, 0),
+(40, '00:00', '00:00', '0', NULL, NULL, 735, 9, 1, NULL, NULL, 0, 0),
+(41, '00:00', '00:00', '0', NULL, NULL, 735, 10, 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2415,13 +2413,14 @@ INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negoc
 (721, 4, '2', 'FV', 29429, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL, NULL),
 (722, 3, '2', 'FV', 29429, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL, NULL),
 (723, 6, '1', '', 29429, 1, 1, 0, NULL, 3, 0, 0, 0, NULL, NULL, NULL),
-(725, 7, '10', 'FV', 29429, 1, 2, 0, NULL, 8, 0, 1, 0, '01:16', NULL, NULL),
+(725, 7, '10', 'FV', 29429, 1, 1, 0, NULL, 9, 0, 0, 0, '00:00', NULL, NULL),
 (728, 5, '12', '', 29429, 2, 2, 0, NULL, 3, 0, 1, 0, '05:06', NULL, NULL),
 (730, 1, '10', 'TH', 29429, 1, 2, 0, NULL, 7, 0, 1, 0, '08:53', NULL, NULL),
 (731, 10, '', NULL, 29429, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL, NULL),
-(732, 1, '10', NULL, 29429, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
-(733, 1, '10', NULL, 29430, 3, 1, 0, NULL, 4, 0, 0, 0, '00:00', NULL, NULL),
-(734, 1, '14', NULL, 29431, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL);
+(732, 1, '10', '', 29429, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
+(733, 1, '10', '', 29430, 3, 1, 0, NULL, 4, 0, 0, 0, '00:00', NULL, NULL),
+(734, 1, '14', '', 29431, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
+(735, 1, '10', 'FV', 29432, 1, 1, 0, NULL, 9, 0, 0, 0, '00:00', '00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -2603,9 +2602,10 @@ CREATE TABLE `proyecto` (
 INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `fecha_salidal`, `ruteoC`, `antisolderC`, `estado_idestado`, `antisolderP`, `ruteoP`, `eliminacion`, `parada`, `entregaCircuitoFEoGF`, `entregaCOMCircuito`, `entregaPCBFEoGF`, `entregaPCBCom`, `novedades`, `estadoEmpresa`, `NFEE`) VALUES
 (29427, '981130', 'ACCESO VIRTUAL ', 'TOMY V7', 'Normal', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-02-26 11:24:16', '2018-02-27', NULL, 0, 0, 2, 0, 0, 0, 1, NULL, NULL, NULL, NULL, NULL, 'A tiempo', NULL),
 (29428, '981130', 'juan david marulanda', 'prueba de reportes de ensamble y teclados', 'Quick', 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, '2018-02-28 10:48:05', '2018-02-28', NULL, 0, 0, 1, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '', NULL, NULL),
-(29429, '981130', 'juan david marulanda', 'prueba de registro de  QR', 'Normal', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2018-02-28 12:35:40', '2018-02-25', NULL, 0, 0, 4, 1, 1, 1, 1, '2018-03-23', '2018-03-09', NULL, NULL, '', 'A tiempo', NULL),
-(29430, '981130', 'juan david marulanda', 'prueba de desarrollo del reporte de EN', 'RQT', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-03-01 10:08:43', '2018-03-02', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(29431, '981130', 'juan david marulanda', 'prueba de desarrollo del reporte de EN', 'Quick', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-03-01 10:10:02', '2018-03-09', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(29429, '981130', 'juan david marulanda', 'prueba de registro de  QR', 'Normal', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2018-02-28 12:35:40', '2018-02-25', NULL, 0, 0, 4, 1, 1, 1, 1, '2018-03-23', '2018-03-09', NULL, NULL, '', 'Retraso', '2018-03-13'),
+(29430, '981130', 'juan david marulanda', 'prueba de desarrollo del reporte de EN', 'RQT', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-03-01 10:08:43', '2018-03-02', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, '', NULL, NULL),
+(29431, '981130', 'juan david marulanda', 'prueba de desarrollo del reporte de EN', 'Quick', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-03-01 10:10:02', '2018-03-09', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, '', NULL, NULL),
+(29432, '981130', 'juan david marulanda', 'prueba de tiempos de registro desde el inicio', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2018-03-13 11:05:52', '2018-03-14', NULL, 1, 1, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2829,13 +2829,13 @@ ALTER TABLE `detalle_ensamble`
 -- AUTO_INCREMENT de la tabla `detalle_formato_estandar`
 --
 ALTER TABLE `detalle_formato_estandar`
-  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_proyecto`
 --
 ALTER TABLE `detalle_proyecto`
-  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=735;
+  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=736;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_teclados`
@@ -2865,7 +2865,7 @@ ALTER TABLE `procesos`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29432;
+  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29433;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`

@@ -31,7 +31,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     public Producciones() {
 
     }
-    int posX = 0,rep=0;
+    int posX = 0, rep = 0,multiplicador=2;
     int posY = 0;
     int panel = 0;
     CachedRowSet crs = null;
@@ -412,7 +412,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     }
 
     public void cambiarPanel(int op) {
-        reinicializarVariables();
+//        reinicializarVariables();
         String nombreArea = "";
         switch (op) {
             case 1:
@@ -439,9 +439,9 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         if (!Contenido.getComponent(0).getName().equals(nombreArea)) {
             obj.setName(nombreArea);
             agregarProyectoEnTabla(negocio, "", "", "", "");
-            if(rep==0){
+            if (rep == 0) {
                 new CambiaPanel(Contenido, obj);//Actualiza
-                rep=1;
+                rep = 1;
             }
         }
         jTNombre.setText("");
@@ -491,18 +491,19 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         String nombre = Contenido.getComponent(0).getName();
         switch (nombre) {
             case "FE":
-                cambiarPanel(1);
+                negocio = 1;
                 break;
             case "TE":
-                cambiarPanel(2);
+                negocio = 2;
                 break;
             case "EN":
-                cambiarPanel(3);
+                negocio = 3;
                 break;
             case "Almacen":
-                cambiarPanel(4);
+                negocio = 4;
                 break;
         }
+        agregarProyectoEnTabla(negocio, "", "", "", "");
     }//GEN-LAST:event_jBActualizarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -620,23 +621,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             //Se realiza la consulta para traer en numero de orden de todos los proyectos registrados
             Proyecto obj = new Proyecto();
             crs = obj.proyectosNegocio(negocio, orden, cliente, proyecto, tipo);
-//            reinicializarVariables();
-            //Se valida cual de los tres contenedores se valida primero
-//            switch (negocio) {
-//                case 4:
-//                case 1:
-//                    ProduccionArea.contenido.setName("FE");
-//                    break;
-//                case 2:
-//                    ProduccionArea.contenido.setName("TE");
-//                    break;
-//                case 3:
-//                    ProduccionArea.contenido.setName("EN");
-//                    break;
-//            }
+            reinicializarVariables();
             ProduccionArea.contenido.removeAll();
             ProduccionArea.contenido.updateUI();
-            ProduccionArea.contenido.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
+//            ProduccionArea.contenido.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530));
             while (crs.next()) {
                 JButton jp = new JButton(String.valueOf(crs.getInt(1)));
                 jp.setBounds(0 + x, 0 + y, 98, 98);
@@ -735,9 +723,10 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
                     filas++;
                     if (cantidad == unidad * conta) {
                         //---
-                        ProduccionArea.contenido.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530 + 400));
+                        ProduccionArea.contenido.setPreferredSize(new Dimension(1128, /*ProduccionFE.contenidoFE.getHeight()->*/ 530*multiplicador));
                         //---
                         conta += 5;
+                        multiplicador+=1;
                     }
                     this.Contenido.updateUI();
                 }

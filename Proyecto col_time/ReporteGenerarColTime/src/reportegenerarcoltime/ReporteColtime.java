@@ -197,10 +197,6 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
 //          jTInforme.setModel(null);
             while (crs.next()) {
                 //...
-//                if(crs.getString(1).equals("29451")){
-//                    System.out.println("Hola mundo");
-//                }
-                //...
                 if (rep == 0) {
                     entro++;
                     vectorInicial();//Inicio del vector
@@ -382,7 +378,6 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
     }
 
     public void metodoBurbujaManual() {
-
         if (cantidadBeta > mayorCantidad) {
             mayorCantidad = cantidadBeta;
             proceso = procesoBeta;
@@ -408,9 +403,6 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
     }
 
     private void asignarTiposNegosio() {
-//        if (v[0].equals("29456")) {
-//            System.out.println("Marulanda");
-//        }
         if (FE >= 1 && TE == 0 && EN == 0) {//Formato estandar
             v[3] = "FE";//Unidad de negocio;
         } else if (FE == 0 && TE >= 1 && EN == 0) {//teclado
@@ -429,10 +421,14 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
             v[2] = crs.getString(4);//Nombre Proyecto
             v[4] = crs.getString(7);//Ingreso
             v[5] = crs.getString(8);//FEE
-            if (crs.getString(9) != null) {//Sub estado de la empresa
-                v[8] = crs.getString(9);//Estado
-            } else {
-                v[8] = "Por iniciar";//Estado
+            if (crs.getBoolean(2)) {//"0" significa que esta parada
+                if (crs.getString(9) != null) {//Sub estado de la empresa
+                    v[8] = crs.getString(9);//Estado
+                } else {
+                    v[8] = "Por iniciar";//Estado
+                }
+            }else{
+                v[8] = "Parada";//Estado
             }
             v[10] = crs.getString(2);
             v[9] = crs.getString(10);
