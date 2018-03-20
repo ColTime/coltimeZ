@@ -4,7 +4,7 @@ import coltime.Menu;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
-import java.io.PrintStream;
+//import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Scanner;
 import javax.swing.JComboBox;
@@ -15,7 +15,7 @@ public class ConexionPS {
     public String mensaje = null;
     private int existePuerto = 0;
     private String v[] = null;
-    private static String puertoCOM = "COM6";
+    private static String puertoCOM = "COM6";//Por defecto va a ser el puerto serial COM6
     private static String usuariodoc = "";
 
     public ConexionPS() {//Constructos

@@ -496,6 +496,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
         limpiarCampos();
         editarColumnasDetalle();
+        editarColumnasPNC();
         jTNumerOrden.setEnabled(true);
         jTNombreCliente.setEnabled(true);
         jTNombreProyecto.setEnabled(true);
@@ -933,6 +934,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         TDetalle.setModel(new DefaultTableModel(null, encabezado1));
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
         editarColumnasDetalle();
+        editarColumnasPNC();
         jTNumerOrden.setEnabled(false);
         jTNombreCliente.setEnabled(false);
         jTNombreProyecto.setEnabled(false);

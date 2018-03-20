@@ -37,8 +37,8 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
     CachedRowSet crs = null;
     int x = 0, y = 0, cantidad = 0, filas = 1, unidad = 11, conta = 5;
     static int negocio = 0, cargo = 0;
-    public Color cor = new Color(17, 161, 255);
-    public Color corF = new Color(63, 179, 255);
+    public Color cor = new Color(53, 124, 165);
+    public Color corF = new Color(60,141,188);
     private static ProduccionArea obj = new ProduccionArea();
 
     @SuppressWarnings("unchecked")
@@ -77,7 +77,7 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(63, 179, 255));
+        jPanel1.setBackground(new java.awt.Color(60, 141, 188));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 0, 2, new java.awt.Color(153, 153, 153)));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -117,11 +117,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         });
         jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1069, 12, 23, -1));
 
-        btn1.setBackground(new java.awt.Color(63, 179, 255));
+        btn1.setBackground(new java.awt.Color(60, 141, 188));
         btn1.setText("Formato estandar");
         btn1.setBorderPainted(false);
-        btn1.setColorHover(new java.awt.Color(17, 161, 255));
-        btn1.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn1.setColorHover(new java.awt.Color(53, 124, 165));
+        btn1.setColorNormal(new java.awt.Color(60, 141, 188));
         btn1.setColorPressed(new java.awt.Color(38, 86, 186));
         btn1.setFocusPainted(false);
         btn1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -136,11 +136,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         });
         jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 149, 54));
 
-        btn2.setBackground(new java.awt.Color(63, 179, 255));
+        btn2.setBackground(new java.awt.Color(60, 141, 188));
         btn2.setText("Teclados");
         btn2.setBorderPainted(false);
-        btn2.setColorHover(new java.awt.Color(17, 161, 255));
-        btn2.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn2.setColorHover(new java.awt.Color(53, 124, 165));
+        btn2.setColorNormal(new java.awt.Color(60, 141, 188));
         btn2.setColorPressed(new java.awt.Color(38, 86, 186));
         btn2.setFocusPainted(false);
         btn2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -155,11 +155,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         });
         jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 2, 140, 54));
 
-        btn3.setBackground(new java.awt.Color(63, 179, 255));
+        btn3.setBackground(new java.awt.Color(60, 141, 188));
         btn3.setText("Ensamble");
         btn3.setBorderPainted(false);
-        btn3.setColorHover(new java.awt.Color(17, 161, 255));
-        btn3.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn3.setColorHover(new java.awt.Color(53, 124, 165));
+        btn3.setColorNormal(new java.awt.Color(60, 141, 188));
         btn3.setColorPressed(new java.awt.Color(38, 86, 186));
         btn3.setFocusPainted(false);
         btn3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,11 +174,11 @@ public class Producciones extends javax.swing.JFrame implements ActionListener {
         });
         jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 2, 131, 54));
 
-        btn4.setBackground(new java.awt.Color(63, 179, 255));
+        btn4.setBackground(new java.awt.Color(60, 141, 188));
         btn4.setText("Almacen");
         btn4.setBorderPainted(false);
-        btn4.setColorHover(new java.awt.Color(17, 161, 255));
-        btn4.setColorNormal(new java.awt.Color(63, 179, 255));
+        btn4.setColorHover(new java.awt.Color(53, 124, 165));
+        btn4.setColorNormal(new java.awt.Color(60, 141, 188));
         btn4.setColorPressed(new java.awt.Color(38, 86, 186));
         btn4.setFocusPainted(false);
         btn4.addMouseListener(new java.awt.event.MouseAdapter() {

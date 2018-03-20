@@ -1668,11 +1668,11 @@ public class proyecto extends javax.swing.JPanel {
             Chocer.showOpenDialog(this);
             File guardar = Chocer.getSelectedFile();
             if (guardar != null) {
-                File folder = new File(guardar + "\\ImágenesQR");
+                File folder = new File(guardar + "\\ImágenesQR");//Nombre de la carpeta
                 if (!folder.exists()) {
                     folder.mkdirs();
                 }
-                File folderPDF = new File(guardar + "\\PDF");
+                File folderPDF = new File(guardar + "\\PDF");//Nombre de la carpeta
                 if (!folderPDF.exists()) {
                     folderPDF.mkdirs();
                 }

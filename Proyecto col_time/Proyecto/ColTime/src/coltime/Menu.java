@@ -224,7 +224,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(138, 138, 138), 2));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPSuperior.setBackground(new java.awt.Color(63, 179, 255));
+        jPSuperior.setBackground(new java.awt.Color(60, 141, 188));
         jPSuperior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -473,6 +473,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jPContenido.add(jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(219, 219, 219));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPanel3MousePressed(evt);
@@ -482,7 +483,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(63, 179, 255));
+        jPanel5.setBackground(new java.awt.Color(60, 141, 188));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -497,6 +498,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -605,6 +607,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
         jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -705,6 +708,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
         jPanel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -804,6 +808,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
         jPanel10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1640,7 +1645,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         }
     }
     //------------------------------------------------------------------------->
-    //--------------------------------------------------------------------------->
+    //------------------------------------------------------------------------->
 //Fien de toma de tiempo automatica-------------------------------------------->
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -1653,7 +1658,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 crs = obj.InformacionAreasProduccion(accion);
                 switch (accion) {
                     case 1:
-                        //proyectos ingresados hoy--------------------------------->
+                        //proyectos ingresados hoy----------------------------->
                         while (crs.next()) {
                             switch (crs.getInt(2)) {
                                 case 1:
@@ -1674,20 +1679,20 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                             }
                         }
                         crs.close();
-                        //proyectos ingresados hoy--------------------------------->
+                        //proyectos ingresados hoy----------------------------->
                         break;
                     case 2:
-                        //Proyectos terminados hoy por area------------------------>
+                        //Proyectos terminados hoy por area-------------------->
                         crs.next();
                         FTerminadosHoy.setText(crs.getString(1));
                         TTerminadosHoy.setText(crs.getString(2));
                         ETerminadosHoy.setText(crs.getString(3));
                         ATerminadosHoy.setText(crs.getString(4));
                         crs.close();
-                        //Proyectos terminados hoy por area------------------------>
+                        //Proyectos terminados hoy por area-------------------->
                         break;
                     case 3:
-                        //Proyectos que se encuentran en estado de ejecución------->
+                        //Proyectos que se encuentran en estado de ejecución--->
                         while (crs.next()) {
                             switch (crs.getInt(2)) {
                                 case 1:
@@ -1708,10 +1713,10 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                             }
                         }
                         crs.close();
-                        //Proyectos que se encuentran en estado de ejecución------->
+                        //Proyectos que se encuentran en estado de ejecución--->
                         break;
                     case 4:
-                        //Proyectos que se encuentran en estado por iniciar-------->
+                        //Proyectos que se encuentran en estado por iniciar---->
                         while (crs.next()) {
                             switch (crs.getInt(2)) {
                                 case 1:
@@ -1731,7 +1736,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                             }
                         }
                         crs.close();
-                        //Proyectos que se encuentran en estado por iniciar-------->
+                        //Proyectos que se encuentran en estado por iniciar----->
                         break;
                 }
                 accion++;
