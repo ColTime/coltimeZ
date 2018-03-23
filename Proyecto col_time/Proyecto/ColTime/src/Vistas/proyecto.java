@@ -1948,7 +1948,7 @@ public class proyecto extends javax.swing.JPanel {
         obj.setNombreProyecto(jTNombreProyecto.getText());
         obj.setTipoProyecto(cbTipo.getSelectedItem().toString());
         obj.setNegocio(cbNegocio.getSelectedItem().toString());
-        DateFormat fecha = new SimpleDateFormat("YYYY/MM/dd");
+        SimpleDateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");//Este formatao se maneja en todas las fechas, si se modifica puede generar problemas 
         obj.setFecha(fecha.format(jDentrega.getDate()));
         v[0] = jCCircuito.isSelected();
         v[1] = jCPCBTE.isSelected();

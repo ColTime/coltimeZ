@@ -87,7 +87,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
-        jPEncabezado.setBackground(new java.awt.Color(63, 179, 255));
+        jPEncabezado.setBackground(new java.awt.Color(60, 141, 188));
         jPEncabezado.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 0, 2, new java.awt.Color(153, 153, 153)));
         jPEncabezado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPEncabezado.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -342,7 +342,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Orden °N", "Comercial", "Nombre Cliente", "Nombre  Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "Ruteo", "Antisolder"
+                "Orden °N", "Registro de", "Nombre Cliente", "Nombre  Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "Ruteo", "Antisolder"
             }
         ));
         TProyecto.setFillsViewportHeight(true);
@@ -933,6 +933,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         consultarProyectos("", "", "", "", 1);
         TDetalle.setModel(new DefaultTableModel(null, encabezado1));
         TPNC.setModel(new DefaultTableModel(null, encabezado2));
+        limpiarCampos() ;
         editarColumnasDetalle();
         editarColumnasPNC();
         jTNumerOrden.setEnabled(false);
@@ -1051,7 +1052,7 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             crs = obj.consultar_Proyecto(tipo);
         }
         try {
-            String v[] = {"N° Orden", "Comercial", "Nombre Cliente", "Nombre Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "RuteoC", "AntisolderC", "RuteoP", "AntisolderP", "Parada", "Fecha1", "Fecha2", "Fecha3", "Fecha4", "Novedad", "EstadoProyec", "NFEE"};
+            String v[] = {"N° Orden", "Registro de", "Nombre Cliente", "Nombre Proyecto", "Fecha Ingreso", "Fecha Entrega", "Fecha Salida", "Estado", "Tipo", "FE", "TE", "IN", "RuteoC", "AntisolderC", "RuteoP", "AntisolderP", "Parada", "Fecha1", "Fecha2", "Fecha3", "Fecha4", "Novedad", "EstadoProyec", "NFEE"};
             DefaultTableModel model = new DefaultTableModel(null, v);
             String v1[] = new String[24];
             while (crs.next()) {

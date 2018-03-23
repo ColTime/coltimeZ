@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Scanner;
+import static javax.print.attribute.Size2DSyntax.MM;
 import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
@@ -21,7 +22,7 @@ public class ProyectoQR implements Runnable {
     public CommPort puerto = null;
     int puertoProyecto = 0;
     proyecto obj = new proyecto();
-    DateFormat formato = new SimpleDateFormat("YYYY/MM/dd");
+    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy/MM/dd");
     Menu menu = new Menu();
     proyecto pro = null;
 
@@ -168,7 +169,7 @@ public class ProyectoQR implements Runnable {
                 obj.jTNombreProyecto.setText(nombreCliente);//Nombre del proyecto
                 obj.cbNegocio.setSelectedItem(InformacionProyecto[3]);//Negocios implicados
                 obj.cbTipo.setSelectedItem(InformacionProyecto[4]);//Tipo de proyecto
-                obj.jDentrega.setDate(formato.parse(InformacionProyecto[5]));//Fecha de entrega al cliente
+                obj.jDentrega.setDate(formatoDelTexto.parse(InformacionProyecto[5]));//Fecha de entrega al cliente
                 if (!InformacionProyecto[6].equals("null")) {//Conversor
                     obj.jCConversor.setSelected(true);
                     obj.jTConversor.setText(InformacionProyecto[6]);
@@ -213,14 +214,14 @@ public class ProyectoQR implements Runnable {
                     if (obj.jRPCBCOM.isSelected()) {//Componentes de la PCB del teclado
                         obj.jDFechaEntregaPCBCOMGF.setVisible(true);
                         if (!InformacionProyecto[25].equals("null")) {
-                            obj.jDFechaEntregaPCBCOMGF.setDate(formato.parse(InformacionProyecto[25]));//Fecha de entrega de componentes de la PCB_TE:
+                            obj.jDFechaEntregaPCBCOMGF.setDate(formatoDelTexto.parse(InformacionProyecto[25]));//Fecha de entrega de componentes de la PCB_TE:
                         }
                         obj.jLpcbGF.setVisible(true);
                     }
                     if (obj.jRPIntegracion.isSelected()) {//Integración de la PCB del teclado 
                         obj.jDFechaEntregaPCBGF.setVisible(true);
                         if (!InformacionProyecto[24].equals("null")) {
-                            obj.jDFechaEntregaPCBGF.setDate(formato.parse(InformacionProyecto[24]));//Fecha de entrega de la PCB_TE(TH,FV,GF):
+                            obj.jDFechaEntregaPCBGF.setDate(formatoDelTexto.parse(InformacionProyecto[24]));//Fecha de entrega de la PCB_TE(TH,FV,GF):
                         }
                         obj.jLCircuitoGF.setVisible(true);
                     }
@@ -238,12 +239,12 @@ public class ProyectoQR implements Runnable {
                 if (obj.jCCircuito.isSelected() && obj.jCIntegracion.isSelected()) {//Esto se le conoce como integración.
                     obj.jLComCircuitos.setVisible(true);
                     if (!InformacionProyecto[23].equals("null")) {
-                        obj.jDFechaEntregaFECOM.setDate(formato.parse(InformacionProyecto[23]));//Fecha de entrega de los componentes del circuito_FE:
+                        obj.jDFechaEntregaFECOM.setDate(formatoDelTexto.parse(InformacionProyecto[23]));//Fecha de entrega de los componentes del circuito_FE:
                     }
                     obj.jDFechaEntregaFECOM.setVisible(true);
                     obj.jLCircuitoFE.setVisible(true);
                     if (!InformacionProyecto[22].equals("null")) {
-                        obj.jDFechaEntregaFE.setDate(formato.parse(InformacionProyecto[22]));//Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble:
+                        obj.jDFechaEntregaFE.setDate(formatoDelTexto.parse(InformacionProyecto[22]));//Fecha de entrega del Circuito_FE(TH,FV,GF) a ensamble:
                     }
                     obj.jDFechaEntregaFE.setVisible(true);
                 }
