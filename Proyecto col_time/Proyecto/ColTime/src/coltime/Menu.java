@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         btn1.setColorPressed(cor);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         this.setLocationRelativeTo(null);
-        funcionalidades(cargo);
+        funcionalidades(cargo, nombre);
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
         //Mensaje de bienvenida-------------------------------------------------
@@ -534,7 +534,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel6.setText("P. Terminados hoy:");
 
-        jLabel10.setText("---------------------------------");
+        jLabel10.setText("-----------------------------------");
 
         FIngresadosHoy.setText("0");
 
@@ -635,7 +635,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel8.setText("P. Terminados hoy:");
 
-        jLabel11.setText("---------------------------------");
+        jLabel11.setText("-----------------------------------");
 
         TIngresadosHoy.setText("0");
 
@@ -736,7 +736,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel9.setText("P. Terminados hoy:");
 
-        jLabel12.setText("---------------------------------");
+        jLabel12.setText("-----------------------------------");
 
         EIngresadosHoy.setText("0");
 
@@ -836,7 +836,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel20.setText("P. Terminados hoy:");
 
-        jLabel21.setText("---------------------------------");
+        jLabel21.setText("-----------------------------------");
 
         AIngresadosHoy.setText("0");
 
@@ -1050,31 +1050,37 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         }
     }
 
-    private void funcionalidades(int cargo) {
+    private void funcionalidades(int cargo, String name) {
         switch (cargo) {
             case 1:
-                //Gestor comercial
-                this.setTitle("Gestor Comercial");
+                //Gestor Técnico
+                this.setTitle("Gestor Técnico: " + name);
+                btn3.setEnabled(false);
+                btn6.setEnabled(false);
+                break;
+            case 6:
+                //Gestor Comercial
+                this.setTitle("Gestor Comercial: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
                 break;
             case 2:
                 //Encargado FE y TE
-                this.setTitle("Encargado FE y TE");
+                this.setTitle("Encargado FE y TE: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
                 break;
             case 3:
                 //Encargado de EN
-                this.setTitle("Encargado EN");
+                this.setTitle("Encargado EN: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
                 break;
             case 4:
-                this.setTitle("Administrador");
+                this.setTitle("Administrador: " + name);
                 break;
             case 5:
-                this.setTitle("Almacen");
+                this.setTitle("Almacen: " + name);
                 btn3.setEnabled(false);
                 btn2.setEnabled(false);
                 btn6.setEnabled(false);
@@ -1110,15 +1116,16 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
             btn2.setColorPressed(cor);
         }
         switch (cargo) {
-            case 1:
-            case 4:
+            case 1://Getosr Técnico
+            case 4://Administrador
+            case 6://Gestor comercial
                 cambiarpanelProyecto("proyectos");
                 break;
-            case 2:
+            case 2://Encargado FE y TE 
                 proyecto1.cargo = cargo;
                 cambiarpanelProyecto("proyectos1");
                 break;
-            case 3:
+            case 3://Encargado EN
                 proyecto1.cargo = cargo;
                 cambiarpanelProyecto("proyectos2");
                 break;
@@ -1763,6 +1770,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
             switch (cargo) {
                 case 1:
                 case 4:
+                case 6:
                     new CambiaPanel(jPContenido, pro = new proyecto(1));
                     break;
                 case 2:

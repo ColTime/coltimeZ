@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2018 a las 17:08:35
+-- Tiempo de generación: 26-03-2018 a las 15:20:29
 -- Versión del servidor: 10.1.29-MariaDB
 -- Versión de PHP: 7.2.0
 
@@ -2235,13 +2235,6 @@ CREATE TABLE `almacen` (
   `hora_llegada` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `almacen`
---
-
-INSERT INTO `almacen` (`idalmacen`, `tiempo_total_proceso`, `cantidad_recibida`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_registro`, `hora_llegada`) VALUES
-(4, '0', '0', '2018-03-01', NULL, 731, 19, 4, '06:17:36', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -2258,11 +2251,12 @@ CREATE TABLE `cargo` (
 --
 
 INSERT INTO `cargo` (`idcargo`, `nombre`) VALUES
-(1, 'Gestor Comercial'),
+(1, 'Gestor Técnico'),
 (2, 'Encargado de FE y TE'),
 (3, 'Encargado de EN'),
 (4, 'Administrador'),
-(5, 'Almacen');
+(5, 'Almacen'),
+(6, 'Gestor Comercial');
 
 -- --------------------------------------------------------
 
@@ -2286,28 +2280,6 @@ CREATE TABLE `detalle_ensamble` (
   `noperarios` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `detalle_ensamble`
---
-
-INSERT INTO `detalle_ensamble` (`idDetalle_ensamble`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_ejecucion`, `hora_terminacion`, `restantes`, `noperarios`) VALUES
-(5, '00:00', '00:00', '0', NULL, NULL, 718, 15, 1, NULL, NULL, 0, 0),
-(6, '00:00', '00:00', '0', NULL, NULL, 718, 16, 1, NULL, NULL, 0, 0),
-(7, '00:00', '00:00', '0', NULL, NULL, 718, 17, 1, NULL, NULL, 0, 0),
-(8, '00:00', '00:00', '0', NULL, NULL, 718, 18, 1, NULL, NULL, 0, 0),
-(17, '00:00', '00:00', '0', NULL, NULL, 732, 15, 1, NULL, NULL, 0, 0),
-(18, '00:00', '00:00', '0', NULL, NULL, 732, 16, 1, NULL, NULL, 0, 0),
-(19, '00:00', '00:00', '0', NULL, NULL, 732, 17, 1, NULL, NULL, 0, 0),
-(20, '00:00', '00:00', '0', NULL, NULL, 732, 18, 1, NULL, NULL, 0, 0),
-(21, '00:00', '00:00', '0', NULL, NULL, 733, 15, 1, NULL, NULL, 0, 0),
-(22, '00:00', '00:00', '0', NULL, NULL, 733, 16, 1, NULL, NULL, 0, 0),
-(23, '00:00', '00:00', '0', NULL, NULL, 733, 17, 1, NULL, NULL, 0, 0),
-(24, '00:00', '00:00', '0', NULL, NULL, 733, 18, 1, NULL, NULL, 0, 0),
-(25, '00:00', '00:00', '0', NULL, NULL, 734, 15, 1, NULL, NULL, 0, 0),
-(26, '00:00', '00:00', '0', NULL, NULL, 734, 16, 1, NULL, NULL, 0, 0),
-(27, '00:00', '00:00', '0', NULL, NULL, 734, 17, 1, NULL, NULL, 0, 0),
-(28, '00:00', '00:00', '0', NULL, NULL, 734, 18, 1, NULL, NULL, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -2329,53 +2301,6 @@ CREATE TABLE `detalle_formato_estandar` (
   `restantes` int(6) NOT NULL DEFAULT '0',
   `noperarios` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `detalle_formato_estandar`
---
-
-INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_ejecucion`, `hora_terminacion`, `restantes`, `noperarios`) VALUES
-(1, '00:00', '00:00', '0', NULL, NULL, 720, 1, 1, NULL, NULL, 0, 0),
-(2, '00:00', '00:00', '0', NULL, NULL, 720, 3, 1, NULL, NULL, 0, 0),
-(3, '00:00', '00:00', '0', NULL, NULL, 720, 4, 1, NULL, NULL, 0, 0),
-(4, '00:00', '00:00', '0', NULL, NULL, 720, 5, 1, NULL, NULL, 0, 0),
-(5, '00:00', '00:00', '0', NULL, NULL, 720, 7, 1, NULL, NULL, 0, 0),
-(6, '00:00', '00:00', '0', NULL, NULL, 720, 8, 1, NULL, NULL, 0, 0),
-(7, '00:00', '00:00', '0', NULL, NULL, 720, 9, 1, NULL, NULL, 0, 0),
-(8, '00:00', '00:00', '0', NULL, NULL, 720, 10, 1, NULL, NULL, 0, 0),
-(9, '00:00', '00:00', '0', NULL, NULL, 721, 1, 1, NULL, NULL, 0, 0),
-(10, '00:00', '00:00', '0', NULL, NULL, 721, 4, 1, NULL, NULL, 0, 0),
-(11, '00:00', '00:00', '0', NULL, NULL, 722, 1, 1, NULL, NULL, 0, 0),
-(12, '00:00', '00:00', '0', NULL, NULL, 722, 4, 1, NULL, NULL, 0, 0),
-(13, '00:00', '00:00', '0', NULL, NULL, 723, 1, 1, NULL, NULL, 0, 0),
-(14, '00:00', '00:00', '0', NULL, NULL, 723, 3, 1, NULL, NULL, 0, 0),
-(15, '00:00', '00:00', '0', NULL, NULL, 723, 4, 1, NULL, NULL, 0, 0),
-(16, '00:00', '00:00', '0', NULL, NULL, 725, 1, 1, NULL, NULL, 0, 0),
-(17, '00:00', '00:00', '0', NULL, NULL, 725, 3, 1, NULL, NULL, 0, 0),
-(18, '00:00', '00:00', '0', NULL, NULL, 725, 4, 1, NULL, NULL, 0, 0),
-(19, '00:00', '00:00', '0', NULL, NULL, 725, 5, 1, NULL, NULL, 0, 0),
-(20, '00:00', '00:00', '0', NULL, NULL, 725, 6, 1, NULL, NULL, 0, 0),
-(21, '00:00', '00:00', '0', NULL, NULL, 725, 7, 1, NULL, NULL, 0, 0),
-(22, '00:00', '00:00', '0', NULL, NULL, 725, 8, 1, NULL, NULL, 0, 0),
-(23, '00:00', '00:00', '0', NULL, NULL, 725, 9, 1, NULL, NULL, 0, 0),
-(24, '00:00', '00:00', '0', NULL, NULL, 725, 10, 1, NULL, NULL, 0, 0),
-(25, '00:00', '08:53', '0', '2018-03-08', NULL, 730, 1, 2, '10:44:47', '10:47:29', 10, 0),
-(26, '00:00', '00:00', '0', NULL, NULL, 730, 2, 1, NULL, NULL, 0, 0),
-(27, '00:00', '00:00', '0', NULL, NULL, 730, 3, 1, NULL, NULL, 0, 0),
-(28, '00:00', '00:00', '0', NULL, NULL, 730, 4, 1, NULL, NULL, 0, 0),
-(29, '00:00', '00:00', '0', NULL, NULL, 730, 5, 1, NULL, NULL, 0, 0),
-(30, '00:00', '00:00', '0', NULL, NULL, 730, 7, 1, NULL, NULL, 0, 0),
-(31, '00:00', '00:00', '0', NULL, NULL, 730, 8, 1, NULL, NULL, 0, 0),
-(32, '00:00', '00:00', '0', NULL, NULL, 730, 10, 1, NULL, NULL, 0, 0),
-(33, '00:00', '00:00', '0', NULL, NULL, 735, 1, 1, NULL, NULL, 0, 0),
-(34, '00:00', '00:00', '0', NULL, NULL, 735, 3, 1, NULL, NULL, 0, 0),
-(35, '00:00', '00:00', '0', NULL, NULL, 735, 4, 1, NULL, NULL, 0, 0),
-(36, '00:00', '00:00', '0', NULL, NULL, 735, 5, 1, NULL, NULL, 0, 0),
-(37, '00:00', '00:00', '0', NULL, NULL, 735, 6, 1, NULL, NULL, 0, 0),
-(38, '00:00', '00:00', '0', NULL, NULL, 735, 7, 1, NULL, NULL, 0, 0),
-(39, '00:00', '00:00', '0', NULL, NULL, 735, 8, 1, NULL, NULL, 0, 0),
-(40, '00:00', '00:00', '0', NULL, NULL, 735, 9, 1, NULL, NULL, 0, 0),
-(41, '00:00', '00:00', '0', NULL, NULL, 735, 10, 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2402,26 +2327,6 @@ CREATE TABLE `detalle_proyecto` (
   `fecha_salida` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `detalle_proyecto`
---
-
-INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negocio`, `canitadad_total`, `material`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`, `PNC`, `ubicacion`, `pro_porIniciar`, `pro_Ejecucion`, `pro_Pausado`, `pro_Terminado`, `tiempo_total`, `Total_timepo_Unidad`, `fecha_salida`) VALUES
-(717, 5, '10', '', 29428, 2, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
-(718, 1, '10', '', 29428, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
-(720, 2, '10', 'FV', 29429, 1, 1, 0, NULL, 8, 0, 0, 0, '00:00', NULL, NULL),
-(721, 4, '2', 'FV', 29429, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL, NULL),
-(722, 3, '2', 'FV', 29429, 1, 1, 0, NULL, 2, 0, 0, 0, NULL, NULL, NULL),
-(723, 6, '1', '', 29429, 1, 1, 0, NULL, 3, 0, 0, 0, NULL, NULL, NULL),
-(725, 7, '10', 'FV', 29429, 1, 1, 0, NULL, 9, 0, 0, 0, '00:00', NULL, NULL),
-(728, 5, '12', '', 29429, 2, 2, 0, NULL, 3, 0, 1, 0, '05:06', NULL, NULL),
-(730, 1, '10', 'TH', 29429, 1, 2, 0, NULL, 7, 0, 1, 0, '08:53', NULL, NULL),
-(731, 10, '', NULL, 29429, 4, 4, 0, NULL, 0, 1, 0, 0, NULL, NULL, NULL),
-(732, 1, '10', '', 29429, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
-(733, 1, '10', '', 29430, 3, 1, 0, NULL, 4, 0, 0, 0, '00:00', NULL, NULL),
-(734, 1, '14', '', 29431, 3, 1, 0, NULL, 4, 0, 0, 0, NULL, NULL, NULL),
-(735, 1, '10', 'FV', 29432, 1, 1, 0, NULL, 9, 0, 0, 0, '00:00', '00:00', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -2443,20 +2348,6 @@ CREATE TABLE `detalle_teclados` (
   `restantes` int(6) NOT NULL DEFAULT '0',
   `noperarios` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `detalle_teclados`
---
-
-INSERT INTO `detalle_teclados` (`idDetalle_teclados`, `tiempo_por_unidad`, `tiempo_total_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_ejecucion`, `hora_terminacion`, `restantes`, `noperarios`) VALUES
-(1, '00:00', '00:00', '0', NULL, NULL, 717, 11, 1, NULL, NULL, 0, 0),
-(2, '00:00', '00:00', '0', NULL, NULL, 717, 12, 1, NULL, NULL, 0, 0),
-(3, '00:00', '00:00', '0', NULL, NULL, 717, 13, 1, NULL, NULL, 0, 0),
-(4, '00:00', '00:00', '0', NULL, NULL, 717, 14, 1, NULL, NULL, 0, 0),
-(5, '00:00', '05:06', '0', '2018-03-08', NULL, 728, 11, 2, '10:44:52', '10:47:24', 12, 0),
-(6, '00:00', '00:00', '0', NULL, NULL, 728, 12, 1, NULL, NULL, 0, 0),
-(7, '00:00', '00:00', '0', NULL, NULL, 728, 13, 1, NULL, NULL, 0, 0),
-(8, '00:00', '00:00', '0', NULL, NULL, 728, 14, 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2551,7 +2442,6 @@ INSERT INTO `procesos` (`idproceso`, `nombre_proceso`, `estado`, `negocio_idnego
 (18, 'Empaque', 1, 3),
 (19, 'Componentes', 1, 4),
 (20, 'GF', 1, 4),
-(24, 'prueba', 0, 3),
 (25, 'demostracion', 0, 2);
 
 -- --------------------------------------------------------
@@ -2594,18 +2484,6 @@ CREATE TABLE `proyecto` (
   `estadoEmpresa` varchar(13) DEFAULT NULL,
   `NFEE` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `proyecto`
---
-
-INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `fecha_salidal`, `ruteoC`, `antisolderC`, `estado_idestado`, `antisolderP`, `ruteoP`, `eliminacion`, `parada`, `entregaCircuitoFEoGF`, `entregaCOMCircuito`, `entregaPCBFEoGF`, `entregaPCBCom`, `novedades`, `estadoEmpresa`, `NFEE`) VALUES
-(29427, '981130', 'ACCESO VIRTUAL ', 'TOMY V7', 'Normal', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-02-26 11:24:16', '2018-02-27', NULL, 0, 0, 2, 0, 0, 0, 1, NULL, NULL, NULL, NULL, NULL, 'A tiempo', NULL),
-(29428, '981130', 'juan david marulanda', 'prueba de reportes de ensamble y teclados', 'Quick', 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, '2018-02-28 10:48:05', '2018-02-28', NULL, 0, 0, 1, 0, 0, 0, 1, NULL, NULL, NULL, NULL, '', NULL, NULL),
-(29429, '981130', 'juan david marulanda', 'prueba de registro de  QR', 'Normal', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2018-02-28 12:35:40', '2018-02-25', NULL, 0, 0, 4, 1, 1, 1, 1, '2018-03-23', '2018-03-09', NULL, NULL, '', 'Retraso', '2018-03-13'),
-(29430, '981130', 'juan david marulanda', 'prueba de desarrollo del reporte de EN', 'RQT', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-03-01 10:08:43', '2018-03-02', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, '', NULL, NULL),
-(29431, '981130', 'juan david marulanda', 'prueba de desarrollo del reporte de EN', 'Quick', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-03-01 10:10:02', '2018-03-09', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, '', NULL, NULL),
-(29432, '981130', 'juan david marulanda', 'prueba de tiempos de registro desde el inicio', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2018-03-13 11:05:52', '2018-03-14', NULL, 1, 1, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2660,15 +2538,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`numero_documento`, `tipo_documento`, `nombres`, `apellidos`, `cargo_idcargo`, `imagen`, `estado`, `contraeña`, `sesion`, `recuperacion`) VALUES
-('109999999', 'CC', 'juan andresa', 'asdasd', 1, NULL, 1, '109999999', 0, 'citg9j-x56'),
-('1216727814', 'CC', 'jhon jairo ', 'sanchez correa', 1, NULL, 1, '1216727814', 0, 'x1ññwula2y'),
-('1216727816', 'CC', 'juan david', 'marulanda p', 3, 'C:\\Users\\auxi.calidad02\\Desktop\\QRProyectos\\FE_TE2.png', 1, '1216727816', 0, 'wn-gd7c@5q'),
-('3004991084', 'CE', 'fredy', 'velez', 1, NULL, 1, '3004991084', 0, '8uifbgjxq1'),
-('981130', 'CC', 'sivia hortensia', 'paniagua gomez', 4, '', 1, '981130', 0, '1u-hyppy60'),
-('98113053', 'CC', 'Catalina', ' rosario', 1, NULL, 0, '98113053', 0, 'bo3t-amybñ'),
-('98113053240', 'CC', 'juan david ', 'marulitoo', 5, '', 1, '98113053240', 0, 'i0s2ienq6p'),
-('9813053240', 'CC', 'sergio andresss', 'marulanda', 2, '', 1, '9813053240', 0, '-8qa2-x54h'),
-('99120101605', 'CC', 'sadasd', 'juan andres', 1, NULL, 1, '99120101605', 0, 'ptaeh3a0ab');
+('981130', 'CC', 'Juan David', 'Marulanda Paniagua', 4, '', 1, '98113053240juan', 0, '1u-hyppy60'),
+('98113053240', 'CC', 'Juan David', 'Marulanda Paniagua', 6, '', 1, '98113053240', 0, 'o51jn-60yw');
 
 -- --------------------------------------------------------
 
@@ -2686,9 +2557,8 @@ CREATE TABLE `usuariopuerto` (
 --
 
 INSERT INTO `usuariopuerto` (`documentousario`, `usuarioPuerto`) VALUES
-('981130', 'COM8'),
-('9813053240', 'COM8'),
-('1216727816', 'COM3');
+('981130', 'COM10'),
+('98113053240', 'COM10');
 
 --
 -- Índices para tablas volcadas
@@ -2811,37 +2681,37 @@ ALTER TABLE `usuariopuerto`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `idalmacen` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idalmacen` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `idcargo` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idcargo` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_ensamble`
 --
 ALTER TABLE `detalle_ensamble`
-  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_formato_estandar`
 --
 ALTER TABLE `detalle_formato_estandar`
-  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_proyecto`
 --
 ALTER TABLE `detalle_proyecto`
-  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=736;
+  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_teclados`
 --
 ALTER TABLE `detalle_teclados`
-  MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idDetalle_teclados` smallint(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -2865,7 +2735,7 @@ ALTER TABLE `procesos`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29433;
+  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29360;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`

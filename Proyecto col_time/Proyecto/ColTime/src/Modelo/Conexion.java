@@ -6,10 +6,10 @@ import java.sql.*;
 public class Conexion {
 
     private Connection conexion;
-    static String bd = "coltime";
-    static String user = "root";
-    static String password = "";
-    static String server = "jdbc:mysql://localhost/" + bd;
+    static String bd = "coltime";//Base de datos actual
+    static String user = "root";//Usuario de mysql
+    static String password = "";//contraseña
+    static String server = "jdbc:mysql://localhost/" + bd;//Servicio de mysql   
     //192.168.0.103
 
     public Conexion() {

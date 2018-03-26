@@ -225,11 +225,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                 jDFechaPropertyChange(evt);
             }
         });
-        jDFecha.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jDFechaVetoableChange(evt);
-            }
-        });
         jPanel3.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, 140, -1));
 
         jREntrega.setBackground(new java.awt.Color(255, 255, 255));
@@ -550,9 +545,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDFechaPropertyChange
 
-    private void jDFechaVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jDFechaVetoableChange
-    }//GEN-LAST:event_jDFechaVetoableChange
-
     private void TProyectoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TProyectoMousePressed
         if (TProyecto.getSelectedRow() >= 0) {
             if (evt.getClickCount() == 1) {
@@ -838,8 +830,12 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                         obj.jLNovedades.setVisible(true);
                         obj.jTNovedades.setVisible(true);
                         obj.jLNCaracteres.setVisible(true);
-
-                        obj.jTNovedades.setText(TProyecto.getValueAt(f, 21).toString());//Mensaje de alguna novedad
+                        //texto de novedades del proyecto
+                        if(!TProyecto.getValueAt(f, 21).toString().equals("null")){
+                           obj.jTNovedades.setText(TProyecto.getValueAt(f, 21).toString());//Mensaje de alguna novedad 
+                        }else{
+                            obj.jTNovedades.setText("");//Mensaje de alguna novedad
+                        }
                         obj.jLNCaracteres.setText(String.valueOf(250 - TProyecto.getValueAt(f, 21).toString().length()));//Cantidad de caracteres.
 
                         this.dispose();
@@ -982,7 +978,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
         });
     }
 //Metodos---------------------------------------------------------------------->
-
     private void activarCamposproyecto(proyecto obj) {
         obj.btnNuevo.setEnabled(true);
         obj.jTNombreCliente.setEnabled(true);
@@ -1006,7 +1001,6 @@ public class ConsutaProyecto extends javax.swing.JFrame {
             obj.btnActivar.setVisible(true);
             obj.GenerarQR.setEnabled(false);
             obj.btnUpdate.setEnabled(false);
-
         }
     }
 

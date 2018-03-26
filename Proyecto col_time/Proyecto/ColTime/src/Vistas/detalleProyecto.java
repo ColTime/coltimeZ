@@ -453,7 +453,7 @@ public class detalleProyecto extends javax.swing.JDialog {
                                 String orden[] = this.getTitle().split("-");                                         //Cantidad//      Proceso  
                                 almacen.pararTiempoAlmacen(Integer.parseInt(orden[0].trim()), Integer.parseInt(idDetalle), 0, detalle, 19);//
                                 //Mensaje de confirmación de la terminación de la toma de tiempo
-                                new rojerusan.RSNotifyAnimated("¡Listo!", "Mensaje___.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                                new rojerusan.RSNotifyAnimated("¡Listo!", "Toma de tiempo finalizada correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                                 cargarTabla();
                             }
                         }
@@ -521,20 +521,26 @@ public class detalleProyecto extends javax.swing.JDialog {
         }
 
         if (permiso == 1 || negocio == 4) {
-            editarTamañoColumnas();
             if (negocio == 4) {
+                //Tiempo por unidad
                 TDetalleProduccion.getColumnModel().getColumn(6).setMinWidth(0);
                 TDetalleProduccion.getColumnModel().getColumn(6).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
                 TDetalleProduccion.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
             }
         }
-        if (negocio != 4 || cargo == 4) {
+        //Boton reiniciar
+        if(cargo!=4){
+            editarTamañoColumnas();
+        }
+        //Boton parar toma de tiempo para almacen
+        if (negocio != 4 || cargo !=5) {
             TDetalleProduccion.getColumnModel().getColumn(14).setMinWidth(0);
             TDetalleProduccion.getColumnModel().getColumn(14).setMaxWidth(0);
             TDetalleProduccion.getTableHeader().getColumnModel().getColumn(14).setMaxWidth(0);
             TDetalleProduccion.getTableHeader().getColumnModel().getColumn(14).setMinWidth(0);
         }
+        //ID detalle del almacen
         TDetalleProduccion.getColumnModel().getColumn(13).setMinWidth(0);
         TDetalleProduccion.getColumnModel().getColumn(13).setMaxWidth(0);
         TDetalleProduccion.getTableHeader().getColumnModel().getColumn(13).setMaxWidth(0);
