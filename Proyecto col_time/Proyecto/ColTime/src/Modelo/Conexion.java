@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 //import javax.swing.JOptionPane;
 
 public class Conexion {
@@ -9,14 +10,14 @@ public class Conexion {
     static String bd = "coltime";//Base de datos actual
     static String user = "root";//Usuario de mysql
     static String password = "";//contraseña
-    static String server = "jdbc:mysql://localhost/" + bd;//Servicio de mysql   
-    //192.168.0.103
+    static String server = "jdbc:mysql://localhost:3306/" + bd;//Servicio de mysql   
+    //El puerto por el cual funciona es el <9090>
 
     public Conexion() {
 
     }
-
-    public void establecerConexion() {
+    //Pedir permiso al puerto de comunicaciones al puerto 3306
+    public void establecerConexion() {  
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(server, user, password);
@@ -29,7 +30,7 @@ public class Conexion {
         }
     }
 
-    public Connection getConexion() {
+    public Connection getConexion() {   
         return conexion;
     }
 

@@ -1,5 +1,7 @@
 package coltime;
 
+import Modelo.Conexion;
+
 public class ColTime {
 
     public static void main(String[] args) {
@@ -8,6 +10,9 @@ public class ColTime {
         Login log = new Login();
         log.setLocationRelativeTo(null);
         log.setVisible(true);
+        
+//        Conexion obj=new Conexion();
+//        obj.establecerConexion();
         //Finaliza el proyecto
     }
 

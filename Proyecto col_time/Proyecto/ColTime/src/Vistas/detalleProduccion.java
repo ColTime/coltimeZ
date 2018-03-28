@@ -25,7 +25,7 @@ public class detalleProduccion extends javax.swing.JDialog implements ActionList
         this.negocio = negocio;
         this.vistaC = vistaC;
         this.cargo=cargo;
-        if (vistaC == 1) {
+        if (vistaC == 1 || vistaC == 3) {
             //Detalles del proyecto
             this.setTitle(String.valueOf(orden));
         } else if (vistaC == 2) {
