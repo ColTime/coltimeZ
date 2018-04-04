@@ -88,10 +88,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
         jTInforme.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jTInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "N°Orden", "Cliente", "nombreProyecto", "N.Negocio", "F.ingreso", "FEE", "Proceso", "% proyecto", "Estado", "NFEE", "parada"

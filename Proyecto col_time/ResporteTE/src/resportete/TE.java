@@ -207,20 +207,12 @@ public class TE extends javax.swing.JFrame implements Runnable {
         jTReporte.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jTReporte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                {}
             },
             new String [] {
-                "N°Orden", "C.T"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         jTReporte.setFocusable(false);
         jTReporte.setGridColor(new java.awt.Color(153, 153, 153));
         jTReporte.setIntercellSpacing(new java.awt.Dimension(0, 1));
