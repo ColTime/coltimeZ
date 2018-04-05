@@ -8,7 +8,6 @@ package reportegenerarcoltime;
 import java.text.DecimalFormat;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**

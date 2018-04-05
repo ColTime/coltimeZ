@@ -23,6 +23,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.getTableHeader().setReorderingAllowed(false);
         limites();
     }
+    static int op = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -520,6 +521,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        op = 0;
         estadoComponentes(true, new Color(255, 255, 255));
         btnGuardar.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -541,9 +543,13 @@ public class Usuarios1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTdocumentoKeyReleased
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cambiar el estado de esta persona?,"
+
+        if (JOptionPane.showOptionDialog(null, "¿Seguro desea cambiar el estado de esta persona?"
                 + "\n"
-                + " si lo cambia el usuario ya no podra interacturar con el sistema.") == 0) {
+                + " si lo cambia el usuario ya no podra interacturar con el sistema.",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI") == 0) {
             Controlador.Usuario obj = new Controlador.Usuario();
             obj.setDocumento(jTdocumento.getText());
             if (obj.validarSiEstaActivo()) {
@@ -570,9 +576,12 @@ public class Usuarios1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTNombreApellidoKeyReleased
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "¿Seguro desea volver activar esta persona?,"
+        if (JOptionPane.showOptionDialog(null, "¿Seguro desea volver activar esta persona?"
                 + "\n"
-                + " si lo cambia el usuario ya podra interacturar con el sistema.") == 0) {
+                + " si lo cambia el usuario ya podra interacturar con el sistema.",
+                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                new Object[]{"SI", "NO"}, "SI") == 0) {
             Controlador.Usuario obj = new Controlador.Usuario();
             obj.setDocumento(jTdocumento.getText());
             boolean res = obj.cambiar_Estado_Usuario(true);
@@ -594,7 +603,8 @@ public class Usuarios1 extends javax.swing.JPanel {
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI");
         if (seleccion == 0) {
-            registrarMdificarUsuario(2, 1);
+            registrarMdificarUsuario(2, 1);//el dos significa modificar
+            op = 0;
             jTdocumento.setEnabled(true);
             btnUpdate.setEnabled(false);
             btnDelete.setEnabled(false);
@@ -630,6 +640,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         if (!evt.isPopupTrigger()) {
             int users = jTUsuario.getRowCount();
             if (users > 0) {
+                op = 1;
                 int fila = jTUsuario.getSelectedRow();
                 estadoComponentes(true, new Color(255, 255, 255));
                 jTdocumento.setText(jTUsuario.getValueAt(fila, 0).toString());
@@ -639,6 +650,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 cBCargo.setSelectedItem(jTUsuario.getValueAt(fila, 4).toString());
                 if (jTUsuario.getValueAt(fila, 5) != null) {
                     //Agregar la imagen al panel!!
+                    //Coming soon...
                 }
                 if (jTUsuario.getValueAt(fila, 6).toString().equals("Activo")) {
                     btnDelete.setEnabled(true);
@@ -657,6 +669,8 @@ public class Usuarios1 extends javax.swing.JPanel {
                 }
                 jTdocumento.setEnabled(false);
                 btnNuevo.setEnabled(true);
+            } else {
+                op = 0;
             }
         }
     }//GEN-LAST:event_jTUsuarioMouseReleased
@@ -684,11 +698,13 @@ public class Usuarios1 extends javax.swing.JPanel {
 
     public void avticarBotonGuardar() {
         //Validacion de los cuatro campos obligatorios para el registro de usuarios.
-        if ((!jTdocumento.getText().equals("") && jTdocumento.getText().length() >= 8 && jTdocumento.getText().length() <= 13)
-                && !jTNombre.getText().equals("") && cBCargo.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0) {
-            btnGuardar.setEnabled(true);
-        } else {
-            btnGuardar.setEnabled(false);
+        if (op == 0) {
+            if ((!jTdocumento.getText().equals("") && jTdocumento.getText().length() >= 8 && jTdocumento.getText().length() <= 13)
+                    && !jTNombre.getText().equals("") && cBCargo.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0) {
+                btnGuardar.setEnabled(true);
+            } else {
+                btnGuardar.setEnabled(false);
+            }
         }
     }
 
@@ -821,38 +837,47 @@ public class Usuarios1 extends javax.swing.JPanel {
     }
 
     public void modifcarColumnas() {
+        //Numero de documento
         jTUsuario.getColumnModel().getColumn(0).setMinWidth(130);
         jTUsuario.getColumnModel().getColumn(0).setMaxWidth(130);
         jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(130);
         jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(130);
+        //Tipo de documento (T.I)
         jTUsuario.getColumnModel().getColumn(1).setMinWidth(50);
         jTUsuario.getColumnModel().getColumn(1).setMaxWidth(50);
         jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(50);
         jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMinWidth(50);
+        //Nombres
         jTUsuario.getColumnModel().getColumn(2).setMinWidth(235);
         jTUsuario.getColumnModel().getColumn(2).setMaxWidth(235);
         jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(235);
         jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMinWidth(235);
+        //Apellidos
         jTUsuario.getColumnModel().getColumn(3).setMinWidth(222);
         jTUsuario.getColumnModel().getColumn(3).setMaxWidth(222);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(222);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(222);
-        jTUsuario.getColumnModel().getColumn(4).setMinWidth(163);
-        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(163);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(163);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(163);
+        //Cargo
+        jTUsuario.getColumnModel().getColumn(4).setMinWidth(158);
+        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(158);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(158);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(158);
+        //Imagen
         jTUsuario.getColumnModel().getColumn(5).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        jTUsuario.getColumnModel().getColumn(6).setMinWidth(65);
-        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(65);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(65);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(65);
+        //Estado
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(70);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(70);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(70);
+        //Recuperacion
         jTUsuario.getColumnModel().getColumn(7).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+        //Session
         jTUsuario.getColumnModel().getColumn(8).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(8).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);

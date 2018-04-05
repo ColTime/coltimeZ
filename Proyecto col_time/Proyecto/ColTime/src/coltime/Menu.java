@@ -1818,6 +1818,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
+                //Look and feel
 //                try {
 //                    UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
 //                } catch (Exception e) {
