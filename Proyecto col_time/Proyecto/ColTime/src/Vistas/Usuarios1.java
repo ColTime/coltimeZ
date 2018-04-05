@@ -4,7 +4,6 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.TablaRenderUsuario;
 import coltime.Menu;
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
@@ -154,6 +153,9 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTNombre.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTNombreKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTNombreKeyTyped(evt);
             }
@@ -163,11 +165,21 @@ public class Usuarios1 extends javax.swing.JPanel {
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "CE", "CC", "TI" }));
         cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
 
         cBCargo.setForeground(new java.awt.Color(102, 102, 102));
         cBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Técnico", "Encargado de FE y TE", "Encargado de EN", "Administrador", "Almacen", "Gestor Comercial" }));
         cBCargo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cBCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBCargoActionPerformed(evt);
+            }
+        });
 
         jPImagenU.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPImagenU.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -362,7 +374,7 @@ public class Usuarios1 extends javax.swing.JPanel {
         });
 
         cBCargoB.setForeground(new java.awt.Color(102, 102, 102));
-        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Comercial", "Encargado de FE y TE", "Encargado de EN", "Administrador" }));
+        cBCargoB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Técnico", "Encargado de FE y TE", "Encargado de EN", "Administrador", "Almacen", "Gestor Comercial" }));
         cBCargoB.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargoB.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cBCargoB.addItemListener(new java.awt.event.ItemListener() {
@@ -522,17 +534,10 @@ public class Usuarios1 extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         registrarMdificarUsuario(1, 1);
-        consultarUsuarios("", "", 0);
-        estadoComponentes(false, new Color(244, 244, 244));
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jTdocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyReleased
-        if (!jTdocumento.getText().equals("") && jTdocumento.getText().length() >= 8 && jTdocumento.getText().length() <= 13) {
-            btnGuardar.setEnabled(true);
-            btnNuevo.setEnabled(false);
-        } else {
-            btnGuardar.setEnabled(false);
-        }
+        avticarBotonGuardar();
     }//GEN-LAST:event_jTdocumentoKeyReleased
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -656,6 +661,18 @@ public class Usuarios1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTUsuarioMouseReleased
 
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        avticarBotonGuardar();
+    }//GEN-LAST:event_cbTipoActionPerformed
+
+    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
+        avticarBotonGuardar();
+    }//GEN-LAST:event_jTNombreKeyReleased
+
+    private void cBCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBCargoActionPerformed
+        avticarBotonGuardar();
+    }//GEN-LAST:event_cBCargoActionPerformed
+
     public void estadoComponentes(boolean estado, Color es) {
         jTdocumento.setEnabled(estado);
         jTNombre.setEnabled(estado);
@@ -663,6 +680,16 @@ public class Usuarios1 extends javax.swing.JPanel {
         cbTipo.setEnabled(estado);
         cBCargo.setEnabled(estado);
         jpUser.setBackground(es);
+    }
+
+    public void avticarBotonGuardar() {
+        //Validacion de los cuatro campos obligatorios para el registro de usuarios.
+        if ((!jTdocumento.getText().equals("") && jTdocumento.getText().length() >= 8 && jTdocumento.getText().length() <= 13)
+                && !jTNombre.getText().equals("") && cBCargo.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0) {
+            btnGuardar.setEnabled(true);
+        } else {
+            btnGuardar.setEnabled(false);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -733,6 +760,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 }
                 limpiar();
                 consultarUsuarios("", "", 0);
+                estadoComponentes(false, new Color(244, 244, 244));//Reinicializa el formulario
             } else {
                 new rojerusan.RSNotifyAnimated("¡Alerta!", "La persona que intento registrar ya existe", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             }
