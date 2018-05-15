@@ -4,6 +4,7 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import Controlador.TablaRenderUsuario;
 import coltime.Menu;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
@@ -23,7 +24,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTUsuario.getTableHeader().setReorderingAllowed(false);
         limites();
     }
-    static int op = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -154,9 +154,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         jTNombre.setColorDeTextoBackground(new java.awt.Color(255, 255, 255));
         jTNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTNombreKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTNombreKeyTyped(evt);
             }
@@ -166,21 +163,11 @@ public class Usuarios1 extends javax.swing.JPanel {
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "CE", "CC", "TI" }));
         cbTipo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cbTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoActionPerformed(evt);
-            }
-        });
 
         cBCargo.setForeground(new java.awt.Color(102, 102, 102));
         cBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Gestor Técnico", "Encargado de FE y TE", "Encargado de EN", "Administrador", "Almacen", "Gestor Comercial" }));
         cBCargo.setColorDeBorde(new java.awt.Color(204, 204, 204));
         cBCargo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cBCargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cBCargoActionPerformed(evt);
-            }
-        });
 
         jPImagenU.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jPImagenU.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -521,7 +508,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        op = 0;
         estadoComponentes(true, new Color(255, 255, 255));
         btnGuardar.setEnabled(false);
         btnUpdate.setEnabled(false);
@@ -536,20 +522,23 @@ public class Usuarios1 extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         registrarMdificarUsuario(1, 1);
+        consultarUsuarios("", "", 0);
+        estadoComponentes(false, new Color(244, 244, 244));
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jTdocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdocumentoKeyReleased
-        avticarBotonGuardar();
+        if (!jTdocumento.getText().equals("") && jTdocumento.getText().length() >= 8 && jTdocumento.getText().length() <= 13) {
+            btnGuardar.setEnabled(true);
+            btnNuevo.setEnabled(false);
+        } else {
+            btnGuardar.setEnabled(false);
+        }
     }//GEN-LAST:event_jTdocumentoKeyReleased
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
-        if (JOptionPane.showOptionDialog(null, "¿Seguro desea cambiar el estado de esta persona?"
+        if (JOptionPane.showConfirmDialog(null, "¿Seguro desea cambiar el estado de esta persona?,"
                 + "\n"
-                + " si lo cambia el usuario ya no podra interacturar con el sistema.",
-                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
-                new Object[]{"SI", "NO"}, "SI") == 0) {
+                + " si lo cambia el usuario ya no podra interacturar con el sistema.") == 0) {
             Controlador.Usuario obj = new Controlador.Usuario();
             obj.setDocumento(jTdocumento.getText());
             if (obj.validarSiEstaActivo()) {
@@ -576,12 +565,9 @@ public class Usuarios1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jTNombreApellidoKeyReleased
 
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
-        if (JOptionPane.showOptionDialog(null, "¿Seguro desea volver activar esta persona?"
+        if (JOptionPane.showConfirmDialog(null, "¿Seguro desea volver activar esta persona?,"
                 + "\n"
-                + " si lo cambia el usuario ya podra interacturar con el sistema.",
-                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
-                new Object[]{"SI", "NO"}, "SI") == 0) {
+                + " si lo cambia el usuario ya podra interacturar con el sistema.") == 0) {
             Controlador.Usuario obj = new Controlador.Usuario();
             obj.setDocumento(jTdocumento.getText());
             boolean res = obj.cambiar_Estado_Usuario(true);
@@ -603,8 +589,7 @@ public class Usuarios1 extends javax.swing.JPanel {
                 JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
                 new Object[]{"SI", "NO"}, "SI");
         if (seleccion == 0) {
-            registrarMdificarUsuario(2, 1);//el dos significa modificar
-            op = 0;
+            registrarMdificarUsuario(2, 1);
             jTdocumento.setEnabled(true);
             btnUpdate.setEnabled(false);
             btnDelete.setEnabled(false);
@@ -640,7 +625,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         if (!evt.isPopupTrigger()) {
             int users = jTUsuario.getRowCount();
             if (users > 0) {
-                op = 1;
                 int fila = jTUsuario.getSelectedRow();
                 estadoComponentes(true, new Color(255, 255, 255));
                 jTdocumento.setText(jTUsuario.getValueAt(fila, 0).toString());
@@ -650,7 +634,6 @@ public class Usuarios1 extends javax.swing.JPanel {
                 cBCargo.setSelectedItem(jTUsuario.getValueAt(fila, 4).toString());
                 if (jTUsuario.getValueAt(fila, 5) != null) {
                     //Agregar la imagen al panel!!
-                    //Coming soon...
                 }
                 if (jTUsuario.getValueAt(fila, 6).toString().equals("Activo")) {
                     btnDelete.setEnabled(true);
@@ -669,23 +652,9 @@ public class Usuarios1 extends javax.swing.JPanel {
                 }
                 jTdocumento.setEnabled(false);
                 btnNuevo.setEnabled(true);
-            } else {
-                op = 0;
             }
         }
     }//GEN-LAST:event_jTUsuarioMouseReleased
-
-    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        avticarBotonGuardar();
-    }//GEN-LAST:event_cbTipoActionPerformed
-
-    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
-        avticarBotonGuardar();
-    }//GEN-LAST:event_jTNombreKeyReleased
-
-    private void cBCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBCargoActionPerformed
-        avticarBotonGuardar();
-    }//GEN-LAST:event_cBCargoActionPerformed
 
     public void estadoComponentes(boolean estado, Color es) {
         jTdocumento.setEnabled(estado);
@@ -694,18 +663,6 @@ public class Usuarios1 extends javax.swing.JPanel {
         cbTipo.setEnabled(estado);
         cBCargo.setEnabled(estado);
         jpUser.setBackground(es);
-    }
-
-    public void avticarBotonGuardar() {
-        //Validacion de los cuatro campos obligatorios para el registro de usuarios.
-        if (op == 0) {
-            if ((!jTdocumento.getText().equals("") && jTdocumento.getText().length() >= 8 && jTdocumento.getText().length() <= 13)
-                    && !jTNombre.getText().equals("") && cBCargo.getSelectedIndex() != 0 && cbTipo.getSelectedIndex() != 0) {
-                btnGuardar.setEnabled(true);
-            } else {
-                btnGuardar.setEnabled(false);
-            }
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -776,7 +733,6 @@ public class Usuarios1 extends javax.swing.JPanel {
                 }
                 limpiar();
                 consultarUsuarios("", "", 0);
-                estadoComponentes(false, new Color(244, 244, 244));//Reinicializa el formulario
             } else {
                 new rojerusan.RSNotifyAnimated("¡Alerta!", "La persona que intento registrar ya existe", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
             }
@@ -837,47 +793,38 @@ public class Usuarios1 extends javax.swing.JPanel {
     }
 
     public void modifcarColumnas() {
-        //Numero de documento
         jTUsuario.getColumnModel().getColumn(0).setMinWidth(130);
         jTUsuario.getColumnModel().getColumn(0).setMaxWidth(130);
         jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(130);
         jTUsuario.getTableHeader().getColumnModel().getColumn(0).setMinWidth(130);
-        //Tipo de documento (T.I)
         jTUsuario.getColumnModel().getColumn(1).setMinWidth(50);
         jTUsuario.getColumnModel().getColumn(1).setMaxWidth(50);
         jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(50);
         jTUsuario.getTableHeader().getColumnModel().getColumn(1).setMinWidth(50);
-        //Nombres
         jTUsuario.getColumnModel().getColumn(2).setMinWidth(235);
         jTUsuario.getColumnModel().getColumn(2).setMaxWidth(235);
         jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(235);
         jTUsuario.getTableHeader().getColumnModel().getColumn(2).setMinWidth(235);
-        //Apellidos
         jTUsuario.getColumnModel().getColumn(3).setMinWidth(222);
         jTUsuario.getColumnModel().getColumn(3).setMaxWidth(222);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(222);
         jTUsuario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(222);
-        //Cargo
-        jTUsuario.getColumnModel().getColumn(4).setMinWidth(158);
-        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(158);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(158);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(158);
-        //Imagen
+        jTUsuario.getColumnModel().getColumn(4).setMinWidth(163);
+        jTUsuario.getColumnModel().getColumn(4).setMaxWidth(163);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(163);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(4).setMinWidth(163);
         jTUsuario.getColumnModel().getColumn(5).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        //Estado
-        jTUsuario.getColumnModel().getColumn(6).setMinWidth(70);
-        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(70);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
-        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(70);
-        //Recuperacion
+        jTUsuario.getColumnModel().getColumn(6).setMinWidth(65);
+        jTUsuario.getColumnModel().getColumn(6).setMaxWidth(65);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(65);
+        jTUsuario.getTableHeader().getColumnModel().getColumn(6).setMinWidth(65);
         jTUsuario.getColumnModel().getColumn(7).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
-        //Session
         jTUsuario.getColumnModel().getColumn(8).setMinWidth(0);
         jTUsuario.getColumnModel().getColumn(8).setMaxWidth(0);
         jTUsuario.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);

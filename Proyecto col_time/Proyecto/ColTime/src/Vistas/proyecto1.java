@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class proyecto1 extends javax.swing.JPanel {
-    
+
     public proyecto1(int p) {
         if (p == 1) {
             initComponents();
@@ -20,11 +20,11 @@ public class proyecto1 extends javax.swing.JPanel {
             jLMaterial.setVisible(false);
         }
     }
-    
+
     public proyecto1() {//Constructor vacio
 
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -543,7 +543,7 @@ public class proyecto1 extends javax.swing.JPanel {
         Controlador.Diagramas obj = new Controlador.Diagramas();
         return obj.graficaCantidad(tipoDiagrama, 0, "", "");
     }
-    
+
     private String rutaGuardado() {
         //Se obtiene la ruta donde se quiere guardar codigo QR
         try {
@@ -587,7 +587,7 @@ public class proyecto1 extends javax.swing.JPanel {
         }
         return "";
     }
-    
+
     private void limpiar() {
         jTNorden.setText("");
         jTNegocio.setText("");
@@ -597,7 +597,7 @@ public class proyecto1 extends javax.swing.JPanel {
         cbProcedoPNC.setSelectedItem(0);
         cbProcedoPNC.setEnabled(false);
     }
-    
+
     private void RegistrarPNCModificar(int op) {//------------------------------------>
         if (cbProcedoPNC.getSelectedIndex() != 0) {
             DetalleProyecto obj = new DetalleProyecto();
@@ -613,6 +613,7 @@ public class proyecto1 extends javax.swing.JPanel {
                         desactivarComponentes();
                         if (op == 1) {
                             new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue registrado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                            rutaGuardado();
                         } else {
                             new rojerusan.RSNotifyAnimated("¡listo!", "El PNC fue Modificado correctamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                         }
@@ -634,7 +635,7 @@ public class proyecto1 extends javax.swing.JPanel {
             new rojerusan.RSNotifyAnimated("¡Alerta!", "Debes seleccionar el proceso donde se genero el PNC.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.WARNING).setVisible(true);
         }
     }
-    
+
     public void desactivarComponentes() {
         jPInformacion.setBackground(new Color(244, 244, 244));
         btnConsultarDetalle.setEnabled(false);

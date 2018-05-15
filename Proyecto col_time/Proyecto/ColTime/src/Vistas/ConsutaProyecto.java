@@ -738,21 +738,17 @@ public class ConsutaProyecto extends javax.swing.JFrame {
                                     obj.jCRuteoP.setEnabled(true);
                                 }
                                 if (TDetalle.getValueAt(i, 4).toString().equals("Terminado") || TDetalle.getValueAt(i, 4).toString().equals("Ejecucion")) {
-                                    obj.cbMaterialPCBTE.setEnabled(false);
-                                    obj.cbMaterialPCBTE.setEnabled(false);
+                                    obj.cbMaterialPCBTE.setEnabled(true);
                                     obj.cbMaterialPCBTE.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
                                     obj.jCPCBTE.setEnabled(false);
+                                    obj.jTPCBTE.setEditable(false);
                                     obj.jTPCBTE.setEnabled(true);
                                 } else {
-                                    obj.cbMaterialPCBTE.setEnabled(true);
                                     obj.cbMaterialPCBTE.setEnabled(true);
                                     obj.cbMaterialPCBTE.setSelectedItem(TDetalle.getValueAt(i, 5).toString());
                                     obj.jCPCBTE.setEnabled(true);
                                     obj.jTPCBTE.setEnabled(true);
-                                }
-//                                obj.jCRuteoP.setEnabled(true);
-//                                obj.jCAntisolderP.setEnabled(true);
-//                                obj.jTPCBTE.setEnabled(true);
+                                }                             
                                 obj.jCPCBTE.setSelected(true);
                                 obj.jTPCBTE.setText(TDetalle.getValueAt(i, 3).toString());
                                 obj.jLMaterialPCB.setText(TDetalle.getValueAt(i, 5).toString());

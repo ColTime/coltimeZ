@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-04-2018 a las 14:17:20
+-- Tiempo de generación: 15-05-2018 a las 13:17:25
 -- Versión del servidor: 10.1.29-MariaDB
 -- Versión de PHP: 7.2.0
 
@@ -2235,6 +2235,13 @@ CREATE TABLE `almacen` (
   `hora_llegada` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `almacen`
+--
+
+INSERT INTO `almacen` (`idalmacen`, `tiempo_total_proceso`, `cantidad_recibida`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_registro`, `hora_llegada`) VALUES
+(1, '0', '0', '2018-04-09', NULL, 3, 19, 4, '14:17:45', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -2285,10 +2292,10 @@ CREATE TABLE `detalle_ensamble` (
 --
 
 INSERT INTO `detalle_ensamble` (`idDetalle_ensamble`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_ejecucion`, `hora_terminacion`, `restantes`, `noperarios`) VALUES
-(1, '00:00', '00:00', '0', NULL, NULL, 1, 15, 1, NULL, NULL, 0, 0),
-(2, '00:00', '00:00', '0', NULL, NULL, 1, 16, 1, NULL, NULL, 0, 0),
-(3, '00:00', '00:00', '0', NULL, NULL, 1, 17, 1, NULL, NULL, 0, 0),
-(4, '00:00', '00:00', '0', NULL, NULL, 1, 18, 1, NULL, NULL, 0, 0);
+(5, '00:00', '00:00', '0', NULL, NULL, 5, 15, 1, NULL, NULL, 0, 0),
+(6, '00:00', '00:00', '0', NULL, NULL, 5, 16, 1, NULL, NULL, 0, 0),
+(7, '00:00', '00:00', '0', NULL, NULL, 5, 17, 1, NULL, NULL, 0, 0),
+(8, '00:00', '00:00', '0', NULL, NULL, 5, 18, 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2311,6 +2318,31 @@ CREATE TABLE `detalle_formato_estandar` (
   `restantes` int(6) NOT NULL DEFAULT '0',
   `noperarios` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `detalle_formato_estandar`
+--
+
+INSERT INTO `detalle_formato_estandar` (`idDetalle_formato_estandar`, `tiempo_por_unidad`, `tiempo_total_por_proceso`, `cantidad_terminada`, `fecha_inicio`, `fecha_fin`, `detalle_proyecto_idDetalle_proyecto`, `Procesos_idproceso`, `estado_idestado`, `hora_ejecucion`, `hora_terminacion`, `restantes`, `noperarios`) VALUES
+(1, '10:11', '101:58', '10', '2018-04-12', '2018-04-12', 2, 1, 3, '06:53:31', '08:35:29', 0, 0),
+(2, '37:37', '376:19', '10', '2018-04-12', '2018-04-12', 2, 2, 3, '08:21:24', '14:37:43', 0, 0),
+(3, '11:36', '116:07', '10', '2018-04-12', '2018-04-12', 2, 3, 3, '14:48:29', '16:44:36', 0, 0),
+(4, '00:00', '00:00', '0', NULL, NULL, 2, 4, 1, NULL, NULL, 0, 0),
+(5, '00:00', '00:00', '0', NULL, NULL, 2, 5, 1, NULL, NULL, 0, 0),
+(6, '00:00', '00:00', '0', NULL, NULL, 2, 6, 1, NULL, NULL, 0, 0),
+(7, '00:00', '00:00', '0', NULL, NULL, 2, 7, 1, NULL, NULL, 0, 0),
+(8, '00:00', '00:00', '0', NULL, NULL, 2, 8, 1, NULL, NULL, 0, 0),
+(9, '00:00', '00:00', '0', NULL, NULL, 2, 10, 1, NULL, NULL, 0, 0),
+(10, '00:09', '01:30', '10', '2018-04-09', '2018-04-09', 4, 1, 3, '15:18:17', '15:19:42', 0, 0),
+(12, '00:00', '00:00', '0', NULL, NULL, 4, 3, 1, NULL, NULL, 0, 0),
+(13, '00:00', '00:00', '0', NULL, NULL, 4, 4, 1, NULL, NULL, 0, 0),
+(14, '00:00', '00:00', '0', NULL, NULL, 4, 5, 1, NULL, NULL, 0, 0),
+(15, '00:00', '00:00', '0', NULL, NULL, 4, 6, 1, NULL, NULL, 0, 0),
+(16, '00:00', '00:00', '0', NULL, NULL, 4, 7, 1, NULL, NULL, 0, 0),
+(17, '00:00', '00:00', '0', NULL, NULL, 4, 8, 1, NULL, NULL, 0, 0),
+(18, '00:00', '00:00', '0', NULL, NULL, 4, 10, 1, NULL, NULL, 0, 0),
+(61, '00:00', '00:00', '0', NULL, NULL, 4, 9, 1, NULL, NULL, 0, 0),
+(62, '00:00', '00:00', '0', NULL, NULL, 4, 2, 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2342,7 +2374,10 @@ CREATE TABLE `detalle_proyecto` (
 --
 
 INSERT INTO `detalle_proyecto` (`idDetalle_proyecto`, `tipo_negocio_idtipo_negocio`, `canitadad_total`, `material`, `proyecto_numero_orden`, `negocio_idnegocio`, `estado_idestado`, `PNC`, `ubicacion`, `pro_porIniciar`, `pro_Ejecucion`, `pro_Pausado`, `pro_Terminado`, `tiempo_total`, `Total_timepo_Unidad`, `fecha_salida`) VALUES
-(1, 1, '10', '', 29359, 3, 1, 0, NULL, 4, 0, 0, 0, '00:00', '00:00', NULL);
+(2, 1, '10', 'TH', 30101, 1, 2, 0, NULL, 6, 0, 0, 3, '594:24', '00:00', NULL),
+(3, 10, '', NULL, 30086, 4, 4, 0, NULL, 0, 1, 0, 0, '00:00', '00:00', NULL),
+(4, 1, '10', 'TH', 30086, 1, 2, 0, NULL, 7, 0, 0, 2, '338:06', '00:00', NULL),
+(5, 1, '10', '', 30086, 3, 1, 0, NULL, 4, 0, 0, 0, '00:00', '00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -2507,7 +2542,8 @@ CREATE TABLE `proyecto` (
 --
 
 INSERT INTO `proyecto` (`numero_orden`, `usuario_numero_documento`, `nombre_cliente`, `nombre_proyecto`, `tipo_proyecto`, `FE`, `TE`, `IN`, `pcb_FE`, `pcb_TE`, `Conversor`, `Repujado`, `troquel`, `stencil`, `lexan`, `fecha_ingreso`, `fecha_entrega`, `fecha_salidal`, `ruteoC`, `antisolderC`, `estado_idestado`, `antisolderP`, `ruteoP`, `eliminacion`, `parada`, `entregaCircuitoFEoGF`, `entregaCOMCircuito`, `entregaPCBFEoGF`, `entregaPCBCom`, `novedades`, `estadoEmpresa`, `NFEE`) VALUES
-(29359, '981130', 'Micro HomCali S.A.S ', 'Control Planta ', 'Normal', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2018-04-04 06:45:31', '2018-02-15', NULL, 0, 0, 1, 0, 0, 1, 1, NULL, NULL, NULL, NULL, 'Este proyecto es generado en forma de prueba para la instalación y validacion de su correcto funcionamiento. ', NULL, NULL);
+(30086, '1128266934', 'FANTASIA DEL AGUA', 'INTERFAZ POTENCIA', 'Normal', 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, '2018-04-09 14:17:45', '2018-04-19', NULL, 1, 1, 4, 0, 0, 1, 1, '2018-04-13', '2018-04-12', NULL, NULL, '', 'A tiempo', NULL),
+(30101, '1128266934', 'INGNOVAC SAS', 'COP04', 'Normal', 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, '2018-04-09 14:13:09', '2018-04-16', NULL, 0, 1, 2, 0, 0, 1, 1, NULL, NULL, NULL, NULL, '', 'A tiempo', NULL);
 
 -- --------------------------------------------------------
 
@@ -2562,14 +2598,15 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`numero_documento`, `tipo_documento`, `nombres`, `apellidos`, `cargo_idcargo`, `imagen`, `estado`, `contraeña`, `sesion`, `recuperacion`) VALUES
-('1017156424', 'CC', 'YAZMIN ANDREA', 'GALEANO CASTAÑEDA', 3, '', 1, '1017156424', 0, 'dñpgxp68@4'),
+('1017156424', 'CC', 'YAZMIN ANDREA', 'GALEANO CASTAÑEDA', 3, '', 1, 'yazmin1987', 0, 'dñpgxp68@4'),
 ('1017191779', 'CC', 'Sintia Liceth', 'Ossa Vasquez', 6, '', 1, '1017191779', 0, '51e-uiññl9'),
 ('1040044905', 'CC', 'Jose Daniel ', 'Grajales Carmona', 1, '', 1, '1040044905', 0, 'z9jmqbñ2kl'),
+('1078579715', 'CC', 'MAIBER DAVID ', 'GONZALEZ MERCADO ', 1, '', 1, '3108967039', 0, 'w7n8pjyhd8'),
 ('1128266934', 'CC', 'Jhon Fredy', 'Velez Londoño', 4, '', 1, '1128266934', 0, '4elax2f2ub'),
 ('1152210828', 'CC', 'PAULA ANDREA ', 'HERRERA ÁLVAREZ', 5, '', 1, '1152210828', 0, 'eimaumks9s'),
 ('42800589', 'CC', 'Juliana', 'Naranjo Henao', 6, '', 1, '42800589', 0, '-cnño-5wb4'),
 ('43263856', 'CC', 'Paula Andrea', 'Lopez Gutierrrez', 1, '', 1, '43263856', 0, 'cxcx03ñkf4'),
-('43975208', 'CC', 'GLORIA ', 'JARAMILLO ', 2, '', 1, '43975208', 0, 'kbdnsdlciq'),
+('43975208', 'CC', 'GLORIA ', 'JARAMILLO ', 2, '', 1, '43975208', 1, 'kbdnsdlciq'),
 ('71268332', 'CC', 'Adimaro', 'Montoya', 3, '', 1, '71268332', 0, '1vr8s4th-@'),
 ('981130', 'CC', 'Juan David', 'Marulanda Paniagua', 4, '', 1, '98113053240juan', 1, '1u-hyppy60'),
 ('98699433', 'CC', 'ANDRES CAMILO', 'BUITRAGO GÓMEZ', 1, '', 1, '98699433', 0, 'ñkzrv7l@uh'),
@@ -2591,9 +2628,10 @@ CREATE TABLE `usuariopuerto` (
 --
 
 INSERT INTO `usuariopuerto` (`documentousario`, `usuarioPuerto`) VALUES
-('43975208', 'COM1'),
+('43975208', 'COM5'),
 ('1017156424', 'COM1'),
-('981130', 'COM10');
+('981130', 'COM5'),
+('71268332', 'COM1');
 
 --
 -- Índices para tablas volcadas
@@ -2716,7 +2754,7 @@ ALTER TABLE `usuariopuerto`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `idalmacen` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `idalmacen` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cargo`
@@ -2728,19 +2766,19 @@ ALTER TABLE `cargo`
 -- AUTO_INCREMENT de la tabla `detalle_ensamble`
 --
 ALTER TABLE `detalle_ensamble`
-  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idDetalle_ensamble` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_formato_estandar`
 --
 ALTER TABLE `detalle_formato_estandar`
-  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalle_formato_estandar` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_proyecto`
 --
 ALTER TABLE `detalle_proyecto`
-  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDetalle_proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_teclados`
@@ -2770,7 +2808,7 @@ ALTER TABLE `procesos`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29360;
+  MODIFY `numero_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30102;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_negocio`

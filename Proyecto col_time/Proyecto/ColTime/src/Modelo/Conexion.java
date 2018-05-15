@@ -10,7 +10,7 @@ public class Conexion {
     static String bd = "coltime";//Base de datos actual
     static String user = "coluser";//Usuario de mysql
     static String password = "";//contraseña
-    static String server = "jdbc:mysql://192.168.4.1:3306/" + bd;//Servicio de mysql   
+    static String server = "jdbc:mysql://192.168.4.173:3306/" + bd;//Servicio de mysql   
     //El puerto por el cual el servidor apache es el <9090>
     //El puerto 3306 es por el cual se hace la comunicacion con el motor de bases de datos.
     

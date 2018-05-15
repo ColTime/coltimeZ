@@ -390,7 +390,6 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTNombreKeyReleased"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTNombreKeyTyped"/>
                   </Events>
                 </Component>
@@ -414,9 +413,6 @@
                       <Font name="Arial" size="14" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="elaprendiz.gui.comboBox.ComboBoxRound" name="cBCargo">
                   <Properties>
@@ -441,9 +437,6 @@
                       <Font name="Arial" size="14" style="0"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cBCargoActionPerformed"/>
-                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPImagenU">
                   <Properties>

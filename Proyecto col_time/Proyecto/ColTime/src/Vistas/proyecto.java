@@ -1129,6 +1129,20 @@ public class proyecto extends javax.swing.JPanel {
         jLMaterialPCB.setText("M");
         jLMaterialCircuito.setText("M");
     }
+
+    public void modificarProyecto(int op) {
+        if (op == 1) {
+            validarRegistro(2);
+        } else {
+            int seleccion = JOptionPane.showOptionDialog(null, "Seguro desea modificar este proyecto",
+                    "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                    new Object[]{"SI", "NO"}, "SI");
+            if (seleccion == 0) {
+                validarRegistro(2);
+            }
+        }
+    }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ConsutaProyecto obj = new ConsutaProyecto();
         obj.setLocationRelativeTo(null);
@@ -1136,13 +1150,7 @@ public class proyecto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        int seleccion = JOptionPane.showOptionDialog(null, "Seguro desea modificar este proyecto",
-                "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
-                new Object[]{"SI", "NO"}, "SI");
-        if (seleccion == 0) {
-            validarRegistro(2);
-        }
+        modificarProyecto(0);//Modifica preguntando
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -1494,7 +1502,8 @@ public class proyecto extends javax.swing.JPanel {
             if (estadoProyecto()) {
                 if (estadoDeOrden(op)) {
                     //Mensaje de cambio de estado todo un exito.
-                    new rojerusan.RSNotifyAnimated("Listo!", "El estado del proyecto fue cambiado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
+                    modificarProyecto(1);//Modifica sin preguntar
+                    //new rojerusan.RSNotifyAnimated("Listo!", "El estado del proyecto fue cambiado exitosamente.", 7, RSNotifyAnimated.PositionNotify.BottomRight, RSNotifyAnimated.AnimationNotify.BottomUp, RSNotifyAnimated.TypeNotify.SUCCESS).setVisible(true);
                     limpiarCampos();
                     limpiarID();
                     cambiarEstadoFalso();
