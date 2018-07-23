@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import rojerusan.RSNotifyAnimated;
 
 public class ProyectoQR implements Runnable {
-
+//Se encarga de realizar la conexion del el puerto serial COM para el ingreso de proyectos mediante QR de proyectos.
     //Variables 
     Thread QRProyecto = null;
     public CommPort puerto = null;
@@ -143,7 +143,7 @@ public class ProyectoQR implements Runnable {
             //...
 //            System.out.println(QRProyecto.split(";").length);
             //...
-            if (QRProyecto.split(";").length == 26) {
+            if (QRProyecto.split(";").length == 26) {//La longitud del vector siempre va a ser 26
 //                valor = QRProyecto.split("/");//Quita el primer "/" de la trama ingresada
 //                //...
 //                for (int i = 1; i <= 4; i++) {
@@ -268,6 +268,7 @@ public class ProyectoQR implements Runnable {
     protected void finalize() throws Throwable {
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
+//    Trama que me envia el modulo wifi al puerto COM.
 //GET /29359;Micro-Hom-Cali-S.A.S;Control-Planta;FE/TE;Normal;15/02/2018;2;null;null;null;null;null;no;no;null;null;no;no;null;null;null;null;null;null;null;null HTTP/1.1
 //.Host: 192.168.4.1
 //.Connection: keep-alive

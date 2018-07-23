@@ -1,9 +1,16 @@
 package Controlador;
 
+import Vistas.Inicio;
 import coltime.Menu;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 //import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Scanner;
@@ -17,13 +24,17 @@ public class ConexionPS {
     private String v[] = null;
     private static String puertoCOM = "COM6";//Por defecto va a ser el puerto serial COM6
     private static String usuariodoc = "";
+    //Escribir archibo plano
+    int hora, minutos, segundos;
+    Date fecha = new Date();
+    SimpleDateFormat formato = new SimpleDateFormat("dd_MM_YYYY");
 
     public ConexionPS() {//Constructos
     }
 
     int conexion = 0;
 //Falta validar que el puerto este abierto y disponible para poder mandar informacion, y de no ser asì se va a notificar al usuario que no puede realizar la toma de tiempo correspondiente a si àrea de producciòn.
-//Composición del código: orden;nDetalle;Negocio;IDlector;cantidadProductos;cantidadOperarios
+//Composición del código: Orden;nDetalle;Negocio;IDlector;cantidadProductos;cantidadOperarios
 
     public void enlacePuertos(Menu menu) {//Ese metodo lo utilizan los roles de encargados de FE, EN y TE
         Menu obj = new Menu();
@@ -37,20 +48,28 @@ public class ConexionPS {
             CommPortIdentifier myCPI = null;
             Scanner mySC;
             while (commports.hasMoreElements()) {//Se valida que el puerto que necesito este disponible
-                existePuerto = 1;
+                existePuerto = 1;//Si ingreso es porque existe un puerto.
                 myCPI = (CommPortIdentifier) commports.nextElement();
-                if (myCPI.getName().equals(obj.puertoActual)) {
+                if (myCPI.getName().equals(obj.puertoActual)) {//&& myCPI.PORT_SERIAL
                     puerto = myCPI.open("Puerto Serial Operario", 1000);//Abro el puerto y le mando dos parametros que son el nombre de la apertura y el tiempo de respuesta
                     SerialPort mySP = (SerialPort) puerto;
                     //                       Baudios           Data bits               stopBists                  Parity
                     mySP.setSerialPortParams(19200, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);//Configuracion del puerto serial: Velocidad de bits, Data bits, stopbits y Paridad
                     //
                     mySC = new Scanner(mySP.getInputStream());//Datos de entrada al puerto
-                    //obj.myPS = new PrintStream(mySP.getOutputStream());//Datos de salia del puerto
-
+                    //obj.myPS = new PrintStream(mySP.getOutputStream());//Datos de salia del puertoS
                     conexion = 1;
+                    //Se selecciona el item Activado de: Menu Principal>Configuración>Lectura>Activado.
+                    menu.jRLActivado.setSelected(true);
+                    //Cambio de la etiqueta del estado de lectura en la vista de menu ubicada en el menu lateral.
+                    menu.estadoDeLectura();
+                    //
                     while (true) {//Valida el mismo puerto que se abrio!!
-                        while (!mySC.hasNext()) {//Valida que en el puerto serial exista alguna linea de información
+                        while (!mySC.hasNext()) {//Valida que en el puerto serial exista alguna linea de información...
+                            //Valida que el puerto serial tenga un tiempo de respues, si no lo tiene el sistema lo dara como que el puerto serial fue desconectado del equipo.
+                            //Y saltara una execión en el Try Catch
+                            mySP.isReceiveTimeoutEnabled();
+                            //Validar cuando se desconecta el puerto.
                             mySC.close();
                             mySC = null;
                             mySC = new Scanner(mySP.getInputStream());
@@ -67,14 +86,16 @@ public class ConexionPS {
                             //La trama es:"N°Orden;DetalleSistema;Área;LectorID;Cantidad;N°Operarios".
                             valorBeta = mySC.next();//Valor de entrada
                             //...
+                            //Se encarga de escribir en un archivo plano los códigos que son leidos del puerto serial.
+                            escribirRecepcionDatos(valorBeta);
 //                            System.out.println(valorBeta.split(";").length+"/"+valorBeta);
                             if (valorBeta.split(";").length == 6) {//El codigo de operario siempre va a contener una longitud del vecto de 6 espaciós en la memoria EEPROM
-                                //                        obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
+                                // obj.LecturaCodigoQR(valorBeta);//Función con bluetooth
                                 if (Character.isDigit(valorBeta.charAt(1))) {//Valida que el valor de entrada sea el correcto//Funcionamiento con wifi
                                     //...
                                     obj.LecturaCodigoQR(valorBeta);//Se encargara de ler el codigo QR
                                     //--------------------------------------------------
-                                    //Limpieza de la memoria Volatil
+                                    //Limpieza de la memoria Volatil RAM
                                     System.gc();//Garbage collector.  
                                 }
                             }
@@ -88,6 +109,8 @@ public class ConexionPS {
             }
             //
             if (conexion == 0) {// 0 =No se pudo realizar la conexion, 1: Conexion realizada correactamente.
+                //Se selecciona el item Activado de: Menu Principal>Configuración>Lectura>Desactivado.
+                menu.jRLDesactivado.setSelected(true);//Activado
                 if (JOptionPane.showOptionDialog(null, "Error: " + "No se pudo conectar al puerto serial " + obj.puertoActual + ". " + "¿Desea seleccionar otro puerto serial disponible?",
                         "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
@@ -101,9 +124,17 @@ public class ConexionPS {
                             null, // null para icono defecto
                             vectorObjet(v),
                             "Cantidad proyectos área");
-                    Usuario reg = new Usuario();
-                    reg.RegistrarModificarPuertoSerialUsuario(obj.jDocumento.getText(), dig.toString());
-                    obj.puertoActual = obj.ConsultarPueroGurdado(obj.jDocumento.getText());
+                    if (dig != null) {
+                        Usuario reg = new Usuario();
+                        //Se registra o se modifica el puerto serial COM que el usuario selecciono.
+                        reg.RegistrarModificarPuertoSerialUsuario(obj.jDocumento.getText(), dig.toString());
+                        //Asignamos el nuevo puerto seria COM a la variable global.
+                        obj.puertoActual = obj.ConsultarPueroGurdado(obj.jDocumento.getText());
+                    } else {
+                        menu.diponible = false;
+                    }
+                } else {
+                    menu.diponible = false;
                 }
             }
             //
@@ -114,8 +145,11 @@ public class ConexionPS {
             }
             //
         } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Error: " + e);
+            //JOptionPane.showMessageDialog(null, "Error: " + e);
             puerto.close();
+            menu.diponible = false;
+            //Cambio de la etiqueta del estado de lectura en la vista de menu ubicada en el menu lateral.
+            menu.estadoDeLectura();//Desactivado
         }
     }
 
@@ -131,7 +165,8 @@ public class ConexionPS {
             v = new String[pos];
             pos = 0;
             comports = CommPortIdentifier.getPortIdentifiers();
-            //Se a gregan lo valores al vector con longitud ya definida 
+            //Se a gregan lo valores al vector con longitud ya definida
+//            v[0] = "Seleccione...";
             while (comports.hasMoreElements()) {
                 CommPortIdentifier comportIdenti = (CommPortIdentifier) comports.nextElement();
                 v[pos] = comportIdenti.getName();
@@ -141,6 +176,41 @@ public class ConexionPS {
 //            JOptionPane.showMessageDialog(null, "Error: " + e);
         }
         return v;
+    }
+
+    public void escribirRecepcionDatos(String QR) {
+        //---
+        Calendar calendario = Calendar.getInstance();
+        PrintWriter pw = null;
+        FileWriter fw = null;
+        File folder = new File("C:\\FormatoEstandar");
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        //---
+        File archivo = new File("C:\\FormatoEstandar\\" + formato.format(fecha) + ".txt");
+        if (!archivo.exists()) {
+            try {
+                archivo.createNewFile();
+            } catch (Exception e) {
+                //error
+                e.printStackTrace();
+            }
+        }
+        //---
+        try {
+            int hora = calendario.get(Calendar.HOUR_OF_DAY);
+            int minutos = calendario.get(Calendar.MINUTE);
+            int segundos = calendario.get(Calendar.SECOND);
+
+            fw = new FileWriter(archivo, true);
+            pw = new PrintWriter(fw);
+            pw.println(QR + '-' + hora + ':' + minutos + ':' + segundos);
+            pw.close();
+            String documento = "";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Object[] vectorObjet(String v[]) {

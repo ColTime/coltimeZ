@@ -39,7 +39,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
      */
     //Variables
     String orden = "";
-    int rep = 0, parada = 0, FE = 0, TE = 0, EN = 0, i = -1;
+    int rep = 0, parada = 0, FE = 0, TE = 0, EN = 0, i = -1, contador = 0;
     int cantidadBeta = 0, procesoBeta = 0, proceso = 0, mayorCantidad = 0, entro = 0;
     int cantidadTotalProceso = 0, cantidadTotatlUnidadesAProcesasP = 0;
     float porProyecto = 0, porUnidad = 0;
@@ -348,6 +348,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
         procesoBeta = 0;
         cantidadTotalProceso = 0;
         cantidadTotatlUnidadesAProcesasP = 0;
+        contador = 0;
     }
 
     private void procesoMayorCantidad() {
@@ -375,9 +376,23 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
     }
 
     public void metodoBurbujaManual() {
-        if (cantidadBeta > mayorCantidad) {
+//        if(v[0].equals("30544")){
+//            System.out.println("orden 30544");
+//        }
+        if (cantidadBeta >= mayorCantidad) {
             mayorCantidad = cantidadBeta;
+            if (v[8].equals("Por iniciar")) {
+                proceso = 0;
+            } else {
+                proceso = procesoBeta;
+            }
+            if (cantidadBeta == 0) {
+                proceso = 0;
+            }
+            //      Se utiliza para poder pasar al sigueinte proceso de produccion.
+        } else if (cantidadBeta == 0 && procesoBeta > proceso && mayorCantidad > 0 && contador == 0) {
             proceso = procesoBeta;
+            contador++;
         }
     }
 
@@ -424,7 +439,7 @@ public class ReporteColtime extends javax.swing.JFrame implements Runnable {
                 } else {
                     v[8] = "Por iniciar";//Estado
                 }
-            }else{
+            } else {
                 v[8] = "Parada";//Estado
             }
             v[10] = crs.getString(2);

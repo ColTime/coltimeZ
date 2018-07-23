@@ -4,6 +4,7 @@ import Controlador.ConexionPS;
 import Controlador.DetalleProyecto;
 import Controlador.DisponibilidadConexion;
 import Controlador.FE_TE_IN;
+import Controlador.HiloLectura;
 import Controlador.Proyecto;
 import Controlador.Usuario;
 import Controlador.generarXlsx;
@@ -32,10 +33,14 @@ import javax.swing.JRadioButtonMenuItem;
 import paneles.CambiaPanel;
 import rojerusan.RSNotifyAnimated;
 
-public class Menu extends javax.swing.JFrame implements Runnable, ActionListener {
-
-    public Color cor = new Color(189, 189, 189);
-    public Color corF = new Color(219, 219, 219);
+public class Menu extends javax.swing.JFrame implements ActionListener {
+    //
+    public Color cor = new Color(189, 189, 189);//girs
+    public Color corF = new Color(219, 219, 219);//Gris
+    //
+    public static Color verde = new Color(51, 255, 51);//Verde
+    public static Color rojo = new Color(255, 0, 0);//Rojo
+    //
     public static Producciones bp = null;
     int cont = 0;
     public static boolean diponible = false;//Se utiliza para saber si se cierra la conexion del puerto o no.
@@ -45,7 +50,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     Thread tomaTiempo = null;
     public static String puertoActual = "COM6";//Por defecto va a ser el Puerto COM6
     proyecto pro = null;
-
     ///---------------------------------------------------------------------------
     //Al generar el ejecutable o acceso directo, no carga el menu principal. Estar atento a esta novedad para solucionarlo lo más pronto posible.
     //----------------------------------------------------------------------------
@@ -58,9 +62,12 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         btn1.setColorHover(cor);
         btn1.setColorNormal(cor);
         btn1.setColorPressed(cor);
+        //Imagen de la ventana.
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenesEmpresa/favicon.png")).getImage());
         this.setLocationRelativeTo(null);
+        //Se encarga de asignarles las funciones que puede hacer cada usuario.
         funcionalidades(cargo, nombre);
+        //se ecarga de consultar los proyectos que quedaron con la toma de tiempos abierta.
         EnCasodeFallaDeLuz();
         InformacionAreasProduccion();
         //Mensaje de bienvenida-------------------------------------------------
@@ -69,22 +76,26 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         //Puerto Por el cual se va a ingresar la información--------------------
         puertoActual = ConsultarPueroGurdado(doc);
         //Fine del puerto-------------------------------------------------------
-        //Busqueda de los puertos seriales disponibles--------------------------
-        puertosSerialDisponibles();
-        //fin de la busqueda de puertos-----------------------------------------
-        //Validación continua de la conexion a la base de datos-----------------
+        //Validación continua de la conexion a la base de datos----------------- En linea o Sin conexión. 
         DisponibilidadConexion dispo = new DisponibilidadConexion();
         Thread conec = new Thread(dispo);
         conec.start();
         //fin de la calidacion a la base de datos-------------------------------
         //Toma de tiempos automatica--------------------------------------------
+        //!!!!!!!!!!!!!!!!!!!!!!!
+        //Solo funciona para los usuarios con cargo de Encargados de FE, TE o EN
         if (cargo == 2 || cargo == 3) {
             if (soloUnaVez == 1) {
                 diponible = true;
-                tomaTiempo = new Thread(this);
+                HiloLectura lectura = new HiloLectura();
+                tomaTiempo = new Thread(lectura);
                 tomaTiempo.start();
+                //Etiquetas de estado de lectura.
+                //jLEstadoLectura.setLocation(jLEstadoLectura.getX(), (jLEstadoLectura.getY()+ 20));
+                //Fin etiquetas estado de lectura.
             }
-        }
+        }//Generar el código del RUN en una clase aparte para poder ejecutarla multiples veces.
+        //!!!!!!!!!!!!!!!!!!!!!!!
         //Fin de toma de tiempos automatica-------------------------------------
     }
 
@@ -112,6 +123,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        estadoLectura = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPSuperior = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
@@ -120,6 +132,8 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jDocumento = new javax.swing.JLabel();
         jLConexion = new javax.swing.JLabel();
         jPMenu = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLEstadoLectura = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         rSUsuario = new rojerusan.RSFotoCircle();
         btn2 = new rsbuttom.RSButtonMetro();
@@ -179,6 +193,9 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMLectura = new javax.swing.JMenu();
+        jRLActivado = new javax.swing.JRadioButtonMenuItem();
+        jRLDesactivado = new javax.swing.JRadioButtonMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -208,11 +225,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMinimumSize(new java.awt.Dimension(1140, 700));
         setUndecorated(true);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                formMousePressed(evt);
-            }
-        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -318,6 +330,16 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
 
         jPMenu.setBackground(new java.awt.Color(219, 219, 219));
         jPMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText(" Lectura:");
+        jPMenu.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 50, 20));
+
+        jLEstadoLectura.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLEstadoLectura.setForeground(new java.awt.Color(255, 0, 0));
+        jLEstadoLectura.setText("Desactivado");
+        jPMenu.add(jLEstadoLectura, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 620, -1, 20));
 
         jPanel4.setBackground(new java.awt.Color(219, 219, 219));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -475,9 +497,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         jPanel3.setBackground(new java.awt.Color(219, 219, 219));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel3MousePressed(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jPanel3MouseReleased(evt);
             }
@@ -500,14 +519,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 131)));
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel6MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jPanel6MouseReleased(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -974,7 +985,38 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
         jMenu4.setText("Puerto COM");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jMenu4MouseEntered(evt);
+            }
+        });
         jMenu3.add(jMenu4);
+
+        jMLectura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadoLectura.png"))); // NOI18N
+        jMLectura.setText("Lectura");
+
+        estadoLectura.add(jRLActivado);
+        jRLActivado.setSelected(true);
+        jRLActivado.setText("Activado");
+        jRLActivado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (3).png"))); // NOI18N
+        jRLActivado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRLActivadoActionPerformed(evt);
+            }
+        });
+        jMLectura.add(jRLActivado);
+
+        estadoLectura.add(jRLDesactivado);
+        jRLDesactivado.setText("Desactivado");
+        jRLDesactivado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconmonstr-shape-19-16 (4).png"))); // NOI18N
+        jRLDesactivado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRLDesactivadoActionPerformed(evt);
+            }
+        });
+        jMLectura.add(jRLDesactivado);
+
+        jMenu3.add(jMLectura);
 
         jMenuBar1.add(jMenu3);
 
@@ -1015,7 +1057,6 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                     }
                     producF.agregarBotones(producF, Integer.parseInt(crs.getString(1)));
                 }
-
                 //Buscamos los proyectos de TE que estan en ejecucion.
                 crs = obj.consultarProyectosEnEjecucion(2);
                 while (crs.next()) {
@@ -1050,6 +1091,18 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         }
     }
 
+    //Queda pendiente hacerle sus respectivas validaciones.....................................................
+    public static void estadoDeLectura() {
+        //Se encarga de seleccionar el estado de lectura del sistema.
+        if (Menu.diponible) {//Activado!!
+            jLEstadoLectura.setText("Activado");
+            jLEstadoLectura.setForeground(verde);
+        } else {//Desactivado.
+            jLEstadoLectura.setText("Desactivado");
+            jLEstadoLectura.setForeground(rojo);
+        }
+    }
+
     private void funcionalidades(int cargo, String name) {
         switch (cargo) {
             case 1:
@@ -1057,33 +1110,58 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 this.setTitle("Gestor Técnico: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
+                //ItemMenu de Estado de lectura.
+                jMLectura.setVisible(false);
+                jLEstadoLectura.setVisible(false);
+                jLabel14.setVisible(false);
                 break;
             case 6:
                 //Gestor Comercial
                 this.setTitle("Gestor Comercial: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
+                //ItemMenu de Estado de lectura.
+                jMLectura.setVisible(false);
+                jLEstadoLectura.setVisible(false);
+                jLabel14.setVisible(false);
                 break;
             case 2:
                 //Encargado FE y TE
                 this.setTitle("Encargado FE y TE: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
+                //ItemMenu de Estado de lectura.
+                jMLectura.setVisible(true);
+                jLEstadoLectura.setVisible(true);
+                jLabel14.setVisible(true);
                 break;
             case 3:
                 //Encargado de EN
                 this.setTitle("Encargado EN: " + name);
                 btn3.setEnabled(false);
                 btn6.setEnabled(false);
+                //ItemMenu de Estado de lectura.
+                jMLectura.setVisible(true);
+                jLEstadoLectura.setVisible(true);
+                jLabel14.setVisible(true);
                 break;
             case 4:
                 this.setTitle("Administrador: " + name);
+                //ItemMenu de Estado de lectura.
+                jMLectura.setVisible(false);
+                jLEstadoLectura.setVisible(false);
+                jLabel14.setVisible(false);
                 break;
             case 5:
+                //Almacen
                 this.setTitle("Almacen: " + name);
                 btn3.setEnabled(false);
                 btn2.setEnabled(false);
                 btn6.setEnabled(false);
+                //ItemMenu de Estado de lectura.
+                jMLectura.setVisible(false);
+                jLEstadoLectura.setVisible(false);
+                jLabel14.setVisible(false);
                 break;
         }
     }
@@ -1259,18 +1337,11 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     private void jPSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMousePressed
         posX = evt.getX();
         posY = evt.getY();
-
     }//GEN-LAST:event_jPSuperiorMousePressed
 
     private void jPSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMouseDragged
-
         this.setLocation((evt.getXOnScreen() - posX), (evt.getYOnScreen() - posY - 25));
-
     }//GEN-LAST:event_jPSuperiorMouseDragged
-
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-
-    }//GEN-LAST:event_formMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         cerrarSesion();
@@ -1324,30 +1395,18 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         cerrarSesion();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-
-    }//GEN-LAST:event_jPanel3MousePressed
-
-    private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
-
-    }//GEN-LAST:event_jPanel6MousePressed
-
     private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
         if (evt.isPopupTrigger()) {
             jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jPanel3MouseReleased
 
-    private void jPanel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseReleased
-
-    }//GEN-LAST:event_jPanel6MouseReleased
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         InformacionAreasProduccion();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jPSuperiorMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPSuperiorMouseReleased
-        if (evt.isPopupTrigger()) {
+        if (evt.isPopupTrigger()) {//El evento es realizado con el click derecho?
             jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jPSuperiorMouseReleased
@@ -1508,7 +1567,43 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
         informacion.setLocationRelativeTo(null);
         informacion.setVisible(true);
     }//GEN-LAST:event_jLabel18MousePressed
+
+    private void jRLActivadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRLActivadoActionPerformed
+        //
+        if (!diponible) {
+            if (JOptionPane.showOptionDialog(null, "¿Seguro deseas reactivar el estado de lectura?",
+                    "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                    new Object[]{"SI", "NO"}, "SI") == 0) {
+                diponible = true;
+                HiloLectura lectura = new HiloLectura();
+                tomaTiempo = new Thread(lectura);
+                tomaTiempo.start();
+            }
+        }
+        //
+    }//GEN-LAST:event_jRLActivadoActionPerformed
+
+    private void jRLDesactivadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRLDesactivadoActionPerformed
+        // 
+        if (diponible) {
+            if (JOptionPane.showOptionDialog(null, "¿Seguro deseas desactivar el estado de lectura?",
+                    "seleccione...", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null,// null para icono por defecto.
+                    new Object[]{"SI", "NO"}, "SI") == 0) {
+                diponible = false;//Se encarga de desactivar el estado de lectura.
+                estadoDeLectura();
+            }
+        }
+    }//GEN-LAST:event_jRLDesactivadoActionPerformed
+
+    private void jMenu4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseEntered
+        //Busqueda de los puertos seriales disponibles--------------------------
+        puertosSerialDisponibles();
+        //fin de la busqueda de puertos-----------------------------------------
+    }//GEN-LAST:event_jMenu4MouseEntered
 //Metodos de la clase menu----------------------------------------------------->
+//...    
 //Configuracion de los puertos seriales-----------------------------------------
 
     public static String ConsultarPueroGurdado(String doc) {
@@ -1518,10 +1613,10 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     }
 
     public void puertosSerialDisponibles() {
-//        jMenu4.removeAll();
-//        jMenu4.updateUI();
+        //
         try {//DELETE FROM usuariopuerto WHERE documentousario='9813053240'
             ConexionPS obj = new ConexionPS();
+            jMenu4.removeAll();
             String v[] = obj.puertosDisponibles();
             grupoCom = new ButtonGroup();
             for (int i = 0; i < v.length; i++) {
@@ -1532,10 +1627,13 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
                 if (puertoActual.equals(v[i])) {
                     opPuerto.setSelected(true);
                 }
+                //Estado del boton depende del estado de lectura.
+                if(diponible){
+                    opPuerto.setEnabled(false);
+                }
                 grupoCom.add(opPuerto);
                 jMenu4.add(opPuerto);
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
@@ -1639,21 +1737,22 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
 //Toma de tiempo automatica---------------------------------------------------->
     //---------------------------------------------------------------------------->
     //--------------------------------------------------------------------------->
-
-    @Override
-    public void run() {
-        CPS = new ConexionPS();//Establecemos la conecion con el puerto serial(COM)
-        while (true) {
-            //El puerto es asignado desde esta variable "puertoActual".
-            CPS.enlacePuertos(this);//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
-            if (!diponible) {//Se va a salir del ciclo infinito y va a finalizar el hilo.
-                break;
-            }
-        }
-    }
+//    @Override
+//    public void run() {
+//        CPS = new ConexionPS();//Establecemos la conecion con el puerto serial(COM)
+//        while (true) {
+//            //El puerto es asignado desde esta variable "puertoActual".
+//            CPS.enlacePuertos(this);//Si detecta algo en el puerto COM va a tomar o detener el tiempo!!
+//            if (!diponible) {//Se va a salir del ciclo infinito y va a finalizar el hilo(Thread).
+//                //Se selecciona el item Activado de: Menu Principal>Configuración>Lectura>Desactivado.
+//                jRLDesactivado.setSelected(true);
+//                break;
+//            }
+//        }
+//    }
     //------------------------------------------------------------------------->
     //------------------------------------------------------------------------->
-//Fien de toma de tiempo automatica-------------------------------------------->
+//Fin de toma de tiempo automatica-------------------------------------------->
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     public void InformacionAreasProduccion() {
@@ -1851,16 +1950,19 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     public rsbuttom.RSButtonMetro btn5;
     public rsbuttom.RSButtonMetro btn6;
     public javax.swing.JButton btnMenu;
+    public javax.swing.ButtonGroup estadoLectura;
     public javax.swing.JButton jBMinimizar;
     public javax.swing.JButton jButton1;
     public static javax.swing.JLabel jDocumento;
     public javax.swing.JInternalFrame jInternalFrame1;
     public static javax.swing.JLabel jLConexion;
+    public static javax.swing.JLabel jLEstadoLectura;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel10;
     public javax.swing.JLabel jLabel11;
     public javax.swing.JLabel jLabel12;
     public javax.swing.JLabel jLabel13;
+    public javax.swing.JLabel jLabel14;
     public javax.swing.JLabel jLabel18;
     public javax.swing.JLabel jLabel19;
     public javax.swing.JLabel jLabel2;
@@ -1879,6 +1981,7 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     public javax.swing.JLabel jLabel7;
     public javax.swing.JLabel jLabel8;
     public javax.swing.JLabel jLabel9;
+    public javax.swing.JMenu jMLectura;
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
     public javax.swing.JMenu jMenu3;
@@ -1900,6 +2003,8 @@ public class Menu extends javax.swing.JFrame implements Runnable, ActionListener
     public javax.swing.JPanel jPanel7;
     public javax.swing.JPanel jPanel8;
     public javax.swing.JPopupMenu jPopupMenu1;
+    public static javax.swing.JRadioButtonMenuItem jRLActivado;
+    public static javax.swing.JRadioButtonMenuItem jRLDesactivado;
     public rojerusan.RSFotoCircle rSUsuario;
     // End of variables declaration//GEN-END:variables
     @Override
